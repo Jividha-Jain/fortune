@@ -3,44 +3,55 @@
 import React from "react";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { ALL_PRODUCTS } from "@/data/productsData";
 
 interface AIPairingSuggestionsSectionProps {
   onNavigateTab: (tab: "products" | "product-detail" | "recommendations" | "mymenu") => void;
 }
 
 export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairingSuggestionsSectionProps) {
+  // Pull real products directly from Fortune Gourmet ALL_PRODUCTS catalog
+  const mozzarellaProduct = ALL_PRODUCTS.find((p) => p.id === "zanetti-mozzarella-bufala");
+  const parmesanProduct = ALL_PRODUCTS.find((p) => p.id === "gran-spicco-200gm");
+  const salmonProduct = ALL_PRODUCTS.find((p) => p.id === "fortune-atlantic-salmon-trim-d");
+  const butterProduct = ALL_PRODUCTS.find((p) => p.id === "butter-unsalted-200gm");
+
   const cards = [
     {
       id: "card-1",
-      bgColor: "bg-[#FAF5EE]", // Warm cream/peach pastel matching screenshot
+      bgColor: "bg-[#FAF5EE]", // Warm cream/peach pastel
       dishTitle: "Margherita Pizza",
-      productSubtitle: "with Black Truffle Oil",
+      productSubtitle: `with ${mozzarellaProduct?.title || "Zanetti Mozzarella di Bufala"}`,
+      productId: mozzarellaProduct?.id || "zanetti-mozzarella-bufala",
       dishImage: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=300&q=80",
+      productImage: mozzarellaProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/1bbm-500x500.png",
     },
     {
       id: "card-2",
-      bgColor: "bg-[#F3EEFA]", // Soft purple/lavender pastel matching screenshot
+      bgColor: "bg-[#F3EEFA]", // Soft purple/lavender pastel
       dishTitle: "Mushroom Pasta",
-      productSubtitle: "with Fresh Truffle",
+      productSubtitle: `with ${parmesanProduct?.title || "Gran Spicco Parmesan"}`,
+      productId: parmesanProduct?.id || "gran-spicco-200gm",
       dishImage: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=300&q=80",
+      productImage: parmesanProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/Gran-Spicco-200gr-500x500.jpg",
     },
     {
       id: "card-3",
-      bgColor: "bg-[#FAF6EF]", // Light warm almond pastel matching screenshot
+      bgColor: "bg-[#FAF6EF]", // Light warm almond pastel
       dishTitle: "Grilled Salmon",
-      productSubtitle: "with Yuzu Dressing",
+      productSubtitle: `with ${salmonProduct?.title || "Fortune Atlantic Salmon Fillet"}`,
+      productId: salmonProduct?.id || "fortune-atlantic-salmon-trim-d",
       dishImage: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=300&q=80",
+      productImage: salmonProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/Tomex-Salmon-fish-fillet-500x500.jpg",
     },
     {
       id: "card-4",
-      bgColor: "bg-[#FCF4FA]", // Soft pink/rose pastel matching screenshot
+      bgColor: "bg-[#FCF4FA]", // Soft pink/rose pastel
       dishTitle: "Chocolate Cake",
-      productSubtitle: "with Sea Salt",
+      productSubtitle: `with ${butterProduct?.title || "Butter Unsalted 200gm"}`,
+      productId: butterProduct?.id || "butter-unsalted-200gm",
       dishImage: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=300&q=80",
+      productImage: butterProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/lurpak-500x500.png",
     },
   ];
 
@@ -86,8 +97,8 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
           {/* Large Bleeding Top-Right Circular Plate */}
           <div className="absolute top-[-50px] right-[-40px] w-56 h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white shrink-0 bg-slate-100 z-10 pointer-events-none">
             <Image
-              src="https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=700&q=80"
-              alt="Fresh Burrata Caprese Salad"
+              src="https://fortunegourmet.com/wp-content/uploads/2025/03/1bbm-500x500.png"
+              alt="Zanetti Mozzarella di Bufala DOP"
               fill
               unoptimized
               className="object-cover scale-110"
@@ -126,13 +137,13 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
                 </div>
 
                 {/* Product Item Container */}
-                <div className="relative w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-300">
+                <div className="relative w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-300 bg-white shadow-xs p-1 border border-slate-100">
                   <Image
                     src={card.productImage}
                     alt={card.productSubtitle}
                     fill
                     unoptimized
-                    className="object-cover rounded-2xl"
+                    className="object-contain p-1 rounded-xl"
                   />
                 </div>
 
@@ -143,7 +154,7 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
                 <h3 className="text-lg font-serif font-bold text-[#151221] leading-snug">
                   {card.dishTitle}
                 </h3>
-                <p className="text-xs text-slate-500 font-normal">
+                <p className="text-xs text-slate-500 font-normal truncate">
                   {card.productSubtitle}
                 </p>
               </div>
