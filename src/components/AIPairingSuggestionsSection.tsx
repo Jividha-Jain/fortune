@@ -12,15 +12,15 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
   const cards = [
     {
       id: "card-1",
-      bgColor: "bg-[#FAF5EE]", // Warm cream/peach pastel
+      bgColor: "bg-[#FAF5EE]", // Warm cream/peach pastel matching screenshot
       dishTitle: "Margherita Pizza",
       productSubtitle: "with Black Truffle Oil",
       dishImage: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=300&q=80",
+      productImage: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=300&q=80",
     },
     {
       id: "card-2",
-      bgColor: "bg-[#F3EEFA]", // Soft purple/lavender pastel
+      bgColor: "bg-[#F3EEFA]", // Soft purple/lavender pastel matching screenshot
       dishTitle: "Mushroom Pasta",
       productSubtitle: "with Fresh Truffle",
       dishImage: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80",
@@ -28,26 +28,26 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
     },
     {
       id: "card-3",
-      bgColor: "bg-[#FAF6EF]", // Light warm almond pastel
+      bgColor: "bg-[#FAF6EF]", // Light warm almond pastel matching screenshot
       dishTitle: "Grilled Salmon",
       productSubtitle: "with Yuzu Dressing",
       dishImage: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=300&q=80",
+      productImage: "https://images.unsplash.com/photo-1582979512210-99b6a53385f9?auto=format&fit=crop&w=300&q=80",
     },
     {
       id: "card-4",
-      bgColor: "bg-[#FCF4FA]", // Soft pink/rose pastel
+      bgColor: "bg-[#FCF4FA]", // Soft pink/rose pastel matching screenshot
       dishTitle: "Chocolate Cake",
       productSubtitle: "with Sea Salt",
       dishImage: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=300&q=80",
+      productImage: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=300&q=80",
     },
   ];
 
   return (
     <div className="w-full bg-[#FAF9FC] rounded-[36px] p-6 sm:p-8 lg:p-10 border border-slate-100 shadow-[0_4px_30px_rgba(0,0,0,0.02)] space-y-8 font-sans text-left relative overflow-hidden">
       
-      {/* Soft Lavender Background Disc at Top Right */}
+      {/* Soft Purple Background Disc at Top Right */}
       <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-gradient-to-bl from-[#ECE5F8]/70 via-[#F3EDFB]/40 to-transparent rounded-full blur-2xl pointer-events-none z-0" />
 
       {/* 1. TOP HERO SECTION */}
@@ -74,20 +74,20 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
           </p>
         </div>
 
-        {/* Right Side: Cursive Handwriting Accent + Top Right Plate Image */}
-        <div className="hidden md:flex items-center gap-6 shrink-0 relative pr-0 lg:pr-36">
+        {/* Right Side: Cursive Handwriting Accent + Non-Overlapping Top Right Plate Image */}
+        <div className="hidden md:flex items-center gap-4 shrink-0 relative z-10">
           
           {/* Cursive Handwriting Accent */}
-          <div className="text-right font-serif italic text-lg sm:text-xl text-[#6B5A94] font-medium leading-[1.15] relative pr-2 rotate-[-2deg]">
+          <div className="text-right font-serif italic text-base sm:text-lg text-[#6B5A94] font-medium leading-[1.15] relative pr-1 rotate-[-2deg]">
             <span>Same<br />Ingredients<br />New Possibilities</span>
-            <div className="w-12 h-[1.5px] bg-[#6B5A94]/40 rounded-full mt-1.5 ml-auto" />
+            <div className="w-10 h-[1.5px] bg-[#6B5A94]/40 rounded-full mt-1.5 ml-auto" />
           </div>
 
-          {/* Top-Right Circular Plate Graphic (Positioned safely without overlapping cards) */}
-          <div className="absolute top-[-30px] right-[-20px] w-44 h-44 lg:w-48 lg:h-48 rounded-full overflow-hidden shadow-xl border-4 border-white shrink-0 bg-white z-0 pointer-events-none">
+          {/* Top-Right Circular Plate Graphic (Flex child, stays cleanly inside top section) */}
+          <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden shadow-xl border-4 border-white shrink-0 bg-white z-10 pointer-events-none">
             <Image
               src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80"
-              alt="Fresh Gourmet Dish"
+              alt="Fresh Gourmet Salad Plate"
               fill
               unoptimized
               className="object-cover scale-105"
