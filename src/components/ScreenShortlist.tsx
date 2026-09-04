@@ -256,40 +256,6 @@ export default function ScreenShortlist({ onNavigateEnquiries, onNavigateProduct
           </div>
         )}
 
-        {/* BOTTOM FIXED PROCURE BAR */}
-        {shortlistItems.length > 0 && (
-          <div className="fixed bottom-4 left-4 right-4 max-w-7xl mx-auto z-40">
-            <div className="bg-[#1C0B33] text-white rounded-3xl p-4 sm:p-5 shadow-2xl border border-purple-900/60 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-xl">
-              
-              <div className="flex items-center gap-3 text-left">
-                <div className="w-9 h-9 rounded-full bg-[#F5C453]/20 border border-[#F5C453]/40 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-5 h-5 text-[#F5C453]" />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-white flex items-center gap-1.5">
-                    <span>{shortlistItems.length} Products Shortlisted</span>
-                    <span>•</span>
-                    <span className="text-[#F5C453] font-extrabold uppercase">CONTRACT PROCURE</span>
-                  </div>
-                  <div className="text-[11px] text-slate-300 font-normal mt-0.5">
-                    📍 Delivery Destination: <strong className="text-white font-semibold">Taj Mahal Palace, Mumbai</strong>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 w-full sm:w-auto shrink-0">
-                <button
-                  onClick={onNavigateEnquiries}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-[#F5C453] hover:bg-[#E5B540] text-[#1C0B33] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer active:scale-[0.98]"
-                >
-                  <span>Request RFQ for Shortlist</span>
-                  <ArrowRight className="w-4 h-4 text-[#1C0B33]" />
-                </button>
-              </div>
-
-            </div>
-          </div>
-        )}
 
       </div>
 
