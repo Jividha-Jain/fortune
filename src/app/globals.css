@@ -202,3 +202,22 @@ h1, h2, h3, h4 {
   animation: shimmerBtn 3.5s infinite;
 }
 
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes reverseSpinRing {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-spin-ring-slow {
+  animation: spinRing 10s linear infinite;
+}
+
+.animate-spin-ring-reverse {
+  animation: reverseSpinRing 14s linear infinite;
+}
+
+

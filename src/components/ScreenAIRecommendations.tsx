@@ -407,7 +407,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                   </div>
                 </div>
 
-                {/* 2. CENTER MATCH SVG RING NODE */}
+                {/* 2. CENTER MATCH SVG RING NODE WITH CONTINUOUS ROTATING SPINNER */}
                 <div className="flex flex-col items-center justify-center shrink-0 my-2 lg:my-0 px-2 group/ring">
                   <div className={`relative w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-white flex flex-col items-center justify-center text-center shadow-md border border-slate-100 transition-all duration-300 group-hover/ring:scale-105 ${
                     rec.matchType === "NEEDS_REVIEW"
@@ -415,6 +415,19 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                       : "animate-ring-pulse"
                   }`}>
                     
+                    {/* Outer Continuous Rotating Orbit Radar Ring */}
+                    <svg className="absolute -inset-1.5 w-[calc(100%+12px)] h-[calc(100%+12px)] animate-spin-ring-slow pointer-events-none" viewBox="0 0 100 100">
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="46"
+                        stroke={rec.matchType === "NEEDS_REVIEW" ? "rgba(245, 158, 11, 0.45)" : "rgba(16, 185, 129, 0.45)"}
+                        strokeWidth="2.5"
+                        strokeDasharray="8 10"
+                        fill="transparent"
+                      />
+                    </svg>
+
                     {/* Dynamic Animated Circular Progress SVG */}
                     <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 88 88">
                       {/* Track Circle */}
@@ -441,8 +454,8 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                       />
                     </svg>
 
-                    {/* Ring Content Text */}
-                    <div className="relative z-10 flex flex-col items-center justify-center">
+                    {/* Ring Content Text (Upright) */}
+                    <div className="relative z-10 flex flex-col items-center justify-center pointer-events-none">
                       <span className={`text-lg sm:text-xl font-black tracking-tight leading-none ${
                         rec.matchType === "NEEDS_REVIEW" ? "text-amber-600" : "text-emerald-600"
                       }`}>
