@@ -349,7 +349,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
               </div>
 
               {/* 5 Navigation Items List */}
-              <div className="p-3 space-y-1">
+              <div className="p-3 space-y-1 text-left">
                 {profileMenuItems.map((menu) => {
                   const Icon = menu.icon;
 
@@ -360,19 +360,19 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
                         setActiveTab(menu.id as any);
                         setShowProfileMenu(false);
                       }}
-                      className="w-full p-3 rounded-2xl flex items-center justify-between transition-all duration-200 text-xs cursor-pointer hover:bg-purple-50/60 group"
+                      className="w-full p-3 rounded-2xl flex items-center justify-between transition-all duration-200 text-xs cursor-pointer hover:bg-purple-50/60 group text-left"
                     >
-                      <div className="flex items-center gap-3.5">
+                      <div className="flex items-center gap-3.5 text-left">
                         <div className="w-11 h-11 rounded-2xl bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
                           <Icon className="w-5 h-5" />
                         </div>
-                        <div>
-                          <div className="font-bold text-slate-900 text-sm group-hover:text-[#5E3B8C] transition-colors">{menu.label}</div>
-                          <div className="text-xs text-slate-400 font-medium">{menu.desc}</div>
+                        <div className="flex flex-col items-start text-left">
+                          <div className="font-bold text-slate-900 text-sm sm:text-base leading-tight group-hover:text-[#5E3B8C] transition-colors text-left">{menu.label}</div>
+                          <div className="text-xs text-slate-400 font-medium text-left leading-tight mt-0.5">{menu.desc}</div>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 shrink-0">
                         <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C]">
                           {menu.badge}
                         </span>
