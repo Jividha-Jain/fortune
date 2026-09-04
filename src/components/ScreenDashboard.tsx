@@ -234,40 +234,6 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
         {/* SECTION 2: AI PAIRING SUGGESTIONS - MATCHING LATEST REFERENCE SCREENSHOT */}
         <AIPairingSuggestionsSection onNavigateTab={onNavigateTab} />
 
-        {/* SECTION 3: EXECUTIVE TELEMETRY & COMPLIANCE BANNER */}
-        <div className="bg-white/90 backdrop-blur-md border border-[#241347]/8 rounded-[28px] p-6 lg:p-7 flex flex-col md:flex-row items-center justify-between gap-4 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.03)] hover:shadow-md transition-all">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#D7A742]/20 to-[#D7A742]/5 text-[#B88726] border border-[#D7A742]/20 flex items-center justify-center font-bold shrink-0 shadow-2xs">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#111111] font-serif">
-                Taj Mumbai Dedicated Temperature Compliance
-              </h4>
-              <p className="text-xs text-[#666666] mt-0.5 font-medium">
-                Direct daily rectors to Colaba with -18°C Frozen &amp; 0-4°C Chilled verified sensor telemetry.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 shrink-0">
-            <span className="text-xs font-semibold text-emerald-800 bg-emerald-50/90 border border-emerald-200/90 px-4 py-2 rounded-full flex items-center gap-2 shadow-2xs">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span>Next Slot: Tomorrow 05:30 AM</span>
-            </span>
-
-            <button
-              onClick={() => alert("Delivery Window & Temperature telemetry config opened.")}
-              className="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold border border-slate-200/80 transition-all"
-            >
-              Manage Delivery Specs
-            </button>
-          </div>
-        </div>
-
       </div>
     </div>
   );
