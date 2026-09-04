@@ -5,6 +5,7 @@ import Image from "next/image";
 import { 
   Bell, 
   ChevronDown,
+  ChevronRight,
   UtensilsCrossed,
   Package,
   Mail,
@@ -17,6 +18,7 @@ import {
   Sparkles,
   ShieldCheck,
   CheckCircle2,
+  Crown,
   X,
   LogIn
 } from "lucide-react";
@@ -282,41 +284,74 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
             }`} />
           </div>
 
-          {/* USER PROFILE DROPDOWN MENU - REDESIGNED LUXURY CARD */}
+          {/* USER PROFILE DROPDOWN MENU - 1:1 MATCH REFERENCE SCREENSHOT */}
           {showProfileMenu && (
-            <div className="absolute top-14 right-0 w-84 bg-white rounded-[26px] border border-slate-200/90 shadow-2xl z-50 overflow-hidden animate-fade-in text-left">
+            <div className="absolute top-14 right-0 w-[420px] bg-white rounded-3xl border border-slate-200/90 shadow-2xl z-50 overflow-hidden animate-fade-in text-left">
               
-              {/* Header Profile Info Box */}
-              <div className="p-4 bg-gradient-to-r from-[#1C0B33] via-[#2D1252] to-[#1C0B33] text-white border-b border-[#F5C453]/20 space-y-2">
-                <div className="flex items-center gap-3">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-[#F5C453] shadow-md">
-                    <Image
-                      src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=400&q=80"
-                      alt="Chef Vikram Singh"
-                      fill
-                      className="object-cover"
-                    />
+              {/* Top Banner Header Box (Dark Royal Purple with Taj Silhouette) */}
+              <div className="relative bg-[#1C0B33] text-white p-5 overflow-hidden border-b border-[#F5C453]/20">
+                {/* Background Taj Palace Silhouette Overlay */}
+                <div className="absolute right-0 top-0 bottom-0 w-2/3 opacity-20 pointer-events-none">
+                  <Image
+                    src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80"
+                    alt="Taj Palace Silhouette"
+                    fill
+                    unoptimized
+                    className="object-cover object-right"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#1C0B33] via-[#1C0B33]/90 to-transparent" />
+                </div>
+
+                <div className="relative z-10 flex items-center justify-between gap-4">
+                  {/* Left Chef Photo & Details */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-[#F5C453] shadow-md">
+                      <Image
+                        src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=400&q=80"
+                        alt="Chef Vikram Singh"
+                        fill
+                        unoptimized
+                        className="object-cover"
+                      />
+                    </div>
+                    
+                    <div className="space-y-0.5">
+                      <h4 className="font-serif font-bold text-xl leading-tight text-white">Taj Hotel Mumbai</h4>
+                      <p className="text-sm font-bold text-[#F5C453]">Chef Vikram Singh</p>
+                      <p className="text-xs text-purple-200 font-medium">Executive Chef</p>
+                      
+                      <div className="inline-flex items-center gap-1.5 mt-1 text-[10px] font-bold text-[#F5C453] bg-[#F5C453]/15 px-3 py-1 rounded-full border border-[#F5C453]/40 uppercase tracking-wider">
+                        <ShieldCheck className="w-3 h-3 text-[#F5C453]" />
+                        <span>ENTERPRISE KEY ACCOUNT</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="space-y-0.5">
-                    <h4 className="font-serif font-bold text-base leading-tight text-white">Taj Hotel Mumbai</h4>
-                    <p className="text-xs text-purple-200 font-medium">Chef Vikram Singh (Executive Chef)</p>
-                    <div className="inline-flex items-center gap-1.5 mt-1 text-[9px] font-bold text-[#F5C453] bg-[#F5C453]/15 px-2.5 py-0.5 rounded-full border border-[#F5C453]/30 uppercase tracking-wider">
-                      <ShieldCheck className="w-3 h-3 text-[#F5C453]" />
-                      <span>ENTERPRISE KEY ACCOUNT</span>
+
+                  {/* Right Vertical Divider & Golden Taj Logo */}
+                  <div className="border-l border-white/20 pl-4 py-1 flex flex-col items-center justify-center text-center shrink-0 space-y-1">
+                    <div className="w-8 h-8 rounded-full bg-[#F5C453]/20 border border-[#F5C453]/40 flex items-center justify-center">
+                      <Crown className="w-5 h-5 text-[#F5C453]" />
+                    </div>
+                    <div className="font-serif font-bold text-sm text-[#F5C453] tracking-widest">
+                      TAJ
+                    </div>
+                    <div className="text-[8px] font-extrabold text-[#F5C453]/80 uppercase tracking-widest leading-none">
+                      HOTELS<br/>PALACES<br/>RESORTS
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Menu Nav Links List */}
-              <div className="p-2 space-y-1">
-                <div className="px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-400">
-                  EXECUTIVE PORTAL NAVIGATION
-                </div>
+              {/* Section Header */}
+              <div className="px-6 pt-4 pb-2 flex items-center justify-between border-b border-amber-200/40 text-[10.5px] font-extrabold uppercase tracking-[0.2em] text-[#B45309]">
+                <span>EXECUTIVE PORTAL NAVIGATION</span>
+                <Sparkles className="w-4 h-4 text-amber-500" />
+              </div>
 
+              {/* 5 Navigation Items List */}
+              <div className="p-3 space-y-1">
                 {profileMenuItems.map((menu) => {
                   const Icon = menu.icon;
-                  const isActive = activeTab === menu.id || (menu.id === "products" && activeTab === "product-detail");
 
                   return (
                     <button
@@ -325,55 +360,72 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
                         setActiveTab(menu.id as any);
                         setShowProfileMenu(false);
                       }}
-                      className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-all duration-200 text-xs cursor-pointer ${
-                        isActive
-                          ? "bg-[#F4EFFB] text-[#5E3B8C] font-bold border border-[#E2D4F7]"
-                          : "text-[#111111] hover:bg-slate-50 font-semibold"
-                      }`}
+                      className="w-full p-3 rounded-2xl flex items-center justify-between transition-all duration-200 text-xs cursor-pointer hover:bg-purple-50/60 group"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-8.5 h-8.5 rounded-xl flex items-center justify-center shrink-0 ${
-                          isActive ? "bg-[#5E3B8C] text-white" : "bg-slate-100 text-slate-600"
-                        }`}>
-                          <Icon className="w-4 h-4" />
+                      <div className="flex items-center gap-3.5">
+                        <div className="w-11 h-11 rounded-2xl bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+                          <Icon className="w-5 h-5" />
                         </div>
                         <div>
-                          <div className="font-bold text-[#111111] text-xs">{menu.label}</div>
-                          <div className="text-[10px] text-slate-400 font-normal">{menu.desc}</div>
+                          <div className="font-bold text-slate-900 text-sm group-hover:text-[#5E3B8C] transition-colors">{menu.label}</div>
+                          <div className="text-xs text-slate-400 font-medium">{menu.desc}</div>
                         </div>
                       </div>
 
-                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">
-                        {menu.badge}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C]">
+                          {menu.badge}
+                        </span>
+                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Bottom Quick Actions */}
-              <div className="p-2.5 border-t border-slate-100 bg-slate-50/80 flex items-center justify-between text-xs">
+              {/* Bottom Split Footer Action Bar */}
+              <div className="p-3 bg-[#FAF7F2] border-t border-[#EBE3D5] grid grid-cols-2 gap-3 text-left">
+                
+                {/* Account Settings Button */}
                 <button
                   onClick={() => {
                     setActiveTab("profile");
                     setShowProfileMenu(false);
                   }}
-                  className="px-3 py-1.5 rounded-xl text-slate-700 hover:text-[#111111] hover:bg-white font-bold flex items-center gap-1.5 text-xs cursor-pointer border border-transparent hover:border-slate-200"
+                  className="p-3 rounded-2xl bg-white border border-[#EBE3D5] hover:bg-slate-50 flex items-center justify-between transition-all cursor-pointer shadow-2xs group"
                 >
-                  <Settings className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Account Settings</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 border border-amber-200/80">
+                      <Settings className="w-4 h-4 text-amber-700" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-slate-900 text-xs group-hover:text-amber-800">Account Settings</div>
+                      <div className="text-[10px] text-slate-400 font-medium">Manage your account</div>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
                 </button>
 
+                {/* Sign Out Button */}
                 <button
                   onClick={() => {
                     setActiveTab("signin");
                     setShowProfileMenu(false);
                   }}
-                  className="px-3 py-1.5 rounded-xl text-red-600 hover:text-red-700 hover:bg-red-50 font-bold flex items-center gap-1.5 text-xs cursor-pointer"
+                  className="p-3 rounded-2xl bg-white border border-[#EBE3D5] hover:bg-rose-50/60 flex items-center justify-between transition-all cursor-pointer shadow-2xs group"
                 >
-                  <LogOut className="w-3.5 h-3.5 text-red-500" />
-                  <span>Sign Out / Switch</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 border border-rose-200/80">
+                      <LogOut className="w-4 h-4 text-rose-600" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-rose-600 text-xs">Sign Out / Switch</div>
+                      <div className="text-[10px] text-slate-400 font-medium">Secure sign out</div>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
                 </button>
+
               </div>
 
             </div>
