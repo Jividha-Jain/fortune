@@ -46,9 +46,6 @@ export default function ScreenProductDetail({ onBack }: ScreenProductDetailProps
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md font-bold">
-              SKU: FG-ZNT-88210
-            </span>
             <span className="text-[10px] font-bold text-amber-900 bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-full flex items-center gap-1">
               <ShieldCheck className="w-3 h-3 text-amber-700" /> Authenticity Guaranteed
             </span>

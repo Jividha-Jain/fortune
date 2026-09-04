@@ -16,53 +16,14 @@ import {
   Calendar,
 } from "lucide-react";
 
+import { RECOMMENDED_HOME_PRODUCTS } from "@/data/productsData";
+
 interface ScreenDashboardProps {
   onNavigateTab: (tab: "products" | "product-detail" | "recommendations" | "mymenu") => void;
 }
 
 export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps) {
-  const recommendedSKUs = [
-    {
-      id: "zanetti-mozzarella",
-      matchPercent: "98%",
-      title: "Zanetti Mozzarella di Bufala DOP",
-      category: "DAIRY • 1KG X 12",
-      originTag: "Italy • DOP",
-      matchDesc: "Matches your Margherita Pizza at Shamiana",
-      sku: "SKU: FG-BUF-001",
-      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=500&q=80",
-    },
-    {
-      id: "paysan-butter",
-      matchPercent: "96%",
-      title: "Paysan Breton Unsalted Butter 82%",
-      category: "DAIRY & BAKERY • 250G X 20",
-      originTag: "France • 82% Fat",
-      matchDesc: "Matches your Viennoiserie & Brioche station",
-      sku: "SKU: FG-BUT-020",
-      image: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=500&q=80",
-    },
-    {
-      id: "levoni-prosciutto",
-      matchPercent: "94%",
-      title: "Levoni Prosciutto di San Daniele DOP",
-      category: "MEATS & SALUMI • 6.5 KG WHOLE",
-      originTag: "Italy • Aged 18 Mo",
-      matchDesc: "Matches your Antipasto Platter menu station",
-      sku: "SKU: FG-SLM-440",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80",
-    },
-    {
-      id: "fortune-salmon",
-      matchPercent: "92%",
-      title: "Fortune Atlantic Salmon Fillet Trim D",
-      category: "SEAFOOD • 1.8 KG FRESH",
-      originTag: "Norway • Trim D",
-      matchDesc: "Matches your Pan-Seared Salmon Fillet",
-      sku: "SKU: FG-SEA-710",
-      image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=500&q=80",
-    },
-  ];
+  const recommendedSKUs = RECOMMENDED_HOME_PRODUCTS;
 
   const innovationConcepts = [
     {
@@ -213,7 +174,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
             <div>
               <div className="text-[10px] uppercase font-bold tracking-[0.22em] text-[#5E3B8C] flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#5E3B8C]" />
-                <span>MATCHED SKUS READY FOR ORDER</span>
+                <span>MATCHED PRODUCTS READY FOR ORDER</span>
               </div>
               <h3 className="text-2xl lg:text-3xl font-serif text-[#111111] font-normal mt-0.5 tracking-tight">
                 Recommended for Your Kitchen
@@ -276,12 +237,11 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                     </div>
                   </div>
 
-                  {/* Card Footer */}
-                  <div className="p-5 pt-3 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                    <span className="text-[10px] font-mono text-slate-400 font-medium">{sku.sku}</span>
+                  {/* Card Footer (Without SKU) */}
+                  <div className="p-5 pt-3 flex items-center justify-end border-t border-slate-100/80 mt-1">
                     <button
                       onClick={() => onNavigateTab("product-detail")}
-                      className="text-[#5E3B8C] hover:text-[#2E1658] text-xs font-bold flex items-center gap-1 transition-colors group/btn"
+                      className="text-[#5E3B8C] hover:text-[#2E1658] text-xs font-bold flex items-center gap-1 transition-colors group/btn cursor-pointer"
                     >
                       <span>View Product</span>
                       <ArrowRight className="w-3.5 h-3.5 transform group-hover/btn:translate-x-0.5 transition-transform" />

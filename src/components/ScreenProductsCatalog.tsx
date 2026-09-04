@@ -19,6 +19,7 @@ import {
   X,
   SlidersHorizontal
 } from "lucide-react";
+import { ALL_PRODUCTS } from "@/data/productsData";
 
 interface ScreenProductsCatalogProps {
   onSelectProduct: (productId: string) => void;
@@ -67,505 +68,18 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
     { name: "Japan", flag: "🇯🇵" },
   ];
 
-  const productsData = [
-    {
-      id: "zanetti-mozzarella",
-      title: "Zanetti Mozzarella di Bufala DOP",
-      brand: "Zanetti",
-      category: "DAIRY",
-      pack: "1 KG • DOP PROTECTED",
-      badge: "MATCHES YOUR MENU",
-      matchPercentNum: 98,
-      matchPercent: "98% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Authentic Campana water buffalo milk cheese, rich creaminess with subtle tang.",
-      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 1850,
-    },
-    {
-      id: "zanetti-parmigiano",
-      title: "Zanetti Parmigiano Reggiano DOP 24M",
-      brand: "Zanetti",
-      category: "DAIRY",
-      pack: "1 KG • AGED 24 MONTHS",
-      badge: "MATCHES YOUR MENU",
-      matchPercentNum: 97,
-      matchPercent: "97% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "King of Italian cheeses aged 24 months. Granular texture with nut and fruit notes.",
-      image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 2950,
-    },
-    {
-      id: "zanetti-grana-padano",
-      title: "Zanetti Grana Padano DOP 16M",
-      brand: "Zanetti",
-      category: "DAIRY",
-      pack: "1 KG • AGED 16 MONTHS",
-      badge: "CHEF ESSENTIAL",
-      matchPercentNum: 92,
-      matchPercent: "92% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Hard Italian cheese with savory depth, ideal for grating over pastas and risottos.",
-      image: "https://images.unsplash.com/photo-1589883661923-6476cb0ae9f2?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 2200,
-    },
-    {
-      id: "zanetti-gorgonzola",
-      title: "Zanetti Gorgonzola DOP Dolce",
-      brand: "Zanetti",
-      category: "DAIRY",
-      pack: "1.5 KG • CREAMY BLUE",
-      badge: "FINE DINING SPEC",
-      matchPercentNum: 89,
-      matchPercent: "89% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Soft, buttery Italian blue cheese with delicate green veining and mild pungent aroma.",
-      image: "https://images.unsplash.com/photo-1626957341926-98752fc2ba90?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: true,
-      price: 2600,
-    },
-    {
-      id: "zanetti-mascarpone",
-      title: "Zanetti Italian Mascarpone Cheese",
-      brand: "Zanetti",
-      category: "DAIRY",
-      pack: "500G • DESSERT SPEC",
-      badge: "PASTRY FAVORITE",
-      matchPercentNum: 95,
-      matchPercent: "95% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Ultra-rich triple cream cheese crafted for classic Tiramisu and dessert mousses.",
-      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: false,
-      isNewArrival: false,
-      price: 1450,
-    },
-    {
-      id: "levoni-salame",
-      title: "Levoni Salame Milano",
-      brand: "Levoni",
-      category: "SALUMI & CHARCUTERIE",
-      pack: "2.5 KG • CURED SALAMI",
-      badge: "POPULAR WITH 5★ HOTELS",
-      matchPercentNum: 94,
-      matchPercent: "94% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Finely ground premium Italian pork seasoned with crushed garlic, white wine.",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: false,
-      isNewArrival: false,
-      price: 2400,
-    },
-    {
-      id: "levoni-prosciutto",
-      title: "Levoni Prosciutto di Parma DOP 18M",
-      brand: "Levoni",
-      category: "SALUMI & CHARCUTERIE",
-      pack: "6.5 KG WHOLE • AGED 18M",
-      badge: "5★ HOTEL SPEC",
-      matchPercentNum: 95,
-      matchPercent: "95% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Cured air-dried ham from Parma with sweet delicate taste and pink rose color.",
-      image: "https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: false,
-      isNewArrival: true,
-      price: 7800,
-    },
-    {
-      id: "levoni-mortadella",
-      title: "Levoni Mortadella Bologna IGP Pistachio",
-      brand: "Levoni",
-      category: "SALUMI & CHARCUTERIE",
-      pack: "3.0 KG • PISTACHIO INCLUDED",
-      badge: "ANTIPASTI CLASSIC",
-      matchPercentNum: 91,
-      matchPercent: "91% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Slow-cooked Emilian specialty studded with Bronte pistachios and delicate pork fat cubes.",
-      image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 3100,
-    },
-    {
-      id: "levoni-coppa",
-      title: "Levoni Coppa di Parma IGP",
-      brand: "Levoni",
-      category: "SALUMI & CHARCUTERIE",
-      pack: "1.8 KG • CURED PORK NECK",
-      badge: "CHARCUTERIE BOARD",
-      matchPercentNum: 88,
-      matchPercent: "88% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Traditional dry-cured pork collar with rich marbling and subtle spices.",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: false,
-      highMargin: true,
-      isNewArrival: true,
-      price: 3400,
-    },
-    {
-      id: "paysan-croissant",
-      title: "Paysan Breton Croissant Pure Butter 70g",
-      brand: "Paysan Breton",
-      category: "BAKERY & VIENNOISERIE",
-      pack: "68 PCS/CASE • 70G EA",
-      badge: "MATCHES YOUR MENU",
-      matchPercentNum: 91,
-      matchPercent: "91% Match",
-      origin: "France",
-      originDetails: "France • Deep Frozen -18°C",
-      desc: "Pre-proved French viennoiserie made with 100% Brittany churned butter.",
-      image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 3200,
-    },
-    {
-      id: "paysan-butter",
-      title: "Paysan Breton French Churned Butter 250g",
-      brand: "Paysan Breton",
-      category: "DAIRY",
-      pack: "40 BARS/CASE • UNSALTED",
-      badge: "BREAKFAST BUFFET SPEC",
-      matchPercentNum: 96,
-      matchPercent: "96% Match",
-      origin: "France",
-      originDetails: "France • Chilled 2-4°C",
-      desc: "Traditional Brittany churned butter with high fat content for smooth lamination.",
-      image: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 4100,
-    },
-    {
-      id: "paysan-pain-au-chocolat",
-      title: "Paysan Breton Pain au Chocolat 75g",
-      brand: "Paysan Breton",
-      category: "BAKERY & VIENNOISERIE",
-      pack: "60 PCS/CASE • REAL CHOCOLATE",
-      badge: "NEW ARRIVAL",
-      matchPercentNum: 89,
-      matchPercent: "89% Match",
-      origin: "France",
-      originDetails: "France • Deep Frozen -18°C",
-      desc: "Flaky puff pastry stuffed with twin batons of premium French dark chocolate.",
-      image: "https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: false,
-      isNewArrival: true,
-      price: 3600,
-    },
-    {
-      id: "paysan-whipping-cream",
-      title: "Paysan Breton French Whipping Cream 35%",
-      brand: "Paysan Breton",
-      category: "DAIRY",
-      pack: "12 x 1L • HIGH STABILITY",
-      badge: "EXECUTIVE PASTRY SPEC",
-      matchPercentNum: 93,
-      matchPercent: "93% Match",
-      origin: "France",
-      originDetails: "France • Chilled 2-4°C",
-      desc: "Ultra-stable 35% fat whipping cream designed for hot sauces and pastry piping.",
-      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 5400,
-    },
-    {
-      id: "rougie-foie-gras",
-      title: "Rougié Duck Foie Gras Bloc",
-      brand: "Rougié",
-      category: "SPECIALTY GOURMET",
-      pack: "1 KG • PURE DUCK",
-      badge: "FINE DINING SIGNATURE",
-      matchPercentNum: 88,
-      matchPercent: "88% Match",
-      origin: "France",
-      originDetails: "France • Chilled 2-4°C",
-      desc: "Classic French gastronomy standard. Smooth texture and delicate buttery finish.",
-      image: "https://images.unsplash.com/photo-1514944288352-fffac99f0bdf?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: false,
-      highMargin: true,
-      isNewArrival: true,
-      price: 4800,
-    },
-    {
-      id: "rougie-duck-fat",
-      title: "Rougié Rendered Duck Fat 1KG",
-      brand: "Rougié",
-      category: "SPECIALTY GOURMET",
-      pack: "1 KG CAN • PURE DUCK FAT",
-      badge: "CHEF ROASTING ESSENTIAL",
-      matchPercentNum: 90,
-      matchPercent: "90% Match",
-      origin: "France",
-      originDetails: "France • Ambient Store",
-      desc: "Pure rendered duck fat ideal for confit cooking, crispy roasted potatoes, and pan searing.",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 1950,
-    },
-    {
-      id: "rougie-duck-breast",
-      title: "Rougié Magret de Canard (Duck Breast)",
-      brand: "Rougié",
-      category: "MEATS & POULTRY",
-      pack: "5 KG CASE • INDIVIDUAL VAC PACK",
-      badge: "FINE DINING SPEC",
-      matchPercentNum: 94,
-      matchPercent: "94% Match",
-      origin: "France",
-      originDetails: "France • Frozen -18°C",
-      desc: "Plump Moulard duck breast with rich subcutaneous fat layer, perfect for pan roasting.",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: true,
-      price: 8500,
-    },
-    {
-      id: "truffle-paste",
-      title: "TartufLanghe Black Truffle Paste 500g",
-      brand: "TartufLanghe",
-      category: "SPECIALTY GOURMET",
-      pack: "500G • ALBA, PIEDMONT",
-      badge: "CHEF FAVORITE",
-      matchPercentNum: 93,
-      matchPercent: "93% Match",
-      origin: "Italy",
-      originDetails: "Italy • Ambient Store",
-      desc: "High-potency minced black summer truffles (Tuber aestivum) suspended in extra virgin olive oil.",
-      image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 5200,
-    },
-    {
-      id: "truffle-oil",
-      title: "TartufLanghe White Truffle Oil 250ml",
-      brand: "TartufLanghe",
-      category: "SPECIALTY GOURMET",
-      pack: "250ML • ALBA WHITE TRUFFLE",
-      badge: "FINISHING OIL SPEC",
-      matchPercentNum: 96,
-      matchPercent: "96% Match",
-      origin: "Italy",
-      originDetails: "Italy • Ambient Store",
-      desc: "Extra virgin olive oil infused with natural Alba white truffle essence for aromatic finishing.",
-      image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: true,
-      price: 3450,
-    },
-    {
-      id: "truffle-butter",
-      title: "TartufLanghe White Truffle Butter 80g",
-      brand: "TartufLanghe",
-      category: "SPECIALTY GOURMET",
-      pack: "80G GLASS JAR • 8% TRUFFLE",
-      badge: "PASTA & RISOTTO FINISH",
-      matchPercentNum: 91,
-      matchPercent: "91% Match",
-      origin: "Italy",
-      originDetails: "Italy • Chilled 2-4°C",
-      desc: "Artisanal churned butter blended with genuine Alba white truffle bits.",
-      image: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 2100,
-    },
-    {
-      id: "truffle-dried",
-      title: "TartufLanghe Freeze Dried Truffle Slices",
-      brand: "TartufLanghe",
-      category: "SPECIALTY GOURMET",
-      pack: "20G JAR • 100% NATURAL",
-      badge: "LUXURY GARNISH",
-      matchPercentNum: 87,
-      matchPercent: "87% Match",
-      origin: "Italy",
-      originDetails: "Italy • Ambient Store",
-      desc: "Innovative freeze-dried black truffle slices that rehydrate instantly on warm dishes.",
-      image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: false,
-      highMargin: true,
-      isNewArrival: true,
-      price: 4900,
-    },
-    {
-      id: "fortune-salmon",
-      title: "Atlantic Fresh Salmon Fillet Premium",
-      brand: "Fortune Select",
-      category: "SEAFOOD",
-      pack: "1.8 - 2.2 KG • TRIM D",
-      badge: "NEW FOR YOUR CATEGORY",
-      matchPercentNum: 96,
-      matchPercent: "96% Match",
-      origin: "Norway",
-      originDetails: "Norway • Chilled 0-2°C",
-      desc: "Air-flown Norwegian fjords salmon. Pin-bone out, skin-on Trim D, optimal for pan-sear.",
-      image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: false,
-      isNewArrival: true,
-      price: 3950,
-    },
-    {
-      id: "wagyu-strip-aus",
-      title: "Fortune Australian Wagyu Striploin MB5+",
-      brand: "Fortune Select",
-      category: "MEATS & POULTRY",
-      pack: "4.5 KG WHOLE • MARBLE 5+",
-      badge: "PREMIUM CULINARY",
-      matchPercentNum: 90,
-      matchPercent: "90% Match",
-      origin: "Australia",
-      originDetails: "Australia • Chilled 0-2°C",
-      desc: "Grain-fed Australian Wagyu with rich intramuscular marbling and melt-in-mouth tenderness.",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: false,
-      highMargin: true,
-      isNewArrival: true,
-      price: 12500,
-    },
-    {
-      id: "black-cod-japan",
-      title: "Wild Alaskan / Japan Black Cod Gilled",
-      brand: "Fortune Select",
-      category: "SEAFOOD",
-      pack: "2.5 KG • FROZEN AT SEA",
-      badge: "WASABI SPEC",
-      matchPercentNum: 99,
-      matchPercent: "99% Match",
-      origin: "Japan",
-      originDetails: "Japan • Frozen -18°C",
-      desc: "Deep ocean Sablefish with high oil content. Ideal for miso marinade black cod.",
-      image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 6400,
-    },
-    {
-      id: "spain-jamon",
-      title: "Consorcio Jamón Serrano Reserva 14M",
-      brand: "Fortune Select",
-      category: "SALUMI & CHARCUTERIE",
-      pack: "5.5 KG WHOLE • AGED 14M",
-      badge: "TAPAS SPECIALTY",
-      matchPercentNum: 89,
-      matchPercent: "89% Match",
-      origin: "Spain",
-      originDetails: "Spain • Chilled 2-4°C",
-      desc: "Traditional Spanish dry-cured ham aged in mountain air for intense savory flavor.",
-      image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: false,
-      highMargin: false,
-      isNewArrival: true,
-      price: 6900,
-    },
-    {
-      id: "wagyu-japan-a5",
-      title: "Miyazaki Japanese A5 Wagyu Ribeye",
-      brand: "Fortune Select",
-      category: "MEATS & POULTRY",
-      pack: "3.2 KG WHOLE • A5 BMS 10-12",
-      badge: "LUXURY SIGNATURE",
-      matchPercentNum: 99,
-      matchPercent: "99% Match",
-      origin: "Japan",
-      originDetails: "Japan • Chilled 0-2°C",
-      desc: "Pinnacle Japanese Miyazaki beef with intricate snowflake marbling and exquisite umami.",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: true,
-      price: 24000,
-    },
-    {
-      id: "smoked-salmon-aus",
-      title: "Fortune Tasmanian Smoked Salmon Sliced",
-      brand: "Fortune Select",
-      category: "SEAFOOD",
-      pack: "1 KG VAC PACK • WOOD SMOKED",
-      badge: "BUFFET SPEC",
-      matchPercentNum: 93,
-      matchPercent: "93% Match",
-      origin: "Australia",
-      originDetails: "Australia • Chilled 0-2°C",
-      desc: "Gently cold-smoked Tasmanian Atlantic salmon slices with silky texture and subtle oak smoke.",
-      image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 3100,
-    },
-    {
-      id: "spanish-octopus",
-      title: "Fortune Spanish Octopus Tentacles Cooked",
-      brand: "Fortune Select",
-      category: "SEAFOOD",
-      pack: "1.5 KG • SOUS-VIDE COOKED",
-      badge: "TAPAS & GRILL SPEC",
-      matchPercentNum: 91,
-      matchPercent: "91% Match",
-      origin: "Spain",
-      originDetails: "Spain • Frozen -18°C",
-      desc: "Tender Galician octopus tentacles pre-cooked sous-vide. Ready for charcoal grilling.",
-      image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
-      matchesMyMenu: true,
-      highMargin: true,
-      isNewArrival: false,
-      price: 5800,
-    },
-  ];
+  const productsData = ALL_PRODUCTS;
 
   // Dynamically compute category counts from productsData
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {
       ALL: productsData.length,
+      BAKERY: 0,
       DAIRY: 0,
-      "BAKERY & VIENNOISERIE": 0,
-      "MEATS & POULTRY": 0,
-      SEAFOOD: 0,
-      "SALUMI & CHARCUTERIE": 0,
-      "SPECIALTY GOURMET": 0,
+      MEATS: 0,
+      POULTRY: 0,
+      "SEA FOOD": 0,
+      "SPECIAL OFFERS": 0,
     };
 
     productsData.forEach((p) => {
@@ -576,12 +90,12 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
 
     return [
       { key: "ALL", label: `ALL (${counts.ALL})`, count: counts.ALL },
+      { key: "BAKERY", label: `BAKERY (${counts.BAKERY})`, count: counts.BAKERY },
       { key: "DAIRY", label: `DAIRY (${counts.DAIRY})`, count: counts.DAIRY },
-      { key: "BAKERY & VIENNOISERIE", label: `BAKERY & VIENNOISERIE (${counts["BAKERY & VIENNOISERIE"]})`, count: counts["BAKERY & VIENNOISERIE"] },
-      { key: "MEATS & POULTRY", label: `MEATS & POULTRY (${counts["MEATS & POULTRY"]})`, count: counts["MEATS & POULTRY"] },
-      { key: "SEAFOOD", label: `SEAFOOD (${counts.SEAFOOD})`, count: counts.SEAFOOD },
-      { key: "SALUMI & CHARCUTERIE", label: `SALUMI & CHARCUTERIE (${counts["SALUMI & CHARCUTERIE"]})`, count: counts["SALUMI & CHARCUTERIE"] },
-      { key: "SPECIALTY GOURMET", label: `SPECIALTY GOURMET (${counts["SPECIALTY GOURMET"]})`, count: counts["SPECIALTY GOURMET"] },
+      { key: "MEATS", label: `MEATS (${counts.MEATS})`, count: counts.MEATS },
+      { key: "POULTRY", label: `POULTRY (${counts.POULTRY})`, count: counts.POULTRY },
+      { key: "SEA FOOD", label: `SEA FOOD (${counts["SEA FOOD"]})`, count: counts["SEA FOOD"] },
+      { key: "SPECIAL OFFERS", label: `SPECIAL OFFERS (${counts["SPECIAL OFFERS"]})`, count: counts["SPECIAL OFFERS"] },
     ];
   }, [productsData]);
 
@@ -590,8 +104,9 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
     const map: Record<string, number> = {};
     brandOptions.forEach((b) => (map[b.name] = 0));
     productsData.forEach((p) => {
-      if (map[p.brand] !== undefined) {
-        map[p.brand]++;
+      const bName = p.brand || "Fortune Select";
+      if (map[bName] !== undefined) {
+        map[bName]++;
       }
     });
     return map;
@@ -644,7 +159,7 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
         const q = searchQuery.toLowerCase();
         const match =
           product.title.toLowerCase().includes(q) ||
-          product.brand.toLowerCase().includes(q) ||
+          (product.brand && product.brand.toLowerCase().includes(q)) ||
           product.category.toLowerCase().includes(q) ||
           product.desc.toLowerCase().includes(q) ||
           product.origin.toLowerCase().includes(q) ||
@@ -658,7 +173,7 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
       if (newArrivals && !product.isNewArrival) return false;
 
       // 4. Brand Checkboxes Filter
-      if (selectedBrands.length > 0 && !selectedBrands.includes(product.brand)) {
+      if (selectedBrands.length > 0 && product.brand && !selectedBrands.includes(product.brand)) {
         return false;
       }
 
@@ -676,9 +191,9 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
     if (sortBy === "Match % (High to Low)" || sortBy === "Recommended for Taj Hotel Mumbai") {
       list = list.sort((a, b) => b.matchPercentNum - a.matchPercentNum);
     } else if (sortBy === "Price (Low to High)") {
-      list = list.sort((a, b) => a.price - b.price);
+      list = list.sort((a, b) => (a.price || 0) - (b.price || 0));
     } else if (sortBy === "Price (High to Low)") {
-      list = list.sort((a, b) => b.price - a.price);
+      list = list.sort((a, b) => (b.price || 0) - (a.price || 0));
     } else if (sortBy === "Name (A-Z)") {
       list = list.sort((a, b) => a.title.localeCompare(b.title));
     }
@@ -1085,7 +600,7 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
                           
                           {/* Top Left Badge */}
                           <div className="absolute top-3 left-3 bg-[#1B0B2E] text-white font-bold text-[9px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow-xs">
-                            {p.badge}
+                            {p.badge || "MATCHES YOUR MENU"}
                           </div>
 
                           {/* Top Right Match % Badge */}
@@ -1095,25 +610,31 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
 
                           {/* Bottom Left Origin Badge */}
                           <div className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[10px] font-mono px-2.5 py-0.5 rounded-md border border-white/10">
-                            {p.originDetails}
+                            {p.originDetails || p.originTag}
                           </div>
                         </div>
 
                         {/* Card Content Body */}
                         <div className="p-5 space-y-2">
                           <div className="flex items-center justify-between text-[10px] uppercase font-bold text-[#5E3B8C] tracking-wider">
-                            <span>{p.brand}</span>
+                            <span>{p.category}</span>
                             <span className="text-slate-400 font-mono font-medium">{p.pack}</span>
                           </div>
                           <h4 className="text-base font-serif font-bold text-[#111111] leading-tight min-h-[44px]">
                             {p.title}
                           </h4>
-                          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal">
+                          {p.matchDesc && (
+                            <div className="flex items-center gap-1.5 text-xs text-[#5E3B8C] font-medium pt-0.5">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#5E3B8C] shrink-0" />
+                              <span className="truncate">{p.matchDesc}</span>
+                            </div>
+                          )}
+                          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal mt-1">
                             {p.desc}
                           </p>
                           <div className="pt-2 flex items-center justify-between text-xs border-t border-slate-100">
-                            <span className="text-slate-400 font-medium">Estimated Price:</span>
-                            <span className="font-serif font-bold text-sm text-[#111111]">₹{p.price.toLocaleString("en-IN")}</span>
+                            <span className="text-slate-400 font-medium">Origin:</span>
+                            <span className="font-serif font-bold text-xs text-[#111111]">{p.originTag}</span>
                           </div>
                         </div>
                       </div>
