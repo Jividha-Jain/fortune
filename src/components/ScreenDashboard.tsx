@@ -205,163 +205,91 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
         </div>
 
-        {/* 4 REDESIGNED EXECUTIVE METRIC CARDS */}
+        {/* 4 ELEGANT LUXURY EXECUTIVE METRIC CARDS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* CARD 1: MENU COVERAGE */}
-          <div className="bg-white/95 backdrop-blur-xl border border-slate-200/80 hover:border-[#5E3B8C]/40 p-6 rounded-[28px] shadow-[0_4px_24px_-6px_rgba(28,11,51,0.04)] hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group text-left flex flex-col justify-between space-y-4">
-            
-            {/* Top Row: Icon & Status Badge */}
-            <div className="flex items-center justify-between">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#F4EFFB] to-[#E2D4F7] text-[#5E3B8C] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-300">
-                <BarChart3 className="w-5 h-5 text-[#5E3B8C]" />
-              </div>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C] border border-[#E2D4F7] tracking-wider uppercase">
-                100% AUDITED
-              </span>
+          <div className="bg-white p-7 rounded-[26px] border border-slate-200/70 shadow-[0_10px_35px_-10px_rgba(28,11,51,0.03)] hover:shadow-xl hover:border-[#5E3B8C]/40 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5 group text-left">
+            <div className="w-12 h-12 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-300">
+              <BarChart3 className="w-5 h-5 text-[#5E3B8C]" />
             </div>
-
-            {/* Middle: Metric Number & Subtitle */}
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            <div className="space-y-1">
+              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
                 MENU COVERAGE
               </div>
-              <div className="text-4xl lg:text-[46px] font-serif font-extrabold text-[#1C0B33] leading-none my-1 tracking-tight">
+              <div className="text-4xl lg:text-[46px] font-serif font-bold text-[#1C0B33] leading-none my-1 tracking-tight">
                 42
               </div>
-              <div className="text-xs font-bold text-slate-800">
+              <div className="text-xs font-semibold text-slate-800">
                 Analyzed Menu Dishes
               </div>
-              <div className="text-[11px] font-semibold text-[#5E3B8C] mt-1">
-                Pizza, Pasta, Robata &amp; Pastry
+              <div className="text-[11px] font-bold text-[#5E3B8C] pt-0.5">
+                Across Pizza, Pasta, Robata &amp; Bakery
               </div>
             </div>
-
-            {/* Bottom Progress Micro-Bar */}
-            <div className="w-full space-y-1 pt-1">
-              <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[#5E3B8C] to-[#8B5CF6] rounded-full w-full" />
-              </div>
-              <div className="text-[9px] text-slate-400 font-mono text-right">42/42 Dishes Indexed</div>
-            </div>
-
           </div>
 
           {/* CARD 2: EXECUTIVE MATCHES */}
-          <div className="bg-white/95 backdrop-blur-xl border border-slate-200/80 hover:border-[#D7A742]/50 p-6 rounded-[28px] shadow-[0_4px_24px_-6px_rgba(28,11,51,0.04)] hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group text-left flex flex-col justify-between space-y-4">
-            
-            {/* Top Row: Icon & Status Badge */}
-            <div className="flex items-center justify-between">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#FFF9EE] to-[#FDE8B3] text-[#D7A742] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-300">
-                <Package className="w-5 h-5 text-[#B8841B]" />
-              </div>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#FFF9EE] text-[#B8841B] border border-[#FDE8B3] tracking-wider uppercase">
-                IN COLD STORAGE
-              </span>
+          <div className="bg-white p-7 rounded-[26px] border border-slate-200/70 shadow-[0_10px_35px_-10px_rgba(28,11,51,0.03)] hover:shadow-xl hover:border-[#D7A742]/50 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5 group text-left">
+            <div className="w-12 h-12 rounded-full bg-[#FFF9EE] text-[#D7A742] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-300">
+              <Package className="w-5 h-5 text-[#D7A742]" />
             </div>
-
-            {/* Middle: Metric Number & Subtitle */}
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            <div className="space-y-1">
+              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
                 EXECUTIVE MATCHES
               </div>
-              <div className="text-4xl lg:text-[46px] font-serif font-extrabold text-[#B8841B] leading-none my-1 tracking-tight">
+              <div className="text-4xl lg:text-[46px] font-serif font-bold text-[#D7A742] leading-none my-1 tracking-tight">
                 12
               </div>
-              <div className="text-xs font-bold text-slate-800">
-                Product SKU Pairings
+              <div className="text-xs font-semibold text-slate-800">
+                Product Pairings
               </div>
-              <div className="text-[11px] font-medium text-slate-500 mt-1">
-                Direct cold-chain substitutions ready
+              <div className="text-[11px] font-medium text-slate-500 pt-0.5">
+                Direct SKU substitutions in cold storage
               </div>
             </div>
-
-            {/* Bottom Progress Micro-Bar */}
-            <div className="w-full space-y-1 pt-1">
-              <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[#D7A742] to-[#F5C453] rounded-full w-[85%]" />
-              </div>
-              <div className="text-[9px] text-slate-400 font-mono text-right">85% Match Ratio</div>
-            </div>
-
           </div>
 
           {/* CARD 3: CULINARY YIELD */}
-          <div className="bg-white/95 backdrop-blur-xl border border-slate-200/80 hover:border-[#5E3B8C]/40 p-6 rounded-[28px] shadow-[0_4px_24px_-6px_rgba(28,11,51,0.04)] hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group text-left flex flex-col justify-between space-y-4">
-            
-            {/* Top Row: Icon & Status Badge */}
-            <div className="flex items-center justify-between">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#F4EFFB] to-[#E2D4F7] text-[#5E3B8C] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-300">
-                <TrendingUp className="w-5 h-5 text-[#5E3B8C]" />
-              </div>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-200 tracking-wider uppercase">
-                HIGH MARGIN YIELD
-              </span>
+          <div className="bg-white p-7 rounded-[26px] border border-slate-200/70 shadow-[0_10px_35px_-10px_rgba(28,11,51,0.03)] hover:shadow-xl hover:border-[#5E3B8C]/40 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5 group text-left">
+            <div className="w-12 h-12 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-300">
+              <TrendingUp className="w-5 h-5 text-[#5E3B8C]" />
             </div>
-
-            {/* Middle: Metric Number & Subtitle */}
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            <div className="space-y-1">
+              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
                 CULINARY YIELD
               </div>
-              <div className="text-4xl lg:text-[46px] font-serif font-extrabold text-[#5E3B8C] leading-none my-1 tracking-tight">
+              <div className="text-4xl lg:text-[46px] font-serif font-bold text-[#5E3B8C] leading-none my-1 tracking-tight">
                 7
               </div>
-              <div className="text-xs font-bold text-slate-800">
-                Menu Innovation Concepts
+              <div className="text-xs font-semibold text-slate-800">
+                Menu Concepts
               </div>
-              <div className="text-[11px] font-medium text-slate-500 mt-1">
-                Regional trending signature dishes
+              <div className="text-[11px] font-medium text-slate-500 pt-0.5">
+                High-margin regional culinary opportunities
               </div>
             </div>
-
-            {/* Bottom Progress Micro-Bar */}
-            <div className="w-full space-y-1 pt-1">
-              <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[#5E3B8C] to-[#10B981] rounded-full w-[70%]" />
-              </div>
-              <div className="text-[9px] text-slate-400 font-mono text-right">+24% Gross Margin Lift</div>
-            </div>
-
           </div>
 
           {/* CARD 4: QUALITY CERTIFICATIONS */}
-          <div className="bg-white/95 backdrop-blur-xl border border-slate-200/80 hover:border-[#D7A742]/50 p-6 rounded-[28px] shadow-[0_4px_24px_-6px_rgba(28,11,51,0.04)] hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group text-left flex flex-col justify-between space-y-4">
-            
-            {/* Top Row: Icon & Status Badge */}
-            <div className="flex items-center justify-between">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#FFF9EE] to-[#FDE8B3] text-[#D7A742] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-300">
-                <Award className="w-5 h-5 text-[#B8841B]" />
-              </div>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#E6F9F0] text-[#0D9488] border border-[#BBF7D0] tracking-wider uppercase">
-                DOP &amp; MSC CERTIFIED
-              </span>
+          <div className="bg-white p-7 rounded-[26px] border border-slate-200/70 shadow-[0_10px_35px_-10px_rgba(28,11,51,0.03)] hover:shadow-xl hover:border-[#D7A742]/50 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5 group text-left">
+            <div className="w-12 h-12 rounded-full bg-[#FFF9EE] text-[#D7A742] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-300">
+              <Award className="w-5 h-5 text-[#D7A742]" />
             </div>
-
-            {/* Middle: Metric Number & Subtitle */}
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            <div className="space-y-1">
+              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
                 QUALITY CERTIFICATIONS
               </div>
-              <div className="text-4xl lg:text-[46px] font-serif font-extrabold text-[#1C0B33] leading-none my-1 tracking-tight">
+              <div className="text-4xl lg:text-[46px] font-serif font-bold text-[#1C0B33] leading-none my-1 tracking-tight">
                 4
               </div>
-              <div className="text-xs font-bold text-slate-800">
-                Artisanal Grade Upgrades
+              <div className="text-xs font-semibold text-slate-800">
+                Artisanal Upgrades
               </div>
-              <div className="text-[11px] font-medium text-slate-500 mt-1">
-                Authentic origin DOP certified items
+              <div className="text-[11px] font-medium text-slate-500 pt-0.5">
+                Artisanal DOP &amp; MSC certified replacements
               </div>
             </div>
-
-            {/* Bottom Progress Micro-Bar */}
-            <div className="w-full space-y-1 pt-1">
-              <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[#0D9488] to-[#10B981] rounded-full w-[95%]" />
-              </div>
-              <div className="text-[9px] text-slate-400 font-mono text-right">Grade A Quality</div>
-            </div>
-
           </div>
 
         </div>
