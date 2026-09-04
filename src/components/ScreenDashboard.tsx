@@ -5,23 +5,13 @@ import Image from "next/image";
 import {
   Sparkles,
   ArrowRight,
+  ChevronRight,
   Package,
-  X,
-  Search,
-  Hourglass,
-  Users,
-  CheckCircle2,
-  Calendar,
-  Phone,
-  Mail,
-  Utensils,
-  Plus,
-  SlidersHorizontal,
-  BarChart3,
-  User,
-  Check,
-  ChevronDown,
-  MessageSquare
+  ChefHat,
+  Lightbulb,
+  MessageSquare,
+  Bookmark,
+  X
 } from "lucide-react";
 
 import AIPairingSuggestionsSection from "./AIPairingSuggestionsSection";
@@ -31,159 +21,157 @@ interface ScreenDashboardProps {
 }
 
 export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<"All" | "Submitted" | "Under Review" | "Sales Contacted" | "Closed">("All");
-  const [sortBy, setSortBy] = useState("Latest");
-  const [showNewEnquiryModal, setShowNewEnquiryModal] = useState(false);
-  const [selectedEnquiry, setSelectedEnquiry] = useState<any>(null);
+  const [activeNoteModalId, setActiveNoteModalId] = useState<string | null>(null);
+  const [notesState, setNotesState] = useState<Record<string, string>>({
+    "halloumi-200gm": "Requested sample batch for Paneer Tikka replacement test.",
+  });
+  const [noteInput, setNoteInput] = useState("");
 
-  const [newProductName, setNewProductName] = useState("");
-  const [newDishName, setNewDishName] = useState("");
-  const [newMessage, setNewMessage] = useState("");
-
-  const [dashboardCards, setDashboardCards] = useState([
+  const dashboardCards = [
     {
-      id: "enq-1",
-      title: "Cheese Sauce",
-      status: "Under Review",
-      statusType: "under_review",
-      relatedDish: "Butter Chicken",
-      message: "We would like to know more about bulk supply options and sample availability for our Butter Chicken preparation.",
-      date: "1 Mar 2026",
-      channel: "Phone",
-      channelType: "phone",
-      contact: "Priya Mehta",
-      contactRole: "Sales Manager",
-      tags: ["Sauces", "Cheese", "HORECA Pack"],
-      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=400&q=80",
-      stepProgress: 2,
-      submittedDate: "1 Mar 2026",
-      underReviewNote: "Awaiting response",
+      id: "halloumi-200gm",
+      brand: "FORTUNE SELECT",
+      title: "Halloumi 200 GM",
+      description: "Perfectly firm & flavorful. Ideal for grilling and high-heat cooking.",
+      forDish: "For Paneer Tikka",
+      forDishTheme: "purple",
+      matchPercent: 78,
+      matchType: "STRONG",
+      matchLabel: "Strong Match",
+      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=800&q=80",
+      productId: "gran-spicco-200gm"
     },
     {
-      id: "enq-2",
-      title: "Quatro Formaggi (Shredded 4 Cheese)",
-      status: "Sales Contacted",
-      statusType: "sales_contacted",
-      relatedDish: "Alfredo Pasta",
-      message: "Interested in understanding product specifications and shelf life for our continental menu section.",
-      date: "25 Feb 2026",
-      channel: "Email",
-      channelType: "email",
-      contact: "Priya Mehta",
-      contactRole: "Sales Manager",
-      tags: ["Cheese", "Shredded", "Continental"],
-      image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=400&q=80",
-      stepProgress: 3,
-      submittedDate: "25 Feb 2026",
-      salesContactedNote: "In conversation",
+      id: "queso-formage",
+      brand: "FIORELLA",
+      title: "Queso Formage (Shredded & Cubes)",
+      description: "Rich, creamy and melts beautifully. Perfect for pastas and baked dishes.",
+      forDish: "For Alfredo Pasta",
+      forDishTheme: "emerald",
+      matchPercent: 95,
+      matchType: "EXCELLENT",
+      matchLabel: "Excellent Match",
+      image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=80",
+      productId: "zanetti-mozzarella-bufala"
     },
     {
-      id: "enq-3",
-      title: "Cheddar White 1Kg",
-      status: "Submitted",
-      statusType: "submitted",
-      relatedDish: "Veg Biryani",
-      message: "Would like to schedule a product demo for our kitchen team.",
-      date: "20 Feb 2026",
-      channel: "Phone",
-      channelType: "phone",
-      contact: "Priya Mehta",
-      contactRole: "Sales Manager",
-      tags: ["Cheese", "Block", "Kitchen Use"],
-      image: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=400&q=80",
-      stepProgress: 1,
-      submittedDate: "20 Feb 2026",
+      id: "lurpak-butter",
+      brand: "LURPAK",
+      title: "Lurpak Unsalted Butter 200g",
+      description: "Premium European butter with rich, natural taste. Elevates your desserts.",
+      forDish: "For Chocolate Mousse",
+      forDishTheme: "amber",
+      matchPercent: 94,
+      matchType: "EXCELLENT",
+      matchLabel: "Excellent Match",
+      image: "https://fortunegourmet.com/wp-content/uploads/2025/03/lurpak-500x500.png",
+      productId: "butter-unsalted-200gm"
     },
-  ]);
+  ];
 
-  const handleCreateEnquiry = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newProductName) return;
-
-    const newEnq = {
-      id: `enq-${Date.now()}`,
-      title: newProductName,
-      status: "Submitted",
-      statusType: "submitted",
-      relatedDish: newDishName || "General Kitchen",
-      message: newMessage || "Requested pricing and sample availability.",
-      date: "4 Mar 2026",
-      channel: "Phone",
-      channelType: "phone",
-      contact: "Priya Mehta",
-      contactRole: "Sales Manager",
-      tags: ["New", "Custom"],
-      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=400&q=80",
-      stepProgress: 1,
-      submittedDate: "4 Mar 2026",
-    };
-
-    setDashboardCards([newEnq, ...dashboardCards]);
-    setNewProductName("");
-    setNewDishName("");
-    setNewMessage("");
-    setShowNewEnquiryModal(false);
+  const openNoteModal = (id: string) => {
+    setActiveNoteModalId(id);
+    setNoteInput(notesState[id] || "");
   };
 
-  const filteredCards = dashboardCards.filter((item) => {
-    const matchesSearch = 
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.relatedDish.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.message.toLowerCase().includes(searchQuery.toLowerCase());
-
-    if (activeFilter === "All") return matchesSearch;
-    return matchesSearch && item.status.toLowerCase() === activeFilter.toLowerCase();
-  });
+  const saveNote = () => {
+    if (activeNoteModalId) {
+      setNotesState((prev) => ({
+        ...prev,
+        [activeNoteModalId]: noteInput,
+      }));
+      setActiveNoteModalId(null);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-[#FAF8FD] text-[#111111] pb-16 font-sans relative overflow-hidden antialiased">
+    <div className="min-h-screen bg-[#FAFAFA] text-[#111111] pb-12 sm:pb-16 font-sans relative overflow-hidden antialiased">
       
-      {/* Background Decorative Glows */}
+      {/* Subtle Background Pattern & Ambient Luxury Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(#241347_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.025] pointer-events-none" />
       <div className="absolute top-0 right-0 w-[900px] h-[900px] bg-gradient-to-bl from-[#D7A742]/12 via-[#241347]/5 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-[450px] left-[-150px] w-[600px] h-[600px] bg-gradient-to-tr from-[#241347]/8 via-[#D7A742]/3 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-6 sm:space-y-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 space-y-8 sm:space-y-10 relative z-10">
 
-        {/* TOP HERO RECOMMENDATION CARD */}
-        <div className="space-y-4">
-          <div className="max-w-xl space-y-2 text-left">
-            <div className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#241347] flex items-center gap-2">
+        {/* TOP HERO SECTION */}
+        <div className="space-y-6">
+          
+          {/* Left Hero Title & Outlets Status Header */}
+          <div className="max-w-xl space-y-4 text-left">
+            <div className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#241347] flex items-center gap-2 mb-1">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D7A742] animate-pulse" />
               <Sparkles className="w-3.5 h-3.5 text-[#241347]" />
               <span>Executive Kitchen Intelligence</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#111111] font-bold tracking-tight">
-              Good morning, <span className="text-[#241347]">Taj Hotel Mumbai</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#111111] font-normal tracking-[-0.02em] leading-[1.08]">
+              Good morning,<br />
+              <span className="font-bold text-[#241347] font-serif bg-gradient-to-r from-[#241347] via-[#3B1F70] to-[#241347] bg-clip-text text-transparent">Taj Hotel Mumbai</span>
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 font-medium">
-              Here&apos;s what Fortune found for your signature autumn menu.
+
+            <div className="w-16 h-[3px] bg-gradient-to-r from-[#D7A742] to-[#E5BC5E] rounded-full my-3.5 shadow-xs" />
+
+            <p className="text-[#555555] text-sm sm:text-base font-medium leading-relaxed">
+              Here&apos;s what Fortune found for your menu.
             </p>
           </div>
 
-          {/* HERO BANNER CARD */}
-          <div className="w-full bg-gradient-to-r from-[#1F0E37] via-[#1A0A30] to-[#140626] rounded-3xl p-6 sm:p-8 lg:p-10 text-white shadow-xl border border-[#D7A742]/30 relative z-10 overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-6 text-left">
+          {/* HERO RECOMMENDATION CARD - SEAMLESS RADIAL MASK BLEND */}
+          <div className="w-full bg-gradient-to-r from-[#1F0E37] via-[#1A0A30] to-[#140626] rounded-[24px] lg:rounded-[28px] p-8 sm:p-10 lg:p-12 text-white shadow-2xl border border-[#D7A742]/30 relative z-10 overflow-hidden min-h-[380px] lg:min-h-[420px] flex items-center text-left">
             
-            <div className="w-full lg:w-[55%] space-y-4 relative z-10">
-              <div className="inline-flex items-center gap-2 bg-[#1C0B33]/80 backdrop-blur-md border border-[#D7A742]/60 px-3.5 py-1.5 rounded-lg text-[#EBB738] text-[11px] font-bold tracking-widest uppercase">
+            {/* Right Side Dish Image with Elliptical Radial Fade Blend */}
+            <div 
+              className="absolute top-0 right-0 bottom-0 w-full lg:w-[62%] h-full pointer-events-none z-0"
+              style={{
+                WebkitMaskImage: "radial-gradient(ellipse 65% 75% at 65% 50%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.8) 55%, rgba(0,0,0,0) 80%)",
+                maskImage: "radial-gradient(ellipse 65% 75% at 65% 50%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.8) 55%, rgba(0,0,0,0) 80%)",
+              }}
+            >
+              <Image
+                src="/image/Dashboard.png"
+                alt="Executive Gourmet Dish Presentation"
+                fill
+                unoptimized
+                className="object-cover object-[65%_center] lg:object-right"
+                priority
+              />
+            </div>
+
+            {/* Concentric Golden Ring Arcs Centered Over the Dish */}
+            <div className="absolute -top-36 -right-36 w-[620px] sm:w-[720px] lg:w-[820px] h-[620px] sm:h-[720px] lg:h-[820px] pointer-events-none z-1 flex items-center justify-center">
+              <div className="w-full h-full rounded-full border border-[#D7A742]/45 flex items-center justify-center p-14 lg:p-20">
+                <div className="w-full h-full rounded-full border border-[#D7A742]/35 flex items-center justify-center p-14 lg:p-20">
+                  <div className="w-full h-full rounded-full border border-[#D7A742]/20" />
+                </div>
+              </div>
+            </div>
+
+            {/* Left Side Content Overlay */}
+            <div className="w-full lg:w-[50%] space-y-6 relative z-10">
+              
+              {/* Gold Outline Badge */}
+              <div className="inline-flex items-center gap-2 bg-[#1C0B33]/80 backdrop-blur-md border border-[#D7A742]/60 px-3.5 py-1.5 rounded-lg text-[#EBB738] text-[11px] font-bold tracking-widest uppercase shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#EBB738]" />
                 <span>FORTUNE CULINARY PAIRING ENGINE</span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif leading-tight">
-                <span className="text-[#F5C453] font-normal block">12 Fortune products</span>
-                <span className="text-white font-normal block mt-0.5">match your menu</span>
+              {/* Title */}
+              <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-serif leading-[1.12] tracking-tight">
+                <span className="text-[#F5C453] font-normal block font-serif">12 Fortune products</span>
+                <span className="text-white font-normal block font-serif mt-1">match your menu</span>
               </h2>
 
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-md">
-                Based on 42 dishes analyzed from your Wasabi &amp; Shamiana menus. Discover direct cold-chain replacements and higher yield.
+              {/* Description */}
+              <p className="text-slate-300/90 text-sm leading-relaxed max-w-md font-normal">
+                Based on 42 dishes we&apos;ve analyzed from your current Wasabi &amp; Shamiana autumn dining menus. Discover direct cold-chain replacements, artisanal certifications, and higher kitchen yield.
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-1">
+              {/* Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-1">
                 <button
                   onClick={() => onNavigateTab("products")}
-                  className="px-6 py-3 rounded-xl bg-[#E5B83B] hover:bg-[#F3C74C] text-[#1C0B33] font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md transition-all cursor-pointer"
+                  className="px-7 py-3.5 rounded-xl bg-[#E5B83B] hover:bg-[#F3C74C] text-[#1C0B33] font-bold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-lg transition-all duration-300 active:scale-[0.98] cursor-pointer"
                 >
                   <span>View Matches</span>
                   <ArrowRight className="w-4 h-4" />
@@ -191,519 +179,245 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
                 <button
                   onClick={() => onNavigateTab("recommendations")}
-                  className="px-6 py-3 rounded-xl bg-transparent hover:bg-white/10 border border-[#D7A742]/60 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-7 py-3.5 rounded-xl bg-transparent hover:bg-white/10 border border-[#D7A742]/60 hover:border-[#D7A742] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2.5 backdrop-blur-md active:scale-[0.98] cursor-pointer"
                 >
                   <span>Explore Recommendations</span>
                   <Package className="w-4 h-4 text-white" />
                 </button>
               </div>
+
             </div>
 
-            {/* Right Side Dish Image */}
-            <div className="relative w-full lg:w-96 h-48 sm:h-56 lg:h-64 rounded-2xl overflow-hidden border border-[#D7A742]/20 shadow-lg">
-              <Image
-                src="/image/Dashboard.png"
-                alt="Executive Gourmet Presentation"
-                fill
-                unoptimized
-                className="object-cover"
-                priority
-              />
-            </div>
           </div>
+
         </div>
 
-        {/* 1:1 PIXEL-PERFECT ENQUIRIES & MATCHES SECTION MATCHING REFERENCE IMAGE */}
-        <div className="space-y-6 pt-2">
-          
-          {/* HERO BANNER TITLE ROW */}
-          <div className="relative bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-2xs overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-2 relative z-10 max-w-xl text-left">
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#111111] tracking-tight">
-                Enquiries
-              </h2>
-              <p className="text-sm text-slate-500 font-medium">
-                Track and manage product enquiries from your customers.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 relative z-10 w-full md:w-auto justify-between md:justify-end">
-              <div className="hidden lg:flex items-center gap-2 text-purple-700 italic font-serif text-base sm:text-lg pr-4">
-                <span>Good Food Starts with Great Conversations</span>
-                <svg className="w-10 h-5 text-amber-500 stroke-current fill-none" viewBox="0 0 50 20">
-                  <path d="M 2 10 Q 25 18 45 6" strokeWidth="2" strokeLinecap="round" />
-                  <path d="M 40 2 L 47 6 L 43 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+        {/* SECTION 1: MATCHED SKUS READY FOR ORDER - EXACT 1:1 PIXEL MATCH TO REFERENCE IMAGE */}
+        <div className="space-y-6 pt-4 relative text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+            <div>
+              <div className="text-[10px] uppercase font-bold tracking-[0.22em] text-[#5E3B8C] flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#5E3B8C]" />
+                <span>MATCHED PRODUCTS READY FOR ORDER</span>
               </div>
-
-              <button
-                onClick={() => setShowNewEnquiryModal(true)}
-                className="px-5 py-3 rounded-2xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center gap-2 shadow-md transition-all cursor-pointer border border-[#F5C453]/40 shrink-0"
-              >
-                <Plus className="w-4 h-4 text-[#F5C453]" />
-                <span>New RFQ Enquiry</span>
-              </button>
-            </div>
-          </div>
-
-          {/* 4 SUMMARY METRIC CARDS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            {/* Metric 1 */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center gap-4 text-left hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                <MessageSquare className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-2xl font-serif font-bold text-[#111111]">3</div>
-                <div className="text-xs font-bold text-[#111111]">All Enquiries</div>
-                <div className="text-[11px] text-slate-400 font-medium">Open enquiries</div>
-              </div>
-            </div>
-
-            {/* Metric 2 */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center gap-4 text-left hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                <Hourglass className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-2xl font-serif font-bold text-[#111111]">1</div>
-                <div className="text-xs font-bold text-[#111111]">Under Review</div>
-                <div className="text-[11px] text-slate-400 font-medium">Awaiting sales response</div>
-              </div>
-            </div>
-
-            {/* Metric 3 */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center gap-4 text-left hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-                <Users className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-2xl font-serif font-bold text-[#111111]">1</div>
-                <div className="text-xs font-bold text-[#111111]">Sales Contacted</div>
-                <div className="text-[11px] text-slate-400 font-medium">In conversation</div>
-              </div>
-            </div>
-
-            {/* Metric 4 */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center gap-4 text-left hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-2xl font-serif font-bold text-[#111111]">0</div>
-                <div className="text-xs font-bold text-[#111111]">Closed</div>
-                <div className="text-[11px] text-slate-400 font-medium">Completed enquiries</div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* SEARCH & FILTER CONTROLS BAR */}
-          <div className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="relative w-full md:w-96">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products, dishes, or messages..."
-                className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200/90 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
-              />
-            </div>
-
-            <div className="flex items-center gap-2 overflow-x-auto custom-scrollbar w-full md:w-auto shrink-0 justify-end">
-              {(["All", "Submitted", "Under Review", "Sales Contacted", "Closed"] as const).map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    activeFilter === filter
-                      ? "bg-[#1C0B33] text-white shadow-2xs"
-                      : "bg-white border border-slate-200/90 text-slate-700 hover:bg-purple-50 hover:text-[#5E3B8C]"
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
-
-              <button className="p-2 rounded-xl border border-slate-200/90 text-slate-600 hover:bg-slate-50 cursor-pointer ml-1">
-                <SlidersHorizontal className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* ITEM COUNT & SORT BY ROW */}
-          <div className="flex items-center justify-between text-xs text-slate-500 font-medium px-1">
-            <span>{filteredCards.length} enquiries</span>
-            
-            <div className="flex items-center gap-1.5 cursor-pointer hover:text-slate-800">
-              <span>Sort by: <strong className="text-slate-900 font-bold">{sortBy}</strong></span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-            </div>
-          </div>
-
-          {/* 3 ENQUIRY CARDS MATCHING REFERENCE SCREENSHOT 1:1 */}
-          {filteredCards.length > 0 ? (
-            <div className="space-y-4">
-              {filteredCards.map((enq) => (
-                <div
-                  key={enq.id}
-                  className="bg-white rounded-3xl border border-slate-200/90 p-6 shadow-2xs hover:shadow-md transition-all duration-300 text-left flex flex-col lg:flex-row gap-6 justify-between items-stretch"
-                >
-                  {/* LEFT MAIN CONTENT */}
-                  <div className="flex-1 space-y-4">
-                    
-                    {/* Top Row: Thumbnail + Product Title + Meta Info + Status Pill */}
-                    <div className="flex flex-col sm:flex-row items-start gap-4">
-                      
-                      {/* Image Container with Badge */}
-                      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
-                        <Image
-                          src={enq.image}
-                          alt={enq.title}
-                          fill
-                          unoptimized
-                          className="object-cover"
-                        />
-                        <div className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-xs text-[#5E3B8C] flex items-center justify-center shadow-xs border border-purple-100">
-                          <Utensils className="w-3.5 h-3.5" />
-                        </div>
-                      </div>
-
-                      {/* Title & Metadata */}
-                      <div className="space-y-1.5 flex-1">
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <h3 className="text-xl font-serif font-bold text-[#111111]">
-                            {enq.title}
-                          </h3>
-
-                          <div className="flex items-center gap-3">
-                            <div className="flex items-center gap-2 text-xs text-slate-400 font-medium">
-                              <span className="flex items-center gap-1">
-                                <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                                <span>{enq.date}</span>
-                              </span>
-                              <span className="flex items-center gap-1">
-                                {enq.channelType === "phone" ? (
-                                  <Phone className="w-3.5 h-3.5 text-slate-400" />
-                                ) : (
-                                  <Mail className="w-3.5 h-3.5 text-slate-400" />
-                                )}
-                                <span>{enq.channel}</span>
-                              </span>
-                            </div>
-
-                            <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-                              enq.statusType === "under_review"
-                                ? "bg-amber-100/70 text-amber-900"
-                                : enq.statusType === "sales_contacted"
-                                ? "bg-purple-100/70 text-[#5E3B8C]"
-                                : "bg-emerald-100/70 text-emerald-900"
-                            }`}>
-                              {enq.status}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                          <Utensils className="w-3.5 h-3.5 text-purple-600" />
-                          <span>Related dish: <strong className="text-slate-800 font-bold">{enq.relatedDish}</strong></span>
-                        </div>
-
-                        <p className="text-xs text-slate-600 leading-relaxed font-normal pt-1">
-                          {enq.message}
-                        </p>
-
-                        <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                          {enq.tags.map((tag, idx) => (
-                            <span
-                              key={idx}
-                              className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-[11px] font-medium"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                    </div>
-
-                    {/* TIMELINE STEPPER (4 STAGES) */}
-                    <div className="pt-4 border-t border-slate-100">
-                      <div className="relative flex items-center justify-between max-w-xl mx-auto px-4">
-                        <div className="absolute left-6 right-6 top-3.5 h-[2px] bg-slate-200 -z-0" />
-                        <div 
-                          className="absolute left-6 top-3.5 h-[2px] bg-purple-700 transition-all duration-500 -z-0"
-                          style={{
-                            width: enq.stepProgress === 1 ? "0%" : enq.stepProgress === 2 ? "33%" : enq.stepProgress === 3 ? "66%" : "100%"
-                          }}
-                        />
-
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                            enq.stepProgress >= 1 
-                              ? "bg-[#1C0B33] text-white shadow-xs" 
-                              : "bg-white border-2 border-slate-300 text-slate-400"
-                          }`}>
-                            <Check className="w-3.5 h-3.5" />
-                          </div>
-                          <div className="mt-2 space-y-0.5">
-                            <div className="text-[11px] font-bold text-slate-900">Submitted</div>
-                            <div className="text-[10px] text-slate-400 font-medium">{enq.submittedDate}</div>
-                          </div>
-                        </div>
-
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                            enq.stepProgress > 2
-                              ? "bg-[#1C0B33] text-white"
-                              : enq.stepProgress === 2
-                              ? "bg-amber-500 text-white ring-4 ring-amber-100"
-                              : "bg-white border-2 border-slate-300 text-slate-400"
-                          }`}>
-                            {enq.stepProgress > 2 ? <Check className="w-3.5 h-3.5" /> : <div className="w-2 h-2 rounded-full bg-white" />}
-                          </div>
-                          <div className="mt-2 space-y-0.5">
-                            <div className="text-[11px] font-bold text-slate-900">Under Review</div>
-                            {enq.underReviewNote && (
-                              <div className="text-[10px] text-slate-400 font-medium">{enq.underReviewNote}</div>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                            enq.stepProgress > 3
-                              ? "bg-[#1C0B33] text-white"
-                              : enq.stepProgress === 3
-                              ? "bg-[#5E3B8C] text-white ring-4 ring-purple-100"
-                              : "bg-white border-2 border-slate-300 text-slate-400"
-                          }`}>
-                            {enq.stepProgress > 3 ? <Check className="w-3.5 h-3.5" /> : <div className="w-2 h-2 rounded-full bg-white" />}
-                          </div>
-                          <div className="mt-2 space-y-0.5">
-                            <div className="text-[11px] font-bold text-slate-900">Sales Contacted</div>
-                            {enq.salesContactedNote && (
-                              <div className="text-[10px] text-slate-400 font-medium">{enq.salesContactedNote}</div>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                            enq.stepProgress >= 4
-                              ? "bg-emerald-600 text-white"
-                              : "bg-white border-2 border-slate-300 text-slate-400"
-                          }`}>
-                            {enq.stepProgress >= 4 ? <Check className="w-3.5 h-3.5" /> : null}
-                          </div>
-                          <div className="mt-2 space-y-0.5">
-                            <div className="text-[11px] font-bold text-slate-900">Closed</div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                  </div>
-
-                  {/* RIGHT SIDE CONTACT PERSON PANEL */}
-                  <div className="w-full lg:w-56 bg-slate-50/80 rounded-2xl p-4 border border-slate-100 flex flex-col justify-between shrink-0 space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-purple-100 text-[#5E3B8C] flex items-center justify-center shrink-0">
-                        <User className="w-4 h-4" />
-                      </div>
-                      <div className="text-left">
-                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Contact Person</div>
-                        <div className="text-xs font-bold text-slate-900">{enq.contact}</div>
-                        <div className="text-[10px] text-slate-500 font-medium">{enq.contactRole}</div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => setSelectedEnquiry(enq)}
-                        className="w-full py-2.5 px-3 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
-                      >
-                        <span>View Details</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-
-                      <button
-                        onClick={() => setSelectedEnquiry(enq)}
-                        className="w-full py-2.5 px-3 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs"
-                      >
-                        <MessageSquare className="w-3.5 h-3.5 text-slate-600" />
-                        <span>Message</span>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white rounded-3xl p-12 border border-slate-200/80 text-center space-y-4 max-w-md mx-auto my-8 shadow-2xs">
-              <div className="w-14 h-14 rounded-2xl bg-purple-50 text-[#5E3B8C] flex items-center justify-center mx-auto">
-                <Search className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-slate-900">
-                No enquiries found
+              <h3 className="text-2xl lg:text-3xl font-serif text-[#111111] font-normal mt-0.5 tracking-tight">
+                Recommended for Your Kitchen
               </h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                Try adjusting your search query or filter settings.
+              <p className="text-xs text-slate-400 font-medium mt-1">
+                Calibrated with your exact signature recipes for seamless kitchen switchovers.
               </p>
             </div>
-          )}
 
-          {/* BOTTOM AI BANNER */}
-          <div className="bg-gradient-to-r from-purple-50/80 via-white to-purple-50/50 rounded-3xl p-6 border border-purple-100/80 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4 text-left">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-[#5E3B8C] flex items-center justify-center shrink-0">
-                <BarChart3 className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="text-base font-serif font-bold text-slate-900">
-                  Turn Enquiries into Opportunities
-                </h4>
-                <p className="text-xs text-slate-500 font-medium">
-                  Respond faster and smarter with AI-powered insights.
-                </p>
-              </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="text-xs text-slate-500 font-medium">Sort by:</span>
+              <select className="bg-white border border-slate-200/90 rounded-full text-xs font-semibold px-4 py-1.5 text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/20 shadow-2xs cursor-pointer">
+                <option>Highest Match %</option>
+                <option>Category</option>
+                <option>Delivery Time</option>
+              </select>
+            </div>
+          </div>
+
+          {/* 3 Product Cards Grid matching reference image pixel-by-pixel */}
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+              {dashboardCards.map((item) => {
+                const hasNote = Boolean(notesState[item.id]);
+
+                return (
+                  <div
+                    key={item.id}
+                    className="bg-white rounded-[28px] border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group text-left relative"
+                  >
+                    {/* Top Edge-to-Edge Image Banner with Overlaid Badges */}
+                    <div className="relative h-56 w-full overflow-hidden bg-slate-100 group/img">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        unoptimized
+                        className="object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
+                      />
+
+                      {/* Top Left Brand Badge */}
+                      <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-xs">
+                        {item.brand}
+                      </div>
+
+                      {/* Top Right Intended Dish Pill with Chef Hat Icon */}
+                      <div className={`absolute top-3.5 right-3.5 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-extrabold border flex items-center gap-1.5 shadow-xs ${
+                        item.forDishTheme === "purple"
+                          ? "bg-[#F4EFFB]/95 text-[#5E3B8C] border-[#E2D4F7]"
+                          : item.forDishTheme === "emerald"
+                          ? "bg-[#E6F9F0]/95 text-[#0D9488] border-[#BBF7D0]"
+                          : "bg-[#FEF6E6]/95 text-[#B45309] border-[#FDE68A]"
+                      }`}>
+                        <ChefHat className={`w-3.5 h-3.5 ${
+                          item.forDishTheme === "purple"
+                            ? "text-[#5E3B8C]"
+                            : item.forDishTheme === "emerald"
+                            ? "text-[#0D9488]"
+                            : "text-[#B45309]"
+                        }`} />
+                        <span>{item.forDish}</span>
+                      </div>
+                    </div>
+
+                    {/* Card Content Section */}
+                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                      
+                      {/* Title & Description */}
+                      <div className="space-y-1.5">
+                        <h3 className="font-serif text-xl sm:text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#1C0B33] transition-colors">
+                          {item.title}
+                        </h3>
+
+                        <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                          {item.description}
+                        </p>
+                      </div>
+
+                      {/* Light Amber / Yellow Note Box (Rendered when note exists) */}
+                      {hasNote && (
+                        <div className="bg-[#FFFBEB] border border-[#FDE68A] p-3 rounded-2xl flex items-start gap-2.5 text-xs text-[#92400E] font-medium shadow-2xs">
+                          <Lightbulb className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{notesState[item.id]}</span>
+                        </div>
+                      )}
+
+                      {/* AI Pairing Score Section */}
+                      <div className="space-y-2 pt-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            AI PAIRING SCORE
+                          </span>
+
+                          <div className="flex items-center gap-2">
+                            <span className="font-black text-slate-900 text-sm sm:text-base">
+                              {item.matchPercent}%
+                            </span>
+                            <span className={`text-[10.5px] font-extrabold px-3 py-0.5 rounded-full ${
+                              item.matchType === "EXCELLENT"
+                                ? "bg-[#E6F9F0] text-[#0D9488]"
+                                : "bg-[#F4EFFB] text-[#5E3B8C]"
+                            }`}>
+                              {item.matchLabel}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Full-width Progress Bar Track */}
+                        <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div
+                            style={{ width: `${item.matchPercent}%` }}
+                            className={`h-full rounded-full transition-all duration-1000 ease-out ${
+                              item.matchType === "EXCELLENT" ? "bg-[#0D9488]" : "bg-[#5E3B8C]"
+                            }`}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Bottom Action Row */}
+                      <div className="flex items-center gap-2.5 pt-2">
+                        
+                        {/* Primary "View Product →" Button */}
+                        <button
+                          onClick={() => onNavigateTab("product-detail")}
+                          className="flex-1 py-3 px-5 rounded-2xl bg-[#1B0B2E] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.98]"
+                        >
+                          <span>View Product</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
+                        </button>
+
+                        {/* Comment / Chef Note Square Button */}
+                        <button
+                          onClick={() => openNoteModal(item.id)}
+                          className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 border transition-all cursor-pointer shadow-2xs active:scale-95 ${
+                            item.forDishTheme === "purple"
+                              ? "bg-[#F4EFFB] text-[#5E3B8C] border-[#E2D4F7] hover:bg-[#E9DDF8]"
+                              : item.forDishTheme === "emerald"
+                              ? "bg-[#E6F9F0] text-[#0D9488] border-[#BBF7D0] hover:bg-[#D1F4E4]"
+                              : "bg-[#FEF6E6] text-[#B45309] border-[#FDE68A] hover:bg-[#FDE8C7]"
+                          }`}
+                          title="Chef's Note"
+                        >
+                          <MessageSquare className="w-4 h-4" />
+                        </button>
+
+                        {/* Bookmark Icon Button */}
+                        <button
+                          onClick={() => alert("Added to bookmarks")}
+                          className="w-11 h-11 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                          title="Bookmark item"
+                        >
+                          <Bookmark className="w-4 h-4" />
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                );
+              })}
             </div>
 
-            <button className="px-5 py-2.5 rounded-xl bg-purple-100/70 hover:bg-purple-200/80 text-[#5E3B8C] text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shrink-0">
-              <span>View Analytics</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+            {/* Right Floating Navigation Button */}
+            <button
+              onClick={() => onNavigateTab("products")}
+              className="hidden lg:flex w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md items-center justify-center text-slate-700 hover:bg-slate-50 absolute -right-5 top-1/2 -translate-y-1/2 z-10 transition-all hover:scale-105 cursor-pointer"
+              title="Browse All Products"
+            >
+              <ChevronRight className="w-5 h-5 text-slate-600" />
             </button>
           </div>
-
         </div>
 
-        {/* SECTION 3: AI PAIRING SUGGESTIONS */}
+        {/* SECTION 2: AI PAIRING SUGGESTIONS */}
         <AIPairingSuggestionsSection onNavigateTab={onNavigateTab} />
 
       </div>
 
-      {/* VIEW DETAILS MODAL */}
-      {selectedEnquiry && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 max-w-lg w-full border border-slate-200 shadow-2xl space-y-4 text-left animate-card-fade">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full bg-purple-100 text-[#5E3B8C] text-xs font-bold">
-                  {selectedEnquiry.status}
-                </span>
-                <h3 className="text-lg font-serif font-bold text-slate-900">
-                  {selectedEnquiry.title}
-                </h3>
-              </div>
-              <button 
-                onClick={() => setSelectedEnquiry(null)}
-                className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="space-y-3 text-xs">
-              <div className="bg-slate-50 p-3 rounded-xl space-y-1">
-                <span className="text-slate-400 font-bold uppercase text-[10px] tracking-wider">Related Dish</span>
-                <p className="text-slate-900 font-bold text-sm">{selectedEnquiry.relatedDish}</p>
-              </div>
-
-              <div className="bg-slate-50 p-3 rounded-xl space-y-1">
-                <span className="text-slate-400 font-bold uppercase text-[10px] tracking-wider">Message Content</span>
-                <p className="text-slate-700 leading-relaxed font-medium">{selectedEnquiry.message}</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-slate-50 p-3 rounded-xl">
-                  <span className="text-slate-400 font-bold uppercase text-[10px] tracking-wider block mb-1">Contact Manager</span>
-                  <span className="font-bold text-slate-900 block">{selectedEnquiry.contact}</span>
-                  <span className="text-slate-500 text-[11px]">{selectedEnquiry.contactRole}</span>
-                </div>
-                <div className="bg-slate-50 p-3 rounded-xl">
-                  <span className="text-slate-400 font-bold uppercase text-[10px] tracking-wider block mb-1">Channel & Date</span>
-                  <span className="font-bold text-slate-900 block">{selectedEnquiry.channel}</span>
-                  <span className="text-slate-500 text-[11px]">{selectedEnquiry.date}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* NEW ENQUIRY MODAL */}
-      {showNewEnquiryModal && (
+      {/* CHEF NOTE MODAL FOR DASHBOARD */}
+      {activeNoteModalId && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-6 max-w-md w-full border border-slate-200 shadow-2xl space-y-4 text-left animate-card-fade">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-lg font-serif font-bold text-slate-900 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#5E3B8C]" />
-                <span>Submit New RFQ Enquiry</span>
+                <MessageSquare className="w-4 h-4 text-[#5E3B8C]" />
+                <span>Executive Kitchen Note</span>
               </h3>
               <button 
-                onClick={() => setShowNewEnquiryModal(false)}
+                onClick={() => setActiveNoteModalId(null)}
                 className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleCreateEnquiry} className="space-y-3.5 text-xs">
-              <div>
-                <label className="block text-slate-700 font-bold mb-1">Product Title</label>
-                <input
-                  type="text"
-                  required
-                  value={newProductName}
-                  onChange={(e) => setNewProductName(e.target.value)}
-                  placeholder="e.g. Zanetti Mozzarella di Bufala DOP"
-                  className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
-                />
-              </div>
+            <textarea
+              rows={4}
+              value={noteInput}
+              onChange={(e) => setNoteInput(e.target.value)}
+              placeholder="e.g. Test melting tolerance for Paneer Tikka replacement, request 200g sample pack..."
+              className="w-full p-3.5 bg-slate-50 border border-slate-200/90 rounded-2xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
+            />
 
-              <div>
-                <label className="block text-slate-700 font-bold mb-1">Related Dish / Menu Section</label>
-                <input
-                  type="text"
-                  value={newDishName}
-                  onChange={(e) => setNewDishName(e.target.value)}
-                  placeholder="e.g. Margherita Pizza"
-                  className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
-                />
-              </div>
+            <div className="flex items-center justify-end gap-2 pt-2">
+              <button
+                onClick={() => setActiveNoteModalId(null)}
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
 
-              <div>
-                <label className="block text-slate-700 font-bold mb-1">Inquiry Details &amp; Sample Requirements</label>
-                <textarea
-                  rows={3}
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  placeholder="e.g. Request sample batch and bulk tier pricing for Taj Mumbai..."
-                  className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
-                />
-              </div>
-
-              <div className="flex items-center justify-end gap-2 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setShowNewEnquiryModal(false)}
-                  className="px-4 py-2.5 rounded-xl text-slate-600 font-bold hover:bg-slate-100 cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white font-bold flex items-center gap-1.5 shadow-md cursor-pointer border border-[#F5C453]/30"
-                >
-                  <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
-                  <span>Send Enquiry</span>
-                </button>
-              </div>
-            </form>
+              <button
+                onClick={saveNote}
+                className="px-5 py-2 rounded-xl bg-[#1C0B33] hover:bg-[#2D1252] text-white text-xs font-bold transition-colors cursor-pointer border border-[#F5C453]/30"
+              >
+                Save Note
+              </button>
+            </div>
           </div>
         </div>
       )}
