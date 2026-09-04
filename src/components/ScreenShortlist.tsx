@@ -145,7 +145,7 @@ export default function ScreenShortlist({ onNavigateEnquiries, onNavigateProduct
                 key={item.id}
                 className="bg-white rounded-3xl border border-slate-200/80 shadow-2xs hover:shadow-lg hover:border-[#5E3B8C]/30 transition-all duration-300 overflow-hidden flex flex-col justify-between group text-left"
               >
-                {/* Top Edge-to-Edge Image Banner with Utensil Badge */}
+                {/* Top Edge-to-Edge Image Banner with Utensil & Category Badges */}
                 <div className="relative h-56 w-full overflow-hidden bg-slate-900 group/img">
                   <Image
                     src={item.image}
@@ -155,26 +155,27 @@ export default function ScreenShortlist({ onNavigateEnquiries, onNavigateProduct
                     className="object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
                   />
 
-                  {/* Utensils Icon Badge Overlay */}
+                  {/* Utensils Icon Badge Overlay (Top Right) */}
                   <div className="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-[#0D9488]/90 backdrop-blur-xs text-white flex items-center justify-center shadow-md border border-white/30">
                     <Utensils className="w-4 h-4" />
+                  </div>
+
+                  {/* Category Pill Badge (Bottom Right on Image) */}
+                  <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-xs px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 uppercase tracking-wider shadow-2xs">
+                    {item.category}
                   </div>
                 </div>
 
                 {/* Card Content Section */}
                 <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
                   
-                  {/* Category, Title & Intended Dish */}
-                  <div className="space-y-1.5">
-                    <div className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">
-                      {item.category}
-                    </div>
-
+                  {/* Title & Intended Dish */}
+                  <div className="space-y-1">
                     <h3 className="font-serif text-xl sm:text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#1C0B33] transition-colors">
                       {item.title}
                     </h3>
 
-                    <p className="text-xs text-slate-500 font-medium pt-0.5">
+                    <p className="text-xs text-slate-400 font-medium pt-0.5">
                       For: <span className="text-slate-800 font-bold">{item.forDish}</span>
                     </p>
                   </div>
@@ -211,18 +212,19 @@ export default function ScreenShortlist({ onNavigateEnquiries, onNavigateProduct
                     </div>
                   </div>
 
-                  {/* Bottom Action Row */}
-                  <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
+                  {/* Bottom Action Row Matching Reference Screenshot */}
+                  <div className="flex items-center gap-2.5 pt-2">
                     <button
                       onClick={onNavigateProducts}
                       className="flex-1 py-3 px-5 rounded-full bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer active:scale-[0.98]"
                     >
                       <span>View Product</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
                     </button>
 
                     <button
                       onClick={() => openNoteModal(item.id)}
-                      className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-700 border border-amber-200/80 hover:bg-amber-100 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                      className="w-10 h-10 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
                       title="Chef's Note"
                     >
                       <MessageSquare className="w-4 h-4" />
@@ -230,10 +232,10 @@ export default function ScreenShortlist({ onNavigateEnquiries, onNavigateProduct
 
                     <button
                       onClick={() => handleDeleteItem(item.id)}
-                      className="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 border border-rose-200/80 hover:bg-rose-100 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
-                      title="Remove from shortlist"
+                      className="w-10 h-10 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                      title="Bookmark"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-4 h-4 text-rose-500" />
                     </button>
                   </div>
 
