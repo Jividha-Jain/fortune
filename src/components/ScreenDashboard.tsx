@@ -1,22 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import {
   Sparkles,
   ArrowRight,
-  TrendingUp,
-  ShieldCheck,
-  Utensils,
   ChevronRight,
-  CheckCircle2,
-  Award,
-  BarChart3,
   Package,
-  Calendar,
+  ChefHat,
+  Lightbulb,
+  MessageSquare,
+  Bookmark,
+  X
 } from "lucide-react";
 
-import { RECOMMENDED_HOME_PRODUCTS } from "@/data/productsData";
 import AIPairingSuggestionsSection from "./AIPairingSuggestionsSection";
 
 interface ScreenDashboardProps {
@@ -24,7 +21,68 @@ interface ScreenDashboardProps {
 }
 
 export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps) {
-  const recommendedSKUs = RECOMMENDED_HOME_PRODUCTS;
+  const [activeNoteModalId, setActiveNoteModalId] = useState<string | null>(null);
+  const [notesState, setNotesState] = useState<Record<string, string>>({
+    "halloumi-200gm": "Requested sample batch for Paneer Tikka replacement test.",
+  });
+  const [noteInput, setNoteInput] = useState("");
+
+  const dashboardCards = [
+    {
+      id: "halloumi-200gm",
+      brand: "FORTUNE SELECT",
+      title: "Halloumi 200 GM",
+      description: "Perfectly firm & flavorful. Ideal for grilling and high-heat cooking.",
+      forDish: "For Paneer Tikka",
+      forDishTheme: "purple",
+      matchPercent: 78,
+      matchType: "STRONG",
+      matchLabel: "Strong Match",
+      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=800&q=80",
+      productId: "gran-spicco-200gm"
+    },
+    {
+      id: "queso-formage",
+      brand: "FIORELLA",
+      title: "Queso Formage (Shredded & Cubes)",
+      description: "Rich, creamy and melts beautifully. Perfect for pastas and baked dishes.",
+      forDish: "For Alfredo Pasta",
+      forDishTheme: "emerald",
+      matchPercent: 95,
+      matchType: "EXCELLENT",
+      matchLabel: "Excellent Match",
+      image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=80",
+      productId: "zanetti-mozzarella-bufala"
+    },
+    {
+      id: "lurpak-butter",
+      brand: "LURPAK",
+      title: "Lurpak Unsalted Butter 200g",
+      description: "Premium European butter with rich, natural taste. Elevates your desserts.",
+      forDish: "For Chocolate Mousse",
+      forDishTheme: "amber",
+      matchPercent: 94,
+      matchType: "EXCELLENT",
+      matchLabel: "Excellent Match",
+      image: "https://fortunegourmet.com/wp-content/uploads/2025/03/lurpak-500x500.png",
+      productId: "butter-unsalted-200gm"
+    },
+  ];
+
+  const openNoteModal = (id: string) => {
+    setActiveNoteModalId(id);
+    setNoteInput(notesState[id] || "");
+  };
+
+  const saveNote = () => {
+    if (activeNoteModalId) {
+      setNotesState((prev) => ({
+        ...prev,
+        [activeNoteModalId]: noteInput,
+      }));
+      setActiveNoteModalId(null);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#111111] pb-12 sm:pb-16 font-sans relative overflow-hidden antialiased">
@@ -134,7 +192,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
         </div>
 
-        {/* SECTION 1: MATCHED SKUS READY FOR ORDER - EXACT MATCH TO REFERENCE SCREENSHOT */}
+        {/* SECTION 1: MATCHED SKUS READY FOR ORDER - EXACT 1:1 PIXEL MATCH TO REFERENCE IMAGE */}
         <div className="space-y-6 pt-4 relative text-left">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
             <div>
@@ -160,69 +218,155 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
             </div>
           </div>
 
-          {/* 4 Product Cards Grid */}
+          {/* 3 Product Cards Grid matching reference image pixel-by-pixel */}
           <div className="relative">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {recommendedSKUs.map((sku) => (
-                <div
-                  key={sku.id}
-                  className="bg-white rounded-[20px] lg:rounded-[24px] border border-slate-200/80 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    {/* Top Product Image */}
-                    <div className="relative h-48 sm:h-52 w-full overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+              {dashboardCards.map((item) => {
+                const hasNote = Boolean(notesState[item.id]);
+
+                return (
+                  <div
+                    key={item.id}
+                    className="bg-white rounded-[28px] border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group text-left relative"
+                  >
+                    {/* Top Edge-to-Edge Image Banner with Overlaid Badges */}
+                    <div className="relative h-56 w-full overflow-hidden bg-slate-100 group/img">
                       <Image
-                        src={sku.image}
-                        alt={sku.title}
+                        src={item.image}
+                        alt={item.title}
                         fill
                         unoptimized
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
                       />
-                      {/* Top Left Match Badge */}
-                      <div className="absolute top-3 left-3 bg-[#5E3B8C] text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
-                        {sku.matchPercent} MATCH
+
+                      {/* Top Left Brand Badge */}
+                      <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-xs">
+                        {item.brand}
                       </div>
-                      {/* Bottom Right Origin Tag */}
-                      <div className="absolute bottom-3 right-3 bg-black/75 backdrop-blur-sm text-white text-[10px] font-medium px-2.5 py-0.5 rounded-full border border-white/10">
-                        {sku.originTag}
+
+                      {/* Top Right Intended Dish Pill with Chef Hat Icon */}
+                      <div className={`absolute top-3.5 right-3.5 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-extrabold border flex items-center gap-1.5 shadow-xs ${
+                        item.forDishTheme === "purple"
+                          ? "bg-[#F4EFFB]/95 text-[#5E3B8C] border-[#E2D4F7]"
+                          : item.forDishTheme === "emerald"
+                          ? "bg-[#E6F9F0]/95 text-[#0D9488] border-[#BBF7D0]"
+                          : "bg-[#FEF6E6]/95 text-[#B45309] border-[#FDE68A]"
+                      }`}>
+                        <ChefHat className={`w-3.5 h-3.5 ${
+                          item.forDishTheme === "purple"
+                            ? "text-[#5E3B8C]"
+                            : item.forDishTheme === "emerald"
+                            ? "text-[#0D9488]"
+                            : "text-[#B45309]"
+                        }`} />
+                        <span>{item.forDish}</span>
                       </div>
                     </div>
 
-                    {/* Card Content Body */}
-                    <div className="p-5 space-y-2.5">
-                      <div className="text-[10px] uppercase font-bold tracking-wider text-[#5E3B8C]">
-                        {sku.category}
-                      </div>
-                      <h4 className="text-base font-serif font-bold text-[#111111] leading-snug min-h-[44px]">
-                        {sku.title}
-                      </h4>
+                    {/* Card Content Section */}
+                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                      
+                      {/* Title & Description */}
+                      <div className="space-y-1.5">
+                        <h3 className="font-serif text-xl sm:text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#1C0B33] transition-colors">
+                          {item.title}
+                        </h3>
 
-                      <div className="flex items-start gap-2 pt-1 text-xs text-slate-600 font-medium">
-                        <CheckCircle2 className="w-4 h-4 text-[#5E3B8C] shrink-0 mt-0.5" />
-                        <span className="leading-snug">{sku.matchDesc}</span>
+                        <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                          {item.description}
+                        </p>
                       </div>
+
+                      {/* Light Amber / Yellow Note Box (Rendered when note exists) */}
+                      {hasNote && (
+                        <div className="bg-[#FFFBEB] border border-[#FDE68A] p-3 rounded-2xl flex items-start gap-2.5 text-xs text-[#92400E] font-medium shadow-2xs">
+                          <Lightbulb className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{notesState[item.id]}</span>
+                        </div>
+                      )}
+
+                      {/* AI Pairing Score Section */}
+                      <div className="space-y-2 pt-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            AI PAIRING SCORE
+                          </span>
+
+                          <div className="flex items-center gap-2">
+                            <span className="font-black text-slate-900 text-sm sm:text-base">
+                              {item.matchPercent}%
+                            </span>
+                            <span className={`text-[10.5px] font-extrabold px-3 py-0.5 rounded-full ${
+                              item.matchType === "EXCELLENT"
+                                ? "bg-[#E6F9F0] text-[#0D9488]"
+                                : "bg-[#F4EFFB] text-[#5E3B8C]"
+                            }`}>
+                              {item.matchLabel}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Full-width Progress Bar Track */}
+                        <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div
+                            style={{ width: `${item.matchPercent}%` }}
+                            className={`h-full rounded-full transition-all duration-1000 ease-out ${
+                              item.matchType === "EXCELLENT" ? "bg-[#0D9488]" : "bg-[#5E3B8C]"
+                            }`}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Bottom Action Row */}
+                      <div className="flex items-center gap-2.5 pt-2">
+                        
+                        {/* Primary "View Product →" Button */}
+                        <button
+                          onClick={() => onNavigateTab("product-detail")}
+                          className="flex-1 py-3 px-5 rounded-2xl bg-[#1B0B2E] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.98]"
+                        >
+                          <span>View Product</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
+                        </button>
+
+                        {/* Comment / Chef Note Square Button */}
+                        <button
+                          onClick={() => openNoteModal(item.id)}
+                          className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 border transition-all cursor-pointer shadow-2xs active:scale-95 ${
+                            item.forDishTheme === "purple"
+                              ? "bg-[#F4EFFB] text-[#5E3B8C] border-[#E2D4F7] hover:bg-[#E9DDF8]"
+                              : item.forDishTheme === "emerald"
+                              ? "bg-[#E6F9F0] text-[#0D9488] border-[#BBF7D0] hover:bg-[#D1F4E4]"
+                              : "bg-[#FEF6E6] text-[#B45309] border-[#FDE68A] hover:bg-[#FDE8C7]"
+                          }`}
+                          title="Chef's Note"
+                        >
+                          <MessageSquare className="w-4 h-4" />
+                        </button>
+
+                        {/* Bookmark Icon Button */}
+                        <button
+                          onClick={() => alert("Added to bookmarks")}
+                          className="w-11 h-11 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                          title="Bookmark item"
+                        >
+                          <Bookmark className="w-4 h-4" />
+                        </button>
+
+                      </div>
+
                     </div>
-                  </div>
 
-                  {/* Card Footer */}
-                  <div className="p-5 pt-3 flex items-center justify-end border-t border-slate-100/80 mt-1">
-                    <button
-                      onClick={() => onNavigateTab("product-detail")}
-                      className="text-[#5E3B8C] hover:text-[#2E1658] text-xs font-bold flex items-center gap-1 transition-colors group/btn cursor-pointer"
-                    >
-                      <span>View Product</span>
-                      <ArrowRight className="w-3.5 h-3.5 transform group-hover/btn:translate-x-0.5 transition-transform" />
-                    </button>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* Right Floating Control */}
+            {/* Right Floating Navigation Button */}
             <button
               onClick={() => onNavigateTab("products")}
-              className="hidden lg:flex w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md items-center justify-center text-slate-700 hover:bg-slate-50 absolute -right-5 top-1/2 -translate-y-1/2 z-10 transition-all hover:scale-105"
-              title="Next Products"
+              className="hidden lg:flex w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md items-center justify-center text-slate-700 hover:bg-slate-50 absolute -right-5 top-1/2 -translate-y-1/2 z-10 transition-all hover:scale-105 cursor-pointer"
+              title="Browse All Products"
             >
               <ChevronRight className="w-5 h-5 text-slate-600" />
             </button>
@@ -233,6 +377,51 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
         <AIPairingSuggestionsSection onNavigateTab={onNavigateTab} />
 
       </div>
+
+      {/* CHEF NOTE MODAL FOR DASHBOARD */}
+      {activeNoteModalId && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 max-w-md w-full border border-slate-200 shadow-2xl space-y-4 text-left animate-card-fade">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-lg font-serif font-bold text-slate-900 flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-[#5E3B8C]" />
+                <span>Executive Kitchen Note</span>
+              </h3>
+              <button 
+                onClick={() => setActiveNoteModalId(null)}
+                className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <textarea
+              rows={4}
+              value={noteInput}
+              onChange={(e) => setNoteInput(e.target.value)}
+              placeholder="e.g. Test melting tolerance for Paneer Tikka replacement, request 200g sample pack..."
+              className="w-full p-3.5 bg-slate-50 border border-slate-200/90 rounded-2xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
+            />
+
+            <div className="flex items-center justify-end gap-2 pt-2">
+              <button
+                onClick={() => setActiveNoteModalId(null)}
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={saveNote}
+                className="px-5 py-2 rounded-xl bg-[#1C0B33] hover:bg-[#2D1252] text-white text-xs font-bold transition-colors cursor-pointer border border-[#F5C453]/30"
+              >
+                Save Note
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
