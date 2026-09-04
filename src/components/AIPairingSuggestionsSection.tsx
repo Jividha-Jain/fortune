@@ -164,17 +164,6 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
         ))}
       </div>
 
-      {/* 3. CENTERED EXPLORE MORE PAIRINGS BUTTON */}
-      <div className="flex items-center justify-center pt-2 relative z-10">
-        <button
-          onClick={() => onNavigateTab("recommendations")}
-          className="px-8 py-3.5 rounded-full bg-white hover:bg-[#F9F7FC] text-[#2B145E] border border-purple-200/80 font-bold text-xs shadow-2xs hover:shadow-xs flex items-center gap-2 transition-all cursor-pointer active:scale-[0.98]"
-        >
-          <span>Explore More Pairings</span>
-          <ArrowRight className="w-4 h-4 text-[#2B145E]" />
-        </button>
-      </div>
-
     </div>
   );
 }
