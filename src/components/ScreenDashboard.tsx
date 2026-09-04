@@ -353,30 +353,34 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
         {/* 6 ELEGANT PAIRING CARDS GRID */}
         <div className="space-y-4">
-          {filteredRecs.map((rec) => {
+          {filteredRecs.map((rec, idx) => {
             const isShortlisted = shortlistedIds.includes(rec.id);
             const isBookmarked = bookmarkedIds.includes(rec.id);
+            const radius = 36;
+            const strokeDasharray = 2 * Math.PI * radius;
+            const strokeDashoffset = strokeDasharray * (1 - rec.matchPercent / 100);
 
             return (
               <div
                 key={rec.id}
-                className="bg-white rounded-[26px] border border-slate-200/90 hover:border-[#5E3B8C]/40 p-5 sm:p-6 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_-8px_rgba(28,11,51,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col lg:flex-row items-center justify-between gap-6 text-left group relative"
+                style={{ animationDelay: `${idx * 80}ms` }}
+                className="animate-card-fade bg-white rounded-[26px] border border-slate-200/90 hover:border-[#5E3B8C]/40 p-5 sm:p-6 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_45px_-8px_rgba(28,11,51,0.14)] hover:-translate-y-1 transition-all duration-300 flex flex-col lg:flex-row items-center justify-between gap-6 text-left group relative"
               >
                 
                 {/* 1. LEFT DISH BLOCK */}
                 <div className="flex items-start gap-4 flex-1 w-full lg:w-auto">
-                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200/80 shadow-2xs">
+                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200/80 shadow-2xs group/img">
                     <Image
                       src={rec.dishImage}
                       alt={rec.dishTitle}
                       fill
                       unoptimized
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover group-hover/img:scale-110 group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                   </div>
 
                   <div className="space-y-1.5 flex-1">
-                    <span className="text-[9px] uppercase font-bold tracking-[0.2em] text-[#5E3B8C] bg-[#F4EFFB] border border-[#E2D4F7] px-2.5 py-0.5 rounded-md inline-block">
+                    <span className="text-[9px] uppercase font-bold tracking-[0.2em] text-[#5E3B8C] bg-[#F4EFFB] border border-[#E2D4F7] px-2.5 py-0.5 rounded-md inline-block shadow-2xs">
                       YOUR DISH
                     </span>
 
@@ -395,7 +399,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                     {/* Tag Pills */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       {rec.tags.map((tag) => (
-                        <span key={tag} className="bg-slate-100 hover:bg-purple-50 text-slate-600 hover:text-[#5E3B8C] text-[10.5px] font-medium px-2.5 py-0.5 rounded-md border border-slate-200/50 transition-colors">
+                        <span key={tag} className="bg-slate-100/80 hover:bg-purple-50 text-slate-600 hover:text-[#5E3B8C] text-[10.5px] font-medium px-2.5 py-0.5 rounded-md border border-slate-200/60 transition-colors">
                           {tag}
                         </span>
                       ))}
@@ -403,37 +407,66 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                   </div>
                 </div>
 
-                {/* 2. CENTER MATCH RING NODE */}
-                <div className="flex flex-col items-center justify-center shrink-0 my-2 lg:my-0 px-2">
-                  <div className={`w-20 h-20 rounded-full border-[4px] bg-white flex flex-col items-center justify-center text-center shadow-md relative z-10 ${
+                {/* 2. CENTER MATCH SVG RING NODE */}
+                <div className="flex flex-col items-center justify-center shrink-0 my-2 lg:my-0 px-2 group/ring">
+                  <div className={`relative w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-white flex flex-col items-center justify-center text-center shadow-md border border-slate-100 transition-all duration-300 group-hover/ring:scale-105 ${
                     rec.matchType === "NEEDS_REVIEW"
-                      ? "border-amber-500 text-amber-600"
-                      : rec.matchType === "STRONG"
-                      ? "border-amber-500 text-amber-600"
-                      : "border-emerald-500 text-emerald-600"
+                      ? "animate-ring-pulse-amber"
+                      : "animate-ring-pulse"
                   }`}>
-                    <span className="text-base font-extrabold leading-none">
-                      {rec.matchPercent}%
-                    </span>
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
-                      MATCH
-                    </span>
+                    
+                    {/* Dynamic Animated Circular Progress SVG */}
+                    <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 88 88">
+                      {/* Track Circle */}
+                      <circle
+                        cx="44"
+                        cy="44"
+                        r={radius}
+                        stroke="#E2E8F0"
+                        strokeWidth="5"
+                        fill="transparent"
+                      />
+                      {/* Animated Active Progress Circle */}
+                      <circle
+                        cx="44"
+                        cy="44"
+                        r={radius}
+                        stroke={rec.matchType === "NEEDS_REVIEW" ? "#F59E0B" : "#10B981"}
+                        strokeWidth="5.5"
+                        strokeLinecap="round"
+                        fill="transparent"
+                        strokeDasharray={strokeDasharray}
+                        strokeDashoffset={strokeDashoffset}
+                        className="transition-all duration-1000 ease-out"
+                      />
+                    </svg>
+
+                    {/* Ring Content Text */}
+                    <div className="relative z-10 flex flex-col items-center justify-center">
+                      <span className={`text-lg sm:text-xl font-black tracking-tight leading-none ${
+                        rec.matchType === "NEEDS_REVIEW" ? "text-amber-600" : "text-emerald-600"
+                      }`}>
+                        {rec.matchPercent}%
+                      </span>
+                      <span className="text-[8px] font-extrabold text-slate-400 uppercase tracking-widest mt-0.5">
+                        MATCH
+                      </span>
+                    </div>
                   </div>
 
-                  <span className={`mt-2 text-[10px] font-bold px-3.5 py-0.5 rounded-full border shadow-2xs ${
+                  {/* Match Badge */}
+                  <span className={`mt-2.5 text-[10.5px] font-bold px-3.5 py-1 rounded-full border shadow-2xs transition-all duration-300 ${
                     rec.matchType === "NEEDS_REVIEW"
-                      ? "bg-amber-50 text-amber-800 border-amber-200/80"
-                      : rec.matchType === "STRONG"
-                      ? "bg-amber-50 text-amber-800 border-amber-200/80"
-                      : "bg-emerald-50 text-emerald-700 border-emerald-200/80"
+                      ? "bg-amber-50/90 text-amber-800 border-amber-200/90"
+                      : "bg-emerald-50/90 text-emerald-800 border-emerald-200/90"
                   }`}>
                     {rec.matchLabel}
                   </span>
                 </div>
 
                 {/* 3. RECOMMENDED PRODUCT BLOCK */}
-                <div className="bg-gradient-to-r from-[#F8F6FC] to-[#F4EFFB]/80 p-3.5 rounded-2xl border border-[#E2D4F7] flex items-center gap-3.5 w-full lg:w-72 shrink-0 shadow-2xs">
-                  <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-xl bg-white overflow-hidden p-1.5 shrink-0 border border-slate-200/90 shadow-2xs flex items-center justify-center">
+                <div className="bg-gradient-to-r from-[#F8F6FC] to-[#F4EFFB]/90 p-3.5 rounded-2xl border border-[#E2D4F7] flex items-center gap-3.5 w-full lg:w-72 shrink-0 shadow-2xs hover:border-[#5E3B8C]/40 transition-colors group/prod">
+                  <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-xl bg-white overflow-hidden p-1.5 shrink-0 border border-slate-200/90 shadow-2xs flex items-center justify-center group-hover/prod:scale-105 transition-transform duration-300">
                     <Image
                       src={rec.recommendedImage}
                       alt={rec.recommendedTitle}
@@ -459,20 +492,20 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                 {/* 4. RIGHT ACTION BUTTONS STACK */}
                 <div className="flex flex-row lg:flex-col items-center gap-2 w-full lg:w-auto shrink-0 justify-end">
                   
-                  {/* View Details Primary Button */}
+                  {/* View Details Primary Button with Golden Shimmer */}
                   <button
                     onClick={() => onNavigateTab("products")}
-                    className="flex-1 lg:flex-none w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#1C0B33] via-[#2D1252] to-[#1C0B33] hover:from-[#2B1B4E] hover:to-[#3C276B] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer border border-[#F5C453]/30 active:scale-[0.98] whitespace-nowrap"
+                    className="btn-shimmer-effect flex-1 lg:flex-none w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#1C0B33] via-[#2D1252] to-[#1C0B33] hover:from-[#2B1B4E] hover:to-[#3C276B] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer border border-[#F5C453]/30 active:scale-[0.97] whitespace-nowrap group/btn"
                   >
                     <span>View Details</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#F5C453] group-hover/btn:translate-x-1 transition-transform" />
                   </button>
 
                   <div className="flex items-center gap-2 w-full lg:w-auto">
                     {/* Shortlist Button */}
                     <button
                       onClick={() => toggleShortlist(rec.id)}
-                      className={`flex-1 py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-1 transition-all cursor-pointer whitespace-nowrap shadow-2xs ${
+                      className={`flex-1 py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-1 transition-all cursor-pointer whitespace-nowrap shadow-2xs active:scale-95 ${
                         isShortlisted
                           ? "bg-purple-50 border-[#5E3B8C] text-[#5E3B8C]"
                           : "bg-white border-slate-200/90 hover:bg-purple-50 hover:border-purple-200 text-slate-700 hover:text-[#5E3B8C]"
@@ -485,7 +518,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                     {/* Bookmark Icon Button */}
                     <button
                       onClick={() => toggleBookmark(rec.id)}
-                      className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all cursor-pointer shrink-0 shadow-2xs ${
+                      className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all cursor-pointer shrink-0 shadow-2xs active:scale-95 ${
                         isBookmarked
                           ? "bg-[#1C0B33] border-[#1C0B33] text-[#F5C453]"
                           : "bg-white border-slate-200/90 text-slate-400 hover:bg-purple-50 hover:border-purple-200 hover:text-[#5E3B8C]"
