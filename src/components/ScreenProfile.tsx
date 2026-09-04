@@ -21,7 +21,9 @@ import {
   Crown,
   Bed,
   Download,
-  Sparkles
+  Sparkles,
+  X,
+  CheckCircle2
 } from "lucide-react";
 
 interface ScreenProfileProps {
@@ -30,10 +32,58 @@ interface ScreenProfileProps {
 }
 
 export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: ScreenProfileProps) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editSection, setEditSection] = useState("Business Information");
+  const [showToast, setShowToast] = useState(false);
+
+  const [profileData, setProfileData] = useState({
+    businessName: "Taj Hotel Mumbai",
+    type: "Hotel & Restaurant",
+    about: "An iconic luxury hotel blending timeless heritage with world-class hospitality, offering exceptional dining experiences in the heart of Mumbai.",
+    address: "Apollo Bunder, Colaba, Mumbai, Maharashtra 400001",
+    website: "www.tajhotels.com",
+    phone: "+91 22 6665 3366",
+    owner: "Tata Sons Private Limited",
+    gm: "Rajiv Menon",
+    gmPhone: "+91 98200 12345",
+    salesManager: "Priya Mehta",
+    salesPhone: "+91 98765 43210",
+    businessEmail: "mumbai@tajhotels.com",
+    altEmail: "sales.mumbai@tajhotels.com",
+    fssai: "11517022000673",
+    gst: "27AAACT2727Q1Z6",
+    pan: "AAACT2727Q",
+    chefName: "Chef Vikram Singh",
+    chefPhone: "+91 90000 11122",
+    chefEmail: "chef.mumbai@tajhotels.com",
+    chefsCount: 18,
+    staffCount: 120,
+    seatingCount: 450,
+  });
+
+  const openEditSection = (sectionName: string) => {
+    setEditSection(sectionName);
+    setShowEditModal(true);
+  };
+
+  const handleSaveModal = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowEditModal(false);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] pb-24 font-sans antialiased text-[#111111]">
+    <div className="min-h-screen bg-[#FAF9F5] pb-24 font-sans antialiased text-[#111111] relative">
+      
+      {/* SUCCESS TOAST NOTIFICATION */}
+      {showToast && (
+        <div className="fixed top-6 right-6 z-50 bg-[#1C0B33] text-white px-5 py-3 rounded-2xl shadow-2xl border border-[#F5C453]/40 flex items-center gap-2.5 animate-fade-in text-xs font-bold">
+          <CheckCircle2 className="w-4 h-4 text-[#F5C453]" />
+          <span>✓ Business Profile Updated Successfully!</span>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-6">
         
         {/* PAGE TITLE BAR WITH TAJ MAHAL PALACE HERO GRAPHIC */}
@@ -56,7 +106,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               BUSINESS PROFILE
             </div>
             <h1 className="text-4xl sm:text-5xl font-serif font-bold text-[#111111] tracking-tight">
-              Taj Hotel Mumbai
+              {profileData.businessName}
             </h1>
             <p className="text-sm font-serif italic text-slate-600 font-medium">
               Iconic hospitality. Timeless experiences.
@@ -69,12 +119,12 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               </span>
               <span className="flex items-center gap-1">
                 <Phone className="w-3.5 h-3.5 text-amber-700" />
-                <span>+91 22 6665 3366</span>
+                <span>{profileData.phone}</span>
               </span>
               <span className="flex items-center gap-1">
                 <Globe className="w-3.5 h-3.5 text-amber-700" />
-                <a href="https://www.tajhotels.com" target="_blank" rel="noreferrer" className="underline font-semibold text-slate-800">
-                  www.tajhotels.com
+                <a href={`https://${profileData.website}`} target="_blank" rel="noreferrer" className="underline font-semibold text-slate-800">
+                  {profileData.website}
                 </a>
               </span>
             </div>
@@ -93,11 +143,11 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
             </div>
 
             <button
-              onClick={() => setIsEditing(!isEditing)}
+              onClick={() => openEditSection("Business Information")}
               className="px-6 py-3 rounded-full bg-[#3D2E1A] hover:bg-[#4E3B22] text-white text-xs font-bold flex items-center gap-2 shadow-md transition-all cursor-pointer"
             >
               <Pencil className="w-3.5 h-3.5" />
-              <span>{isEditing ? "Save Profile" : "Edit Profile"}</span>
+              <span>Edit Profile</span>
             </button>
           </div>
         </div>
@@ -118,7 +168,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                   className="object-cover"
                 />
                 <button 
-                  onClick={() => alert("Upload photo modal")}
+                  onClick={() => alert("Photo updated successfully!")}
                   className="absolute bottom-2 left-2 right-2 bg-black/60 hover:bg-black/80 text-white font-semibold text-[10px] py-1.5 rounded-xl text-center backdrop-blur-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                 >
                   <Camera className="w-3 h-3" />
@@ -134,11 +184,11 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                 </div>
 
                 <h2 className="text-3xl font-serif font-bold text-[#111111]">
-                  Taj Hotel Mumbai
+                  {profileData.businessName}
                 </h2>
 
                 <div className="text-xs text-slate-500 font-medium">
-                  Hotel &amp; Restaurant
+                  {profileData.type}
                 </div>
 
                 <div className="font-serif italic text-xs text-slate-500 pt-0.5">
@@ -183,7 +233,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               <ChefHat className="w-6 h-6 text-[#B45309]" />
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-serif font-bold text-[#111111]">18</div>
+              <div className="text-2xl sm:text-3xl font-serif font-bold text-[#111111]">{profileData.chefsCount}</div>
               <div className="text-xs text-slate-400 font-medium">Chefs</div>
             </div>
           </div>
@@ -240,7 +290,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               </div>
 
               <button 
-                onClick={() => setIsEditing(true)}
+                onClick={() => openEditSection("Business Information")}
                 className="px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold cursor-pointer"
               >
                 Edit
@@ -250,30 +300,30 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
             <div className="divide-y divide-slate-100 text-xs">
               <div className="py-2.5 flex items-center justify-between">
                 <span className="text-xs text-slate-400 font-medium w-28 shrink-0">Business Name</span>
-                <span className="font-bold text-slate-900 text-xs text-right flex-1">Taj Hotel Mumbai</span>
+                <span className="font-bold text-slate-900 text-xs text-right flex-1">{profileData.businessName}</span>
               </div>
 
               <div className="py-2.5 flex items-center justify-between">
                 <span className="text-xs text-slate-400 font-medium w-28 shrink-0">Type</span>
-                <span className="font-bold text-slate-900 text-xs text-right flex-1">Hotel &amp; Restaurant</span>
+                <span className="font-bold text-slate-900 text-xs text-right flex-1">{profileData.type}</span>
               </div>
 
               <div className="py-2.5 flex items-start justify-between gap-4">
                 <span className="text-xs text-slate-400 font-medium w-28 shrink-0">About</span>
                 <p className="text-slate-600 font-normal leading-relaxed text-xs text-left flex-1">
-                  An iconic luxury hotel blending timeless heritage with world-class hospitality, offering exceptional dining experiences in the heart of Mumbai.
+                  {profileData.about}
                 </p>
               </div>
 
               <div className="py-2.5 flex items-start justify-between gap-4">
                 <span className="text-xs text-slate-400 font-medium w-28 shrink-0">Address</span>
-                <span className="font-semibold text-slate-800 text-xs text-left flex-1">Apollo Bunder, Colaba, Mumbai, Maharashtra 400001</span>
+                <span className="font-semibold text-slate-800 text-xs text-left flex-1">{profileData.address}</span>
               </div>
 
               <div className="pt-2.5 flex items-center justify-between">
                 <span className="text-xs text-slate-400 font-medium w-28 shrink-0">Website</span>
-                <a href="https://www.tajhotels.com" target="_blank" rel="noreferrer" className="font-semibold text-slate-800 underline text-xs flex items-center gap-1">
-                  <span>www.tajhotels.com</span>
+                <a href={`https://${profileData.website}`} target="_blank" rel="noreferrer" className="font-semibold text-slate-800 underline text-xs flex items-center gap-1">
+                  <span>{profileData.website}</span>
                   <ExternalLink className="w-3 h-3 text-slate-400" />
                 </a>
               </div>
@@ -294,7 +344,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               </div>
 
               <button 
-                onClick={() => setIsEditing(true)}
+                onClick={() => openEditSection("Contacts")}
                 className="px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold cursor-pointer"
               >
                 Edit
@@ -306,29 +356,29 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               <div className="divide-y divide-slate-100 text-xs flex-1">
                 <div className="py-2.5">
                   <span className="text-xs text-slate-400 font-medium block mb-0.5">Owner</span>
-                  <div className="font-bold text-slate-900 text-xs">Tata Sons Private Limited</div>
+                  <div className="font-bold text-slate-900 text-xs">{profileData.owner}</div>
                 </div>
 
                 <div className="py-2.5">
                   <span className="text-xs text-slate-400 font-medium block mb-0.5">General Manager</span>
-                  <div className="font-bold text-slate-900 text-xs">Rajiv Menon</div>
-                  <div className="text-slate-500 font-medium text-[11px]">+91 98200 12345</div>
+                  <div className="font-bold text-slate-900 text-xs">{profileData.gm}</div>
+                  <div className="text-slate-500 font-medium text-[11px]">{profileData.gmPhone}</div>
                 </div>
 
                 <div className="py-2.5">
                   <span className="text-xs text-slate-400 font-medium block mb-0.5">Sales Manager</span>
-                  <div className="font-bold text-slate-900 text-xs">Priya Mehta</div>
-                  <div className="text-slate-500 font-medium text-[11px]">+91 98765 43210</div>
+                  <div className="font-bold text-slate-900 text-xs">{profileData.salesManager}</div>
+                  <div className="text-slate-500 font-medium text-[11px]">{profileData.salesPhone}</div>
                 </div>
 
                 <div className="py-2.5">
                   <span className="text-xs text-slate-400 font-medium block mb-0.5">Business Email</span>
-                  <span className="font-semibold text-slate-800 text-xs">mumbai@tajhotels.com</span>
+                  <span className="font-semibold text-slate-800 text-xs">{profileData.businessEmail}</span>
                 </div>
 
                 <div className="pt-2.5">
                   <span className="text-xs text-slate-400 font-medium block mb-0.5">Alternate Email</span>
-                  <span className="font-semibold text-slate-800 text-xs">sales.mumbai@tajhotels.com</span>
+                  <span className="font-semibold text-slate-800 text-xs">{profileData.altEmail}</span>
                 </div>
               </div>
 
@@ -362,7 +412,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               </div>
 
               <button 
-                onClick={() => setIsEditing(true)}
+                onClick={() => openEditSection("KYC")}
                 className="px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold cursor-pointer"
               >
                 Edit
@@ -380,17 +430,17 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
 
               <div className="py-2.5 flex items-center justify-between">
                 <span className="text-xs text-slate-400 font-medium w-24 shrink-0">FSSAI</span>
-                <span className="font-mono font-bold text-slate-900 text-xs">11517022000673</span>
+                <span className="font-mono font-bold text-slate-900 text-xs">{profileData.fssai}</span>
               </div>
 
               <div className="py-2.5 flex items-center justify-between">
                 <span className="text-xs text-slate-400 font-medium w-24 shrink-0">GST</span>
-                <span className="font-mono font-bold text-slate-900 text-xs">27AAACT2727Q1Z6</span>
+                <span className="font-mono font-bold text-slate-900 text-xs">{profileData.gst}</span>
               </div>
 
               <div className="py-2.5 flex items-center justify-between">
                 <span className="text-xs text-slate-400 font-medium w-24 shrink-0">PAN</span>
-                <span className="font-mono font-bold text-slate-900 text-xs">AAACT2727Q</span>
+                <span className="font-mono font-bold text-slate-900 text-xs">{profileData.pan}</span>
               </div>
 
               {/* PDF Attachments Download Row */}
@@ -428,7 +478,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               </div>
 
               <button 
-                onClick={() => setIsEditing(true)}
+                onClick={() => openEditSection("Chef & Kitchen")}
                 className="px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold cursor-pointer"
               >
                 Edit
@@ -439,14 +489,14 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               <div className="flex items-center justify-between">
                 <span className="text-xs text-slate-400 font-medium w-28 shrink-0">Executive Chef</span>
                 <div className="text-right">
-                  <div className="font-bold text-slate-900 text-xs">Chef Vikram Singh</div>
-                  <div className="text-slate-500 font-medium text-[11px]">+91 90000 11122</div>
+                  <div className="font-bold text-slate-900 text-xs">{profileData.chefName}</div>
+                  <div className="text-slate-500 font-medium text-[11px]">{profileData.chefPhone}</div>
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-1 border-t border-slate-100">
                 <span className="text-xs text-slate-400 font-medium w-28 shrink-0">Chef Email</span>
-                <span className="font-semibold text-slate-800 text-xs underline">chef.mumbai@tajhotels.com</span>
+                <span className="font-semibold text-slate-800 text-xs underline">{profileData.chefEmail}</span>
               </div>
 
               {/* 3 Mini Stat Cards inside Chef & Kitchen */}
@@ -454,7 +504,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                 <div className="bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/70 flex items-center gap-2">
                   <ChefHat className="w-4 h-4 text-slate-700 shrink-0" />
                   <div>
-                    <div className="font-extrabold text-slate-900 text-sm">18</div>
+                    <div className="font-extrabold text-slate-900 text-sm">{profileData.chefsCount}</div>
                     <div className="text-[10px] text-slate-400 font-medium">Chefs</div>
                   </div>
                 </div>
@@ -462,7 +512,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                 <div className="bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/70 flex items-center gap-2">
                   <Users className="w-4 h-4 text-slate-700 shrink-0" />
                   <div>
-                    <div className="font-extrabold text-slate-900 text-sm">120</div>
+                    <div className="font-extrabold text-slate-900 text-sm">{profileData.staffCount}</div>
                     <div className="text-[10px] text-slate-400 font-medium">Kitchen Staff</div>
                   </div>
                 </div>
@@ -470,7 +520,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                 <div className="bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/70 flex items-center gap-2">
                   <Utensils className="w-4 h-4 text-slate-700 shrink-0" />
                   <div>
-                    <div className="font-extrabold text-slate-900 text-sm">450</div>
+                    <div className="font-extrabold text-slate-900 text-sm">{profileData.seatingCount}</div>
                     <div className="text-[10px] text-slate-400 font-medium">Seating (Main)</div>
                   </div>
                 </div>
@@ -493,6 +543,192 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
         </div>
 
       </div>
+
+      {/* INTERACTIVE EDIT PROFILE MODAL */}
+      {showEditModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-7 max-w-lg w-full border border-slate-200 shadow-2xl space-y-4 text-left animate-fade-in">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-xl font-serif font-bold text-slate-900 flex items-center gap-2">
+                <Pencil className="w-4 h-4 text-amber-700" />
+                <span>Edit {editSection}</span>
+              </h3>
+              <button 
+                onClick={() => setShowEditModal(false)}
+                className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveModal} className="space-y-4 text-xs">
+              {editSection === "Business Information" && (
+                <>
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Business Name</label>
+                    <input 
+                      type="text" 
+                      value={profileData.businessName}
+                      onChange={(e) => setProfileData({...profileData, businessName: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Establishment Type</label>
+                    <input 
+                      type="text" 
+                      value={profileData.type}
+                      onChange={(e) => setProfileData({...profileData, type: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">About</label>
+                    <textarea 
+                      rows={3}
+                      value={profileData.about}
+                      onChange={(e) => setProfileData({...profileData, about: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Address</label>
+                    <input 
+                      type="text" 
+                      value={profileData.address}
+                      onChange={(e) => setProfileData({...profileData, address: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+                </>
+              )}
+
+              {editSection === "Contacts" && (
+                <>
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Owner Name</label>
+                    <input 
+                      type="text" 
+                      value={profileData.owner}
+                      onChange={(e) => setProfileData({...profileData, owner: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">GM Name</label>
+                      <input 
+                        type="text" 
+                        value={profileData.gm}
+                        onChange={(e) => setProfileData({...profileData, gm: e.target.value})}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">GM Phone</label>
+                      <input 
+                        type="text" 
+                        value={profileData.gmPhone}
+                        onChange={(e) => setProfileData({...profileData, gmPhone: e.target.value})}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Business Email</label>
+                    <input 
+                      type="email" 
+                      value={profileData.businessEmail}
+                      onChange={(e) => setProfileData({...profileData, businessEmail: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+                </>
+              )}
+
+              {editSection === "KYC" && (
+                <>
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">FSSAI Registration Number</label>
+                    <input 
+                      type="text" 
+                      value={profileData.fssai}
+                      onChange={(e) => setProfileData({...profileData, fssai: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">GSTIN Number</label>
+                    <input 
+                      type="text" 
+                      value={profileData.gst}
+                      onChange={(e) => setProfileData({...profileData, gst: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+                </>
+              )}
+
+              {editSection === "Chef & Kitchen" && (
+                <>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Executive Chef</label>
+                      <input 
+                        type="text" 
+                        value={profileData.chefName}
+                        onChange={(e) => setProfileData({...profileData, chefName: e.target.value})}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Chef Phone</label>
+                      <input 
+                        type="text" 
+                        value={profileData.chefPhone}
+                        onChange={(e) => setProfileData({...profileData, chefPhone: e.target.value})}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Chef Email</label>
+                    <input 
+                      type="email" 
+                      value={profileData.chefEmail}
+                      onChange={(e) => setProfileData({...profileData, chefEmail: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                    />
+                  </div>
+                </>
+              )}
+
+              <div className="flex items-center justify-end gap-2 pt-3">
+                <button
+                  type="button"
+                  onClick={() => setShowEditModal(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl bg-[#3D2E1A] hover:bg-[#4E3B22] text-white text-xs font-bold cursor-pointer shadow-md"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
