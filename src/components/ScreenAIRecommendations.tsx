@@ -404,9 +404,15 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                 </div>
 
                 {/* 2. CENTER MATCH RING NODE */}
-                <div className="flex flex-col items-center justify-center shrink-0 my-2 lg:my-0">
-                  <div className="w-20 h-20 rounded-full border-4 border-emerald-500 bg-white flex flex-col items-center justify-center text-center shadow-2xs">
-                    <span className="text-sm font-extrabold text-[#111111] leading-none">
+                <div className="flex flex-col items-center justify-center shrink-0 my-2 lg:my-0 px-2">
+                  <div className={`w-20 h-20 rounded-full border-[3.5px] bg-white flex flex-col items-center justify-center text-center shadow-2xs ${
+                    rec.matchType === "NEEDS_REVIEW"
+                      ? "border-amber-500"
+                      : rec.matchType === "STRONG"
+                      ? "border-emerald-500"
+                      : "border-emerald-500"
+                  }`}>
+                    <span className="text-base font-extrabold text-[#111111] leading-none">
                       {rec.matchPercent}%
                     </span>
                     <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
@@ -418,16 +424,16 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                     rec.matchType === "NEEDS_REVIEW"
                       ? "bg-amber-50 text-amber-700 border-amber-200"
                       : rec.matchType === "STRONG"
-                      ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                      : "bg-emerald-50 text-emerald-700 border-emerald-200"
+                      ? "bg-amber-50 text-amber-700 border-amber-200"
+                      : "bg-emerald-50 text-emerald-600 border-emerald-100"
                   }`}>
                     {rec.matchLabel}
                   </span>
                 </div>
 
                 {/* 3. RECOMMENDED PRODUCT BLOCK */}
-                <div className="bg-slate-50 p-3 rounded-2xl border border-slate-100 flex items-center gap-3.5 w-full lg:w-72 shrink-0">
-                  <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-xl bg-white overflow-hidden p-1 shrink-0 border border-slate-200/80 flex items-center justify-center">
+                <div className="bg-[#F8F6FC] p-3 rounded-2xl border border-purple-100/60 flex items-center gap-3.5 w-full lg:w-72 shrink-0">
+                  <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-xl bg-white overflow-hidden p-1 shrink-0 border border-slate-200/80 flex items-center justify-center shadow-2xs">
                     <Image
                       src={rec.recommendedImage}
                       alt={rec.recommendedTitle}
