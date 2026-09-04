@@ -73,7 +73,6 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
     { id: "orders", label: "Orders", icon: Package, badge: "2 Active", desc: "Live dispatch & telemetry" },
     { id: "enquiries", label: "Enquiries", icon: Mail, badge: "RFQ", desc: "Commercial quotation terms" },
     { id: "shortlist", label: "Shortlist", icon: Star, badge: "4 Saved", desc: "Curated executive selection" },
-    { id: "products", label: "Saved Catalog", icon: Heart, badge: "Wishlist", desc: "Saved gourmet items" },
     { id: "profile", label: "Profile & Account", icon: User, badge: "Settings", desc: "Taj Executive preferences" },
   ];
 
