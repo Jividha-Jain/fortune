@@ -281,33 +281,6 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                         </div>
                       )}
 
-                      {/* Match Score Section */}
-                      <div className="space-y-2 pt-2">
-                        <div className="flex items-center justify-end text-xs">
-                          <div className="flex items-center gap-2">
-                            <span className="font-black text-slate-900 text-base">
-                              {item.matchPercent}%
-                            </span>
-                            <span className={`text-[10.5px] font-extrabold px-3 py-0.5 rounded-full ${
-                              item.matchType === "EXCELLENT"
-                                ? "bg-[#E6F9F0] text-[#0D9488]"
-                                : "bg-[#F4EFFB] text-[#5E3B8C]"
-                            }`}>
-                              {item.matchLabel}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Full-width Progress Bar Track */}
-                        <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                          <div
-                            style={{ width: `${item.matchPercent}%` }}
-                            className={`h-full rounded-full transition-all duration-1000 ease-out ${
-                              item.matchType === "EXCELLENT" ? "bg-[#0D9488]" : "bg-[#5E3B8C]"
-                            }`}
-                          />
-                        </div>
-                      </div>
 
                     </div>
 
