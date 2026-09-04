@@ -78,7 +78,120 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
   ];
 
   return (
-    <header className="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50 w-full shadow-2xs">
+    <>
+      {/* PERSISTENT TOP KYC INCOMPLETE ALERT BANNER */}
+      {isKycBannerVisible && !isKycCompleted && (
+        <div className="bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-[#1C0B33] px-4 py-2.5 text-xs font-bold flex items-center justify-between shadow-md border-b border-amber-600/30 sticky top-0 z-50 animate-fade-in">
+          <div className="flex items-center gap-2.5 max-w-5xl mx-auto text-left">
+            <span className="w-5 h-5 rounded-full bg-[#1C0B33] text-[#F5C453] flex items-center justify-center text-[10px] shrink-0 font-bold">
+              ⚠️
+            </span>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="font-extrabold uppercase tracking-wider text-[10px] bg-[#1C0B33] text-[#F5C453] px-2 py-0.5 rounded">
+                KYC Incomplete
+              </span>
+              <span className="font-semibold text-[#1C0B33]">
+                Your establishment verification is pending. Upload your FSSAI / GST license to activate Net-30 credit limits &amp; express dispatch.
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => setShowKycModal(true)}
+              className="px-3 py-1.5 bg-[#1C0B33] hover:bg-black text-amber-300 rounded-lg text-[11px] font-bold transition-all cursor-pointer shadow-xs whitespace-nowrap active:scale-95"
+            >
+              Complete KYC Now →
+            </button>
+            <button
+              onClick={() => setIsKycBannerVisible(false)}
+              className="text-[#1C0B33] hover:text-black font-bold p-1 text-xs cursor-pointer ml-1"
+              title="Dismiss banner"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* KYC VERIFICATION POPUP MODAL */}
+      {showKycModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 text-left space-y-5 relative">
+            
+            {/* Modal Close Button */}
+            <button
+              onClick={() => setShowKycModal(false)}
+              className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 font-bold p-1 cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Title */}
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
+                <span>Express Hotel Verification</span>
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-slate-900">
+                Complete Account KYC
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Provide your GSTIN and FSSAI license numbers to verify your establishment.
+              </p>
+            </div>
+
+            {/* KYC Form */}
+            <form onSubmit={handleKycSubmit} className="space-y-4">
+              <div>
+                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1">
+                  GSTIN Registration Number
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={gstin}
+                  onChange={(e) => setGstin(e.target.value)}
+                  placeholder="27AAACI1681G1Z8"
+                  className="w-full px-4 py-3 bg-purple-50/20 border border-purple-200 rounded-xl text-xs font-mono uppercase font-bold text-slate-900 focus:ring-2 focus:ring-[#5E3B8C] focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1">
+                  FSSAI License Number (14 Digits)
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={fssai}
+                  onChange={(e) => setFssai(e.target.value)}
+                  placeholder="10014022003189"
+                  className="w-full px-4 py-3 bg-purple-50/20 border border-purple-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:ring-2 focus:ring-[#5E3B8C] focus:outline-none"
+                />
+              </div>
+
+              <div className="pt-2 flex items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowKycModal(false)}
+                  className="px-4 py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 cursor-pointer"
+                >
+                  Skip for Now
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmittingKyc}
+                  className="flex-1 py-3 px-6 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all active:scale-95"
+                >
+                  {isSubmittingKyc ? "Verifying..." : "Verify & Complete KYC →"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      <header className="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50 w-full shadow-2xs">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4 relative">
         
         {/* Left Brand Logo */}
@@ -335,5 +448,6 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
         })}
       </div>
     </header>
-  );
+  </>
+);
 }
