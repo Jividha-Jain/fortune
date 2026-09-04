@@ -28,6 +28,13 @@ interface PortalHeaderProps {
 export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderProps) {
   const [showNotification, setShowNotification] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [isKycBannerVisible, setIsKycBannerVisible] = useState(true);
+  const [showKycModal, setShowKycModal] = useState(false);
+  const [isKycCompleted, setIsKycCompleted] = useState(false);
+  const [gstin, setGstin] = useState("27AAACI1681G1Z8");
+  const [fssai, setFssai] = useState("10014022003189");
+  const [isSubmittingKyc, setIsSubmittingKyc] = useState(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on outside click
@@ -41,6 +48,18 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleKycSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingKyc(true);
+    setTimeout(() => {
+      setIsSubmittingKyc(false);
+      setIsKycCompleted(true);
+      setShowKycModal(false);
+      setIsKycBannerVisible(false);
+      alert("✓ KYC Verification Submitted Successfully! Your account is now fully verified.");
+    }, 700);
+  };
 
   const navItems = [
     { id: "dashboard", label: "Dashboard" },

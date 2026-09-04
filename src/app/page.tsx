@@ -18,6 +18,7 @@ import ScreenBusinessDetails from "@/components/ScreenBusinessDetails";
 import ScreenMenuUpload from "@/components/ScreenMenuUpload";
 import ScreenLiveAnalysis from "@/components/ScreenLiveAnalysis";
 import ScreenSignIn from "@/components/ScreenSignIn";
+import ScreenHotelDetails from "@/components/ScreenHotelDetails";
 import { ChevronLeft, ChevronRight, Layers } from "lucide-react";
 
 export default function Home() {
@@ -36,6 +37,7 @@ export default function Home() {
     | "onboarding"
     | "signin"
     | "register"
+    | "hotel-details"
   >("signin");
 
   // Onboarding sub-step state (1 to 5) when activeTab === "onboarding"
@@ -53,7 +55,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8FD] relative">
       {/* Top Portal Header (Shown when authenticated) */}
-      {activeTab !== "signin" && activeTab !== "register" && activeTab !== "onboarding" && (
+      {activeTab !== "signin" && activeTab !== "register" && activeTab !== "hotel-details" && activeTab !== "onboarding" && (
         <PortalHeader activeTab={activeTab as any} setActiveTab={(tab) => setActiveTab(tab as any)} />
       )}
 
@@ -138,7 +140,13 @@ export default function Home() {
         {activeTab === "register" && (
           <ScreenRegister
             onNavigateSignIn={() => setActiveTab("signin")}
-            onSuccessRegister={() => setActiveTab("dashboard")}
+            onSuccessRegister={() => setActiveTab("hotel-details")}
+          />
+        )}
+
+        {activeTab === "hotel-details" && (
+          <ScreenHotelDetails
+            onComplete={() => setActiveTab("dashboard")}
           />
         )}
 
