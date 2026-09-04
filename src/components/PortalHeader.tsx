@@ -50,12 +50,11 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
   ];
 
   const profileMenuItems = [
-    { id: "signin", label: "Sign In / Partner Login", icon: LogIn, badge: "Login Screen", desc: "Institutional credentials sign-in" },
     { id: "mymenu", label: "My Menu", icon: UtensilsCrossed, badge: "6 Dishes", desc: "View active paired dishes" },
     { id: "orders", label: "Orders", icon: Package, badge: "2 Active", desc: "Live dispatch & telemetry" },
     { id: "enquiries", label: "Enquiries", icon: Mail, badge: "RFQ", desc: "Commercial quotation terms" },
     { id: "shortlist", label: "Shortlist", icon: Star, badge: "4 Saved", desc: "Curated executive selection" },
-    { id: "products", label: "Wishlist", icon: Heart, badge: "Catalog", desc: "Saved gourmet items" },
+    { id: "products", label: "Saved Catalog", icon: Heart, badge: "Wishlist", desc: "Saved gourmet items" },
     { id: "profile", label: "Profile & Account", icon: User, badge: "Settings", desc: "Taj Executive preferences" },
   ];
 
@@ -134,9 +133,9 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
                 : "border-slate-200/90 hover:border-slate-300 hover:bg-slate-50 shadow-2xs"
             }`}
           >
-            <div className="relative w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-full overflow-hidden shrink-0 border border-slate-200 shadow-xs">
+            <div className="relative w-8.5 h-8.5 rounded-full overflow-hidden shrink-0 border-2 border-[#F5C453] shadow-xs">
               <Image
-                src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=200&q=80"
+                src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=400&q=80"
                 alt="Chef Vikram Singh"
                 fill
                 className="object-cover"
@@ -151,25 +150,25 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
             }`} />
           </div>
 
-          {/* USER PROFILE DROPDOWN MENU */}
+          {/* USER PROFILE DROPDOWN MENU - REDESIGNED LUXURY CARD */}
           {showProfileMenu && (
-            <div className="absolute top-14 right-0 w-80 bg-white rounded-[24px] border border-slate-200/90 shadow-2xl z-50 overflow-hidden animate-fade-in text-left">
+            <div className="absolute top-14 right-0 w-84 bg-white rounded-[26px] border border-slate-200/90 shadow-2xl z-50 overflow-hidden animate-fade-in text-left">
               
               {/* Header Profile Info Box */}
-              <div className="p-4 bg-gradient-to-br from-[#1C0B33] to-[#3B1B5E] text-white space-y-2">
+              <div className="p-4 bg-gradient-to-r from-[#1C0B33] via-[#2D1252] to-[#1C0B33] text-white border-b border-[#F5C453]/20 space-y-2">
                 <div className="flex items-center gap-3">
-                  <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0 border-2 border-[#F5C453]">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-[#F5C453] shadow-md">
                     <Image
-                      src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=200&q=80"
+                      src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=400&q=80"
                       alt="Chef Vikram Singh"
                       fill
                       className="object-cover"
                     />
                   </div>
-                  <div>
-                    <h4 className="font-serif font-bold text-sm leading-tight text-white">Taj Hotel Mumbai</h4>
+                  <div className="space-y-0.5">
+                    <h4 className="font-serif font-bold text-base leading-tight text-white">Taj Hotel Mumbai</h4>
                     <p className="text-xs text-purple-200 font-medium">Chef Vikram Singh (Executive Chef)</p>
-                    <div className="inline-flex items-center gap-1 mt-1 text-[9px] font-bold text-[#F5C453] bg-[#F5C453]/20 px-2 py-0.5 rounded-full border border-[#F5C453]/30 uppercase">
+                    <div className="inline-flex items-center gap-1.5 mt-1 text-[9px] font-bold text-[#F5C453] bg-[#F5C453]/15 px-2.5 py-0.5 rounded-full border border-[#F5C453]/30 uppercase tracking-wider">
                       <ShieldCheck className="w-3 h-3 text-[#F5C453]" />
                       <span>ENTERPRISE KEY ACCOUNT</span>
                     </div>
@@ -179,7 +178,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
 
               {/* Menu Nav Links List */}
               <div className="p-2 space-y-1">
-                <div className="px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-slate-400">
+                <div className="px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-400">
                   EXECUTIVE PORTAL NAVIGATION
                 </div>
 
@@ -194,14 +193,14 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
                         setActiveTab(menu.id as any);
                         setShowProfileMenu(false);
                       }}
-                      className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-colors text-xs font-semibold cursor-pointer ${
+                      className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-all duration-200 text-xs cursor-pointer ${
                         isActive
                           ? "bg-[#F4EFFB] text-[#5E3B8C] font-bold border border-[#E2D4F7]"
-                          : "text-[#111111] hover:bg-slate-50"
+                          : "text-[#111111] hover:bg-slate-50 font-semibold"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
+                        <div className={`w-8.5 h-8.5 rounded-xl flex items-center justify-center shrink-0 ${
                           isActive ? "bg-[#5E3B8C] text-white" : "bg-slate-100 text-slate-600"
                         }`}>
                           <Icon className="w-4 h-4" />
@@ -212,7 +211,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
                         </div>
                       </div>
 
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">
+                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">
                         {menu.badge}
                       </span>
                     </button>
@@ -221,15 +220,15 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
               </div>
 
               {/* Bottom Quick Actions */}
-              <div className="p-2 border-t border-slate-100 bg-slate-50/60 flex items-center justify-between text-xs">
+              <div className="p-2.5 border-t border-slate-100 bg-slate-50/80 flex items-center justify-between text-xs">
                 <button
                   onClick={() => {
                     setActiveTab("profile");
                     setShowProfileMenu(false);
                   }}
-                  className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-[#111111] hover:bg-slate-100 font-medium flex items-center gap-1.5 text-xs cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl text-slate-700 hover:text-[#111111] hover:bg-white font-bold flex items-center gap-1.5 text-xs cursor-pointer border border-transparent hover:border-slate-200"
                 >
-                  <Settings className="w-3.5 h-3.5" />
+                  <Settings className="w-3.5 h-3.5 text-slate-500" />
                   <span>Account Settings</span>
                 </button>
 
@@ -238,9 +237,9 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
                     setActiveTab("signin");
                     setShowProfileMenu(false);
                   }}
-                  className="px-3 py-1.5 rounded-lg text-red-500 hover:text-red-700 hover:bg-red-50 font-bold flex items-center gap-1.5 text-xs cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl text-red-600 hover:text-red-700 hover:bg-red-50 font-bold flex items-center gap-1.5 text-xs cursor-pointer"
                 >
-                  <LogOut className="w-3.5 h-3.5" />
+                  <LogOut className="w-3.5 h-3.5 text-red-500" />
                   <span>Sign Out / Switch</span>
                 </button>
               </div>
