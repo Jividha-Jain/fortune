@@ -27,17 +27,17 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
   const recommendedSKUs = RECOMMENDED_HOME_PRODUCTS;
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-[#111111] pb-24 font-sans relative overflow-hidden antialiased">
+    <div className="min-h-screen bg-[#FAFAFA] text-[#111111] pb-12 sm:pb-16 font-sans relative overflow-hidden antialiased">
       
       {/* Subtle Background Pattern & Ambient Luxury Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(#241347_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.025] pointer-events-none" />
       <div className="absolute top-0 right-0 w-[900px] h-[900px] bg-gradient-to-bl from-[#D7A742]/12 via-[#241347]/5 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute top-[450px] left-[-150px] w-[600px] h-[600px] bg-gradient-to-tr from-[#241347]/8 via-[#D7A742]/3 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 lg:pt-14 space-y-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 space-y-8 sm:space-y-10 relative z-10">
 
         {/* TOP HERO SECTION */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           
           {/* Left Hero Title & Outlets Status Header */}
           <div className="max-w-xl space-y-4">
