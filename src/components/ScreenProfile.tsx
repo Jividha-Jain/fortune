@@ -74,7 +74,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] pb-24 font-sans antialiased text-[#111111] relative">
+    <div className="min-h-screen bg-[#FAF8FD] pb-24 font-sans antialiased text-[#111111] relative">
       
       {/* SUCCESS TOAST NOTIFICATION */}
       {showToast && (
@@ -98,11 +98,11 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               unoptimized
               className="object-cover object-right"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F5] via-[#FAF9F5]/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8FD] via-[#FAF8FD]/80 to-transparent" />
           </div>
 
           <div className="space-y-1 relative z-10">
-            <div className="text-[10.5px] font-extrabold uppercase tracking-widest text-[#B45309]">
+            <div className="text-[10.5px] font-extrabold uppercase tracking-widest text-[#5E3B8C]">
               BUSINESS PROFILE
             </div>
             <h1 className="text-4xl sm:text-5xl font-serif font-bold text-[#111111] tracking-tight">
@@ -114,15 +114,15 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 pt-2 font-medium">
               <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-amber-700" />
+                <MapPin className="w-3.5 h-3.5 text-[#5E3B8C]" />
                 <span>Apollo Bunder, Mumbai, Maharashtra</span>
               </span>
               <span className="flex items-center gap-1">
-                <Phone className="w-3.5 h-3.5 text-amber-700" />
+                <Phone className="w-3.5 h-3.5 text-[#5E3B8C]" />
                 <span>{profileData.phone}</span>
               </span>
               <span className="flex items-center gap-1">
-                <Globe className="w-3.5 h-3.5 text-amber-700" />
+                <Globe className="w-3.5 h-3.5 text-[#5E3B8C]" />
                 <a href={`https://${profileData.website}`} target="_blank" rel="noreferrer" className="underline font-semibold text-slate-800">
                   {profileData.website}
                 </a>
@@ -133,20 +133,20 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
           {/* Right Cursive Calligraphy Graphic & Edit Button */}
           <div className="flex items-center gap-6 shrink-0 z-10 self-end md:self-auto pt-2 md:pt-0">
             <div className="hidden lg:block text-right">
-              <span className="font-serif italic text-2xl text-[#92400E] font-semibold block leading-tight">
+              <span className="font-serif italic text-2xl text-[#5E3B8C] font-semibold block leading-tight">
                 A Legend
               </span>
-              <span className="font-serif italic text-2xl text-[#92400E] font-semibold block leading-tight">
+              <span className="font-serif italic text-2xl text-[#5E3B8C] font-semibold block leading-tight">
                 Lives Here
               </span>
-              <div className="w-20 h-0.5 bg-amber-400/60 ml-auto mt-1 rounded-full" />
+              <div className="w-20 h-0.5 bg-[#F5C453] ml-auto mt-1 rounded-full" />
             </div>
 
             <button
               onClick={() => openEditSection("Business Information")}
-              className="px-6 py-3 rounded-full bg-[#3D2E1A] hover:bg-[#4E3B22] text-white text-xs font-bold flex items-center gap-2 shadow-md transition-all cursor-pointer"
+              className="px-6 py-3 rounded-full bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center gap-2 shadow-md border border-[#F5C453]/30 transition-all cursor-pointer"
             >
-              <Pencil className="w-3.5 h-3.5" />
+              <Pencil className="w-3.5 h-3.5 text-[#F5C453]" />
               <span>Edit Profile</span>
             </button>
           </div>
@@ -205,17 +205,17 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                   <span className="font-black text-slate-900 text-sm">90%</span>
                 </div>
                 <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-[#B45309] rounded-full w-[90%]" />
+                  <div className="h-full bg-[#0D9488] rounded-full w-[90%]" />
                 </div>
               </div>
 
               {/* Gold Crown Callout Card */}
-              <div className="bg-[#FAF7F2] border border-[#EBE3D5] p-3.5 rounded-2xl flex items-start gap-3 text-left">
-                <div className="w-8 h-8 rounded-full bg-[#FEF3C7] text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
-                  <Crown className="w-4 h-4 text-amber-700" />
+              <div className="bg-[#F4EFFB] border border-[#E2D4F7] p-3.5 rounded-2xl flex items-start gap-3 text-left">
+                <div className="w-8 h-8 rounded-full bg-[#5E3B8C] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                  <Crown className="w-4 h-4 text-[#F5C453]" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-slate-900">Almost there!</div>
+                  <div className="text-xs font-bold text-[#1C0B33]">Almost there!</div>
                   <div className="text-[11px] text-slate-600 font-medium leading-tight">Complete your KYC to unlock all features.</div>
                 </div>
               </div>
@@ -229,8 +229,8 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
           
           {/* Widget 1 */}
           <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs flex items-center gap-3.5 text-left">
-            <div className="w-12 h-12 rounded-full bg-[#FFFBEB] text-[#B45309] flex items-center justify-center shrink-0 border border-[#FDE68A]">
-              <ChefHat className="w-6 h-6 text-[#B45309]" />
+            <div className="w-12 h-12 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+              <ChefHat className="w-6 h-6 text-[#5E3B8C]" />
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-serif font-bold text-[#111111]">{profileData.chefsCount}</div>
@@ -240,8 +240,8 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
 
           {/* Widget 2 */}
           <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs flex items-center gap-3.5 text-left">
-            <div className="w-12 h-12 rounded-full bg-[#FFFBEB] text-[#B45309] flex items-center justify-center shrink-0 border border-[#FDE68A]">
-              <Users className="w-6 h-6 text-[#B45309]" />
+            <div className="w-12 h-12 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+              <Users className="w-6 h-6 text-[#5E3B8C]" />
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-serif font-bold text-[#111111]">320</div>
@@ -251,8 +251,8 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
 
           {/* Widget 3 */}
           <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs flex items-center gap-3.5 text-left">
-            <div className="w-12 h-12 rounded-full bg-[#FFFBEB] text-[#B45309] flex items-center justify-center shrink-0 border border-[#FDE68A]">
-              <Utensils className="w-6 h-6 text-[#B45309]" />
+            <div className="w-12 h-12 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+              <Utensils className="w-6 h-6 text-[#5E3B8C]" />
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-serif font-bold text-[#111111]">11</div>
@@ -262,8 +262,8 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
 
           {/* Widget 4 */}
           <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs flex items-center gap-3.5 text-left">
-            <div className="w-12 h-12 rounded-full bg-[#FFFBEB] text-[#B45309] flex items-center justify-center shrink-0 border border-[#FDE68A]">
-              <Bed className="w-6 h-6 text-[#B45309]" />
+            <div className="w-12 h-12 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+              <Bed className="w-6 h-6 text-[#5E3B8C]" />
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-serif font-bold text-[#111111]">582</div>
@@ -280,8 +280,8 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
           <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-2xs space-y-4 text-left">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
-                  <Building2 className="w-5 h-5 text-amber-700" />
+                <div className="w-10 h-10 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+                  <Building2 className="w-5 h-5 text-[#5E3B8C]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-serif font-bold text-[#111111]">Business Information</h3>
@@ -334,8 +334,8 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
           <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-2xs space-y-4 text-left">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
-                  <User className="w-5 h-5 text-amber-700" />
+                <div className="w-10 h-10 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+                  <User className="w-5 h-5 text-[#5E3B8C]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-serif font-bold text-[#111111]">Contacts</h3>
@@ -383,14 +383,14 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               </div>
 
               {/* Right Side Taj Heritage Golden Card */}
-              <div className="w-full lg:w-44 bg-[#FAF7F2] border border-[#EBE3D5] rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2 shrink-0">
-                <div className="w-10 h-10 rounded-full bg-[#FEF3C7] text-amber-700 flex items-center justify-center shrink-0">
-                  <Crown className="w-5 h-5 text-amber-700" />
+              <div className="w-full lg:w-44 bg-[#1C0B33] text-white border border-purple-900/60 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2 shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#F5C453]/20 border border-[#F5C453]/40 text-[#F5C453] flex items-center justify-center shrink-0">
+                  <Crown className="w-5 h-5 text-[#F5C453]" />
                 </div>
-                <div className="font-serif font-bold text-base text-[#92400E] tracking-wider">
+                <div className="font-serif font-bold text-base text-[#F5C453] tracking-wider">
                   TAJ
                 </div>
-                <div className="text-[9.5px] font-extrabold text-amber-800 uppercase tracking-widest leading-tight">
+                <div className="text-[9.5px] font-extrabold text-slate-300 uppercase tracking-widest leading-tight">
                   LET'S CREATE EXTRAORDINARY TOGETHER
                 </div>
               </div>
@@ -402,8 +402,8 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
           <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-2xs space-y-4 text-left">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-5 h-5 text-amber-700" />
+                <div className="w-10 h-10 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+                  <ShieldCheck className="w-5 h-5 text-[#5E3B8C]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-serif font-bold text-[#111111]">KYC</h3>
@@ -468,8 +468,8 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
           <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-2xs space-y-4 text-left">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
-                  <ChefHat className="w-5 h-5 text-amber-700" />
+                <div className="w-10 h-10 rounded-full bg-[#F4EFFB] text-[#5E3B8C] flex items-center justify-center shrink-0 border border-[#E2D4F7]">
+                  <ChefHat className="w-5 h-5 text-[#5E3B8C]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-serif font-bold text-[#111111]">Chef &amp; Kitchen</h3>
@@ -529,12 +529,12 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               <div className="pt-2">
                 <span className="text-xs text-slate-400 font-medium block mb-1.5">Cuisines</span>
                 <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/80">Indian</span>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/80">Continental</span>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/80">Chinese</span>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/80">Japanese</span>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/80">Mediterranean</span>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/80">Desserts</span>
+                  <span className="px-3 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C] text-[11px] font-bold border border-[#E2D4F7]">Indian</span>
+                  <span className="px-3 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C] text-[11px] font-bold border border-[#E2D4F7]">Continental</span>
+                  <span className="px-3 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C] text-[11px] font-bold border border-[#E2D4F7]">Chinese</span>
+                  <span className="px-3 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C] text-[11px] font-bold border border-[#E2D4F7]">Japanese</span>
+                  <span className="px-3 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C] text-[11px] font-bold border border-[#E2D4F7]">Mediterranean</span>
+                  <span className="px-3 py-1 rounded-full bg-[#F4EFFB] text-[#5E3B8C] text-[11px] font-bold border border-[#E2D4F7]">Desserts</span>
                 </div>
               </div>
             </div>
@@ -550,7 +550,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
           <div className="bg-white rounded-3xl p-6 sm:p-7 max-w-lg w-full border border-slate-200 shadow-2xl space-y-4 text-left animate-fade-in">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-xl font-serif font-bold text-slate-900 flex items-center gap-2">
-                <Pencil className="w-4 h-4 text-amber-700" />
+                <Pencil className="w-4 h-4 text-[#5E3B8C]" />
                 <span>Edit {editSection}</span>
               </h3>
               <button 
@@ -570,7 +570,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       type="text" 
                       value={profileData.businessName}
                       onChange={(e) => setProfileData({...profileData, businessName: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
 
@@ -580,7 +580,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       type="text" 
                       value={profileData.type}
                       onChange={(e) => setProfileData({...profileData, type: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
 
@@ -590,7 +590,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       rows={3}
                       value={profileData.about}
                       onChange={(e) => setProfileData({...profileData, about: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
 
@@ -600,7 +600,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       type="text" 
                       value={profileData.address}
                       onChange={(e) => setProfileData({...profileData, address: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
                 </>
@@ -614,7 +614,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       type="text" 
                       value={profileData.owner}
                       onChange={(e) => setProfileData({...profileData, owner: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
 
@@ -625,7 +625,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                         type="text" 
                         value={profileData.gm}
                         onChange={(e) => setProfileData({...profileData, gm: e.target.value})}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                       />
                     </div>
                     <div>
@@ -634,7 +634,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                         type="text" 
                         value={profileData.gmPhone}
                         onChange={(e) => setProfileData({...profileData, gmPhone: e.target.value})}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                       />
                     </div>
                   </div>
@@ -645,7 +645,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       type="email" 
                       value={profileData.businessEmail}
                       onChange={(e) => setProfileData({...profileData, businessEmail: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
                 </>
@@ -659,7 +659,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       type="text" 
                       value={profileData.fssai}
                       onChange={(e) => setProfileData({...profileData, fssai: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
                   <div>
@@ -668,7 +668,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       type="text" 
                       value={profileData.gst}
                       onChange={(e) => setProfileData({...profileData, gst: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
                 </>
@@ -683,7 +683,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                         type="text" 
                         value={profileData.chefName}
                         onChange={(e) => setProfileData({...profileData, chefName: e.target.value})}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                       />
                     </div>
                     <div>
@@ -692,7 +692,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                         type="text" 
                         value={profileData.chefPhone}
                         onChange={(e) => setProfileData({...profileData, chefPhone: e.target.value})}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                       />
                     </div>
                   </div>
@@ -703,7 +703,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                       type="email" 
                       value={profileData.chefEmail}
                       onChange={(e) => setProfileData({...profileData, chefEmail: e.target.value})}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30"
                     />
                   </div>
                 </>
@@ -719,7 +719,7 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-[#3D2E1A] hover:bg-[#4E3B22] text-white text-xs font-bold cursor-pointer shadow-md"
+                  className="px-5 py-2.5 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold cursor-pointer shadow-md border border-[#F5C453]/30"
                 >
                   Save Changes
                 </button>
