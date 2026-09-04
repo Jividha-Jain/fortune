@@ -166,7 +166,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
               {/* Gold Outline Badge */}
               <div className="inline-flex items-center gap-2 bg-[#1C0B33]/80 backdrop-blur-md border border-[#D7A742]/60 px-3.5 py-1.5 rounded-lg text-[#EBB738] text-[11px] font-bold tracking-widest uppercase shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#EBB738]" />
-                <span>AI CULINARY RECOMMENDATION ENGINE</span>
+                <span>FORTUNE CULINARY PAIRING ENGINE</span>
               </div>
 
               {/* Title */}
@@ -208,20 +208,20 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
         {/* 4 EXECUTIVE METRIC CARDS - EXACT MATCH TO REFERENCE SCREENSHOT */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          {/* CARD 1: ANALYSIS BASE */}
+          {/* CARD 1: MENU COVERAGE */}
           <div className="bg-white p-6 rounded-[24px] border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-md transition-all duration-300 flex items-start gap-4">
             <div className="w-12 h-12 rounded-full bg-[#EEECFA] text-[#6B5EAE] flex items-center justify-center shrink-0 shadow-2xs">
               <BarChart3 className="w-5 h-5" />
             </div>
             <div className="space-y-1">
               <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                ANALYSIS BASE
+                MENU COVERAGE
               </div>
               <div className="text-4xl lg:text-[44px] font-serif font-bold text-[#111111] leading-tight my-0.5">
                 42
               </div>
               <div className="text-xs text-slate-600 font-medium">
-                Menu Items Analyzed
+                Analyzed Menu Dishes
               </div>
               <div className="text-[11px] font-bold text-[#6B5EAE]">
                 Across Pizza, Pasta, Robata &amp; Bakery
@@ -229,20 +229,20 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
             </div>
           </div>
 
-          {/* CARD 2: INVENTORY ALIGN */}
+          {/* CARD 2: EXECUTIVE MATCHES */}
           <div className="bg-white p-6 rounded-[24px] border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-md transition-all duration-300 flex items-start gap-4">
             <div className="w-12 h-12 rounded-full bg-[#FEF5E3] text-[#D7A742] flex items-center justify-center shrink-0 shadow-2xs">
               <Package className="w-5 h-5" />
             </div>
             <div className="space-y-1">
               <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                INVENTORY ALIGN
+                EXECUTIVE MATCHES
               </div>
               <div className="text-4xl lg:text-[44px] font-serif font-bold text-[#D7A742] leading-tight my-0.5">
                 12
               </div>
               <div className="text-xs text-slate-600 font-medium">
-                Product Matches
+                Product Pairings
               </div>
               <div className="text-[11px] text-slate-500 font-medium">
                 Direct SKU substitutions in cold storage
@@ -263,28 +263,28 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                 7
               </div>
               <div className="text-xs text-slate-600 font-medium">
-                New Menu Opportunities
+                Menu Concepts
               </div>
               <div className="text-[11px] text-slate-500 font-medium">
-                High-margin culinary concepts by AI
+                High-margin regional culinary opportunities
               </div>
             </div>
           </div>
 
-          {/* CARD 4: QUALITY TIER */}
+          {/* CARD 4: QUALITY CERTIFICATIONS */}
           <div className="bg-white p-6 rounded-[24px] border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-md transition-all duration-300 flex items-start gap-4">
             <div className="w-12 h-12 rounded-full bg-[#FEF5E3] text-[#D7A742] flex items-center justify-center shrink-0 shadow-2xs">
               <Award className="w-5 h-5" />
             </div>
             <div className="space-y-1">
               <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                QUALITY TIER
+                QUALITY CERTIFICATIONS
               </div>
               <div className="text-4xl lg:text-[44px] font-serif font-bold text-[#111111] leading-tight my-0.5">
                 4
               </div>
               <div className="text-xs text-slate-600 font-medium">
-                Menu Upgrades
+                Artisanal Upgrades
               </div>
               <div className="text-[11px] text-slate-500 font-medium">
                 Artisanal DOP &amp; MSC certified replacements

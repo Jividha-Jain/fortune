@@ -293,17 +293,17 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
           <div className="space-y-2 max-w-2xl z-10 text-left">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F4EFFB] border border-[#E2D4F7] text-[10px] font-bold tracking-wider text-[#5E3B8C] uppercase">
               <Sparkles className="w-3.5 h-3.5 text-[#5E3B8C]" />
-              <span>ALGORITHMIC PANTRY ENGINE</span>
+              <span>CULINARY INTELLIGENCE ENGINE</span>
               <span>•</span>
               <span>V2.4 ACTIVE</span>
               <span>•</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl font-serif text-[#111111] font-normal leading-tight tracking-tight">
-              AI Recommendations
+              Executive Recommendations
             </h1>
             <p className="text-sm text-slate-500 font-medium">
-              Fortune has analyzed your menu and found opportunities across your kitchen.
+              Fortune has analyzed your dining menu and identified tailored product matches &amp; culinary concepts.
             </p>
           </div>
 
