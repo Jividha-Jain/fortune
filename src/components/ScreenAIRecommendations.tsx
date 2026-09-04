@@ -22,6 +22,7 @@ import {
   FileText,
   Utensils
 } from "lucide-react";
+import AIPairingSuggestionsSection from "./AIPairingSuggestionsSection";
 
 interface ScreenAIRecommendationsProps {
   onSelectProduct: (productId: string) => void;
@@ -618,6 +619,9 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                 ))}
               </div>
             </div>
+
+            {/* AI PAIRING SUGGESTIONS - MATCHING LATEST REFERENCE SCREENSHOT */}
+            <AIPairingSuggestionsSection onNavigateTab={() => {}} />
 
             {/* 7 NEW MENU IDEA CARDS GRID */}
             <div className="grid grid-cols-1 gap-6">

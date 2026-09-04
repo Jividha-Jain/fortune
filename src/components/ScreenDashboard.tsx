@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { RECOMMENDED_HOME_PRODUCTS } from "@/data/productsData";
+import AIPairingSuggestionsSection from "./AIPairingSuggestionsSection";
 
 interface ScreenDashboardProps {
   onNavigateTab: (tab: "products" | "product-detail" | "recommendations" | "mymenu") => void;
@@ -24,45 +25,6 @@ interface ScreenDashboardProps {
 
 export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps) {
   const recommendedSKUs = RECOMMENDED_HOME_PRODUCTS;
-
-  const innovationConcepts = [
-    {
-      oppId: "#OPP-01",
-      title: "Garden Vegetable & Burrata Pizza",
-      currentDish: "Margherita Pizza at Shamiana",
-      fortuneProduct: "Puglia Fresh Burrata 200g",
-      desc: "Pair your existing Margherita Pizza base with imported Puglia Burrata to launch a high-margin premium vegetarian wood-fired signature.",
-      keyIngredient: "Puglia Fresh Burrata 200g",
-      targetOutlet: "Shamiana All-Day",
-      metricLabel: "Projected Margin",
-      metricValue: "+24%",
-      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80",
-    },
-    {
-      oppId: "#OPP-02",
-      title: "Truffle & Forest Mushroom Risotto",
-      currentDish: "Wild Mushroom Risotto",
-      fortuneProduct: "TartufLanghe Truffle Butter",
-      desc: "Elevate your existing Mushroom Risotto by finishing with Alba White Truffle Butter to boost per-cover check size by +18%.",
-      keyIngredient: "TartufLanghe White Truffle Butter",
-      targetOutlet: "Shamiana Fine Dining",
-      metricLabel: "Projected Check Lift",
-      metricValue: "+18% Avg",
-      image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80",
-    },
-    {
-      oppId: "#OPP-03",
-      title: "Cured Salmon Carpaccio",
-      currentDish: "Atlantic Salmon Starter",
-      fortuneProduct: "Norwegian Salmon (Trim D)",
-      desc: "Combine Norwegian Salmon Fillet with your cold appetiser station to cut trim waste by -31% across Wasabi & Shamiana.",
-      keyIngredient: "Norwegian Salmon Fillet Trim D",
-      targetOutlet: "Dual Station Sync",
-      metricLabel: "Waste Reduction",
-      metricValue: "-31% Kitchen Trim",
-      image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=400&q=80",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#111111] pb-24 font-sans relative overflow-hidden antialiased">
@@ -269,142 +231,8 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
           </div>
         </div>
 
-        {/* SECTION 2: CULINARY INNOVATION LAB - EXACT MATCH TO REFERENCE SCREENSHOT */}
-        <div className="space-y-6 pt-4 relative">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2">
-            <div>
-              <div className="text-[10px] uppercase font-bold tracking-[0.22em] text-[#5E3B8C] flex items-center gap-1.5">
-                <Utensils className="w-3.5 h-3.5 text-[#5E3B8C]" />
-                <span>CULINARY INNOVATION LAB</span>
-              </div>
-              <h3 className="text-2xl lg:text-3xl font-serif text-[#111111] font-normal mt-0.5 tracking-tight flex items-center gap-2">
-                <span>New Menu</span>
-                <span className="text-[#5E3B8C]">Opportunities</span>
-              </h3>
-              <p className="text-xs text-slate-400 font-medium mt-1">
-                High-margin culinary concepts crafted using your dining room demographics and stock availability.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-end shrink-0">
-              <div className="hidden sm:block text-[11px] font-serif italic text-[#5E3B8C]/80 -mb-0.5 mr-2">
-                \ More ideas. Bigger possibilities.
-              </div>
-              <button
-                onClick={() => onNavigateTab("recommendations")}
-                className="px-5 py-2.5 rounded-full bg-[#F4EFFB] hover:bg-[#EAE0FA] text-[#5E3B8C] font-bold text-xs flex items-center gap-2 transition-all shadow-2xs active:scale-[0.98]"
-              >
-                <span>View All 7 Concepts</span>
-                <ArrowRight className="w-4 h-4 text-[#5E3B8C]" />
-              </button>
-            </div>
-          </div>
-
-          {/* 3 Innovation Cards Grid */}
-          <div className="relative">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {innovationConcepts.map((opp, idx) => (
-                <div
-                  key={opp.oppId}
-                  className="bg-white rounded-[24px] p-6 lg:p-7 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-md transition-all duration-300 flex flex-col justify-between relative overflow-hidden group min-h-[380px]"
-                >
-                  {/* Top-Right Food Arch Image Container */}
-                  <div className="absolute top-0 right-0 w-[44%] h-[210px] rounded-bl-[36px] overflow-hidden z-0 shadow-xs pointer-events-none">
-                    <Image
-                      src={opp.image || (idx === 0 ? "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80" : idx === 1 ? "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80" : "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=400&q=80")}
-                      alt={opp.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-
-                  {/* Top-Right OPP Tag Floating Over Image */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="text-[10px] font-mono text-[#9E6E17] font-bold bg-[#FDF6E3] px-2.5 py-1 rounded-md border border-[#F5E6BE] shadow-xs">
-                      {opp.oppId}
-                    </span>
-                  </div>
-
-                  <div className="relative z-10 pt-1">
-                    {/* Top Row: AI Recommendation Badge */}
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#5E3B8C] bg-[#F3EDFD] px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs">
-                        <Sparkles className="w-3 h-3 text-[#5E3B8C]" />
-                        <span>AI RECOMMENDATION</span>
-                      </span>
-                    </div>
-
-                    {/* Title & Description */}
-                    <h4 className="text-lg sm:text-[20px] font-serif font-bold text-[#111111] leading-snug mt-3 mb-2 max-w-[55%]">
-                      {opp.title}
-                    </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed font-normal mb-3 max-w-[55%] min-h-[48px]">
-                      {opp.desc}
-                    </p>
-
-                    {/* Culinary Pairing Formula Box: Current Dish + Fortune Product ➔ New Concept */}
-                    <div className="bg-[#F8F5FD] border border-purple-100 rounded-xl p-2.5 mb-4 max-w-[55%] text-[10px] space-y-1 shadow-2xs">
-                      <div className="text-[9px] font-bold uppercase tracking-wider text-[#5E3B8C] flex items-center gap-1">
-                        <Sparkles className="w-3 h-3 text-[#5E3B8C]" />
-                        <span>Dish Upgrade Formula</span>
-                      </div>
-                      <div className="text-[10px] font-medium text-slate-700 leading-tight space-y-0.5">
-                        <div className="flex items-center gap-1">
-                          <span className="text-slate-400 font-semibold">Current Dish:</span>
-                          <strong className="text-slate-900 font-bold truncate">{opp.currentDish}</strong>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-[#5E3B8C] font-semibold">+ Fortune Product:</span>
-                          <strong className="text-[#5E3B8C] font-extrabold truncate">{opp.fortuneProduct}</strong>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* 3-Column Metadata Row */}
-                    <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-100/90 text-xs">
-                      <div>
-                        <span className="text-[9px] uppercase font-semibold text-slate-400 block tracking-wider">Key Ingredient</span>
-                        <div className="text-[11px] font-bold text-[#111111] mt-1 leading-tight flex items-center gap-1">
-                          {idx === 0 && <span className="text-emerald-500">🍃</span>}
-                          {idx === 1 && <span>🍄</span>}
-                          {idx === 2 && <span>🐟</span>}
-                          <span className="truncate">{opp.keyIngredient}</span>
-                        </div>
-                      </div>
-
-                      <div>
-                        <span className="text-[9px] uppercase font-semibold text-slate-400 block tracking-wider">Target Outlet</span>
-                        <div className="text-[11px] font-bold text-[#5E3B8C] mt-1 leading-tight flex items-center gap-1">
-                          <Utensils className="w-3 h-3 text-[#5E3B8C] shrink-0" />
-                          <span className="truncate">{opp.targetOutlet}</span>
-                        </div>
-                      </div>
-
-                      <div>
-                        <span className="text-[9px] uppercase font-semibold text-slate-400 block tracking-wider">{opp.metricLabel}</span>
-                        <div className="text-[11px] font-bold text-emerald-600 mt-1 leading-tight flex items-center gap-1">
-                          {idx === 0 && <BarChart3 className="w-3 h-3 text-emerald-500 shrink-0" />}
-                          {idx === 1 && <TrendingUp className="w-3 h-3 text-emerald-500 shrink-0" />}
-                          {idx === 2 && <span className="text-emerald-500">♻️</span>}
-                          <span className="truncate">{opp.metricValue}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Explore Concept Recipe Button */}
-                  <button
-                    onClick={() => onNavigateTab("recommendations")}
-                    className="w-full py-3 px-5 rounded-2xl bg-[#F6F1FD] hover:bg-[#EDE3FA] text-[#5E3B8C] font-bold text-xs flex items-center justify-between transition-all duration-300 shadow-2xs mt-4 group/btn active:scale-[0.99]"
-                  >
-                    <span>Explore Concept Recipe</span>
-                    <ChevronRight className="w-4 h-4 text-[#5E3B8C] group-hover/btn:translate-x-0.5 transition-transform" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* SECTION 2: AI PAIRING SUGGESTIONS - MATCHING LATEST REFERENCE SCREENSHOT */}
+        <AIPairingSuggestionsSection onNavigateTab={onNavigateTab} />
 
         {/* SECTION 3: EXECUTIVE TELEMETRY & COMPLIANCE BANNER */}
         <div className="bg-white/90 backdrop-blur-md border border-[#241347]/8 rounded-[28px] p-6 lg:p-7 flex flex-col md:flex-row items-center justify-between gap-4 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.03)] hover:shadow-md transition-all">
