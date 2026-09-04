@@ -234,14 +234,16 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                         unoptimized
                         className="object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
                       />
+                      {/* Gradient overlay for contrast */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 pointer-events-none" />
 
                       {/* Top Left Brand Badge */}
-                      <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-xs border border-slate-200/60">
+                      <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-sm border border-white/60">
                         {item.brand}
                       </div>
 
                       {/* Top Right Intended Dish Pill with Chef Hat Icon */}
-                      <div className={`absolute top-3.5 right-3.5 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-extrabold border flex items-center gap-1.5 shadow-xs ${
+                      <div className={`absolute top-3.5 right-3.5 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-extrabold border flex items-center gap-1.5 shadow-sm ${
                         item.forDishTheme === "purple"
                           ? "bg-[#F4EFFB]/95 text-[#5E3B8C] border-[#E2D4F7]"
                           : item.forDishTheme === "emerald"
@@ -281,6 +283,32 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                         </div>
                       )}
 
+                      {/* Executive Action Row */}
+                      <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
+                        <button
+                          onClick={() => onNavigateTab("product-detail")}
+                          className="flex-1 py-3 px-4 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+                        >
+                          <span>View Product</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
+                        </button>
+
+                        <button
+                          onClick={() => openNoteModal(item.id)}
+                          className="w-10 h-10 rounded-xl bg-purple-50 text-[#5E3B8C] border border-purple-100 hover:bg-purple-100 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                          title="Chef's Note"
+                        >
+                          <MessageSquare className="w-4 h-4" />
+                        </button>
+
+                        <button
+                          onClick={() => alert("Added to bookmarks")}
+                          className="w-10 h-10 rounded-xl bg-slate-50 text-slate-500 border border-slate-200 hover:bg-slate-100 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                          title="Bookmark"
+                        >
+                          <Bookmark className="w-4 h-4" />
+                        </button>
+                      </div>
 
                     </div>
 
