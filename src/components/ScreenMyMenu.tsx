@@ -5,362 +5,347 @@ import Image from "next/image";
 import { 
   Search, 
   Upload, 
+  Plus, 
   Sparkles, 
-  CheckCircle2, 
-  ChevronRight, 
-  ArrowUpRight,
-  TrendingUp,
-  ShieldCheck,
-  Star,
-  Layers,
-  Recycle,
-  Award,
-  Zap
+  Edit3, 
+  Trash2, 
+  Maximize2,
+  ChevronDown,
+  UtensilsCrossed,
+  Filter
 } from "lucide-react";
 
 interface ScreenMyMenuProps {
-  onNavigateTab: (tab: "products" | "product-detail" | "recommendations") => void;
+  onNavigateTab: (tab: "products" | "product-detail" | "recommendations" | "mymenu") => void;
 }
 
 export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
-  const [selectedOutlet, setSelectedOutlet] = useState("All Outlets");
-  const [selectedCategory, setSelectedCategory] = useState("All Dishes (42)");
-
-  const outlets = ["All Outlets", "Wasabi", "Shamiana", "Sea Lounge"];
-  const categories = [
-    { label: "All Dishes (42)", count: "42", isGold: true },
-    { label: "Pizza & Wood-Fired (8)", count: "8" },
-    { label: "Pasta & Primi (10)", count: "10" },
-    { label: "Starters & Small Plates (12)", count: "12" },
-    { label: "Main Courses (8)", count: "8" },
-    { label: "Desserts & Bakery (4)", count: "4" },
-  ];
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [selectedCuisine, setSelectedCuisine] = useState("All Cuisines");
 
   const menuDishes = [
     {
       id: "dish-1",
-      outlet: "SHAMIANA",
-      matchBadge: "2 Matches",
-      category: "PIZZA & WOOD-FIRED",
-      title: "Truffle Mushroom Pizza",
-      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
-      stockStatus: "100% IN STOCK",
-      stockColor: "text-emerald-700",
-      ingredients: [
-        "TartufLanghe Truffle Butter (250g)",
-        "Zanetti Mozzarella Block (1kg)",
-      ],
-      calloutBg: "bg-[#FDF9F0] border-[#F5E6BE]",
-      calloutTitleColor: "text-[#B88726]",
-      calloutIcon: Sparkles,
-      calloutTitle: "AI MARGIN OPPORTUNITY",
-      calloutDesc: "Consider adding fresh Burrata for a premium variant (+18% price realization).",
+      title: "Butter Chicken",
+      category: "Indian Main Course",
+      cuisine: "North Indian",
+      description: "Tender chicken pieces cooked in a rich, creamy tomato-based gravy with aromatic spices and butter.",
+      ingredients: "Chicken, Tomatoes, Butter, Cream +more",
+      matchPercent: 92,
+      matchLabel: "Excellent Match",
+      matchColor: "emerald", // emerald match bar
+      badge: "AI Analysed",
+      image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
     },
     {
       id: "dish-2",
-      outlet: "SHAMIANA",
-      matchBadge: "3 Matches",
-      category: "PIZZA & WOOD-FIRED",
-      title: "Margherita Pizza D.O.C.",
-      image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
-      stockStatus: "VERIFIED DOP",
-      stockColor: "text-[#5E3B8C]",
-      ingredients: [
-        "San Marzano DOP Peeled Tomatoes",
-        "Bufala Mozzarella Campana DOP",
-        "De Cecco Extra Virgin Olive Oil",
-      ],
-      calloutBg: "bg-[#F7F3FC] border-[#E9DDF8]",
-      calloutTitleColor: "text-[#5E3B8C]",
-      calloutIcon: ShieldCheck,
-      calloutTitle: "AUTHENTICITY BADGE",
-      calloutDesc: "DOP certification sticker available for digital guest tablet & physical menu.",
+      title: "Paneer Tikka",
+      category: "Starters",
+      cuisine: "North Indian",
+      description: "Cottage cheese cubes marinated in spiced yogurt and grilled to perfection in a tandoor.",
+      ingredients: "Paneer, Yogurt, Red Chili, Turmeric +more",
+      matchPercent: 78,
+      matchLabel: "Strong Match",
+      matchColor: "emerald",
+      badge: "AI Analysed",
+      image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=600&q=80",
     },
     {
       id: "dish-3",
-      outlet: "SHAMIANA",
-      matchBadge: "2 Matches",
-      category: "MAIN COURSES",
-      title: "Pan-Seared Norwegian Salmon",
-      image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80",
-      stockStatus: "COLD-CHAIN MONITORED",
-      stockColor: "text-emerald-700",
-      ingredients: [
-        "Fortune Select Salmon Fillet Trim D",
-        "Isigny Ste Mère Unsalted AOP Butter",
-      ],
-      calloutBg: "bg-[#F2FBF7] border-[#D1F3E5]",
-      calloutTitleColor: "text-emerald-700",
-      calloutIcon: TrendingUp,
-      calloutTitle: "YIELD OPTIMIZATION",
-      calloutDesc: "Direct cold air-freight reduces trim loss by 14% vs sea freight frozen.",
+      title: "Veg Biryani",
+      category: "Indian Main Course",
+      cuisine: "North Indian",
+      description: "Fragrant basmati rice layered with spiced vegetables, saffron, and fresh herbs.",
+      ingredients: "Basmati Rice, Mixed Vegetables, Saffron, Yogurt +more",
+      matchPercent: 71,
+      matchLabel: "Potential Match",
+      matchColor: "amber",
+      badge: "AI Analysed",
+      image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
     },
     {
       id: "dish-4",
-      outlet: "WASABI BY MORIMOTO",
-      matchBadge: "2 Matches",
-      category: "STARTERS & SMALL PLATES",
-      title: "Hamachi & Yellowtail Carpaccio",
-      image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80",
-      stockStatus: "AIR FREIGHT SPEC",
-      stockColor: "text-emerald-700",
-      ingredients: [
-        "TartufLanghe Truffle Pearls (50g)",
-        "Shoyu Select Premium Barrel Aged",
-      ],
-      calloutBg: "bg-[#F7F3FC] border-[#E9DDF8]",
-      calloutTitleColor: "text-[#5E3B8C]",
-      calloutIcon: Zap,
-      calloutTitle: "FLAVOR SYNERGY",
-      calloutDesc: "High synergy with Fortune artisanal yuzu dressing — tested 4.9/5 sensory score.",
+      title: "Alfredo Pasta",
+      category: "Continental",
+      cuisine: "Italian",
+      description: "Creamy fettuccine pasta tossed in a rich parmesan and butter sauce with garlic.",
+      ingredients: "Fettuccine Pasta, Heavy Cream, Parmesan, Butter +more",
+      matchPercent: 95,
+      matchLabel: "Excellent Match",
+      matchColor: "emerald",
+      badge: "AI Analysed",
+      image: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=600&q=80",
     },
     {
       id: "dish-5",
-      outlet: "SHAMIANA",
-      matchBadge: "3 Matches",
-      category: "PASTA & PRIMI",
-      title: "Four Cheese Ravioli",
-      image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80",
-      stockStatus: "3 FORMAGGI DIRECT",
-      stockColor: "text-emerald-700",
-      ingredients: [
-        "Zanetti Parmigiano Reggiano 24M",
-        "Gorgonzola DOP Dolce Cremoso",
-        "Fresh Italian Buffalo Ricotta",
-      ],
-      calloutBg: "bg-[#F7F3FC] border-[#E9DDF8]",
-      calloutTitleColor: "text-[#5E3B8C]",
-      calloutIcon: Layers,
-      calloutTitle: "SUPPLY CONTINUITY",
-      calloutDesc: "Parmigiano 24M wheel allocation locked for 180 days at contracted T3 rates.",
+      title: "Grilled Chicken",
+      category: "Continental",
+      cuisine: "Continental",
+      description: "Herb-marinated chicken breast grilled to perfection, served with seasonal vegetables.",
+      ingredients: "Chicken Breast, Olive Oil, Rosemary, Thyme +more",
+      matchPercent: 82,
+      matchLabel: "Strong Match",
+      matchColor: "emerald",
+      badge: "AI Analysed",
+      image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80",
     },
     {
       id: "dish-6",
-      outlet: "SHAMIANA BREAKFAST",
-      matchBadge: "1 Match",
-      category: "DESSERTS & BAKERY",
-      title: "Artisanal Butter Croissant",
-      image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80",
-      stockStatus: "DRY TOURAGE GRADE",
-      stockColor: "text-emerald-700",
-      ingredients: [
-        "Paysan Breton 82% Sheet Butter (2kg)",
-      ],
-      calloutBg: "bg-[#F7F3FC] border-[#E9DDF8]",
-      calloutTitleColor: "text-[#5E3B8C]",
-      calloutIcon: Award,
-      calloutTitle: "LAMINATION EFFICIENCY",
-      calloutDesc: "82% fat tourage sheets yield 28 distinct crispy layers without dough tearing.",
+      title: "Caesar Salad",
+      category: "Starters",
+      cuisine: "Continental",
+      description: "Crisp romaine lettuce with parmesan shavings, croutons, and classic Caesar dressing.",
+      ingredients: "Romaine Lettuce, Parmesan, Croutons, Anchovy +more",
+      matchPercent: 65,
+      matchLabel: "Potential Match",
+      matchColor: "amber",
+      badge: "AI Analysed",
+      image: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      id: "dish-7",
+      title: "Chocolate Mousse",
+      category: "Desserts",
+      cuisine: "Continental",
+      description: "Rich dark chocolate mousse topped with whipped cream and berry compote.",
+      ingredients: "Dark Chocolate, Heavy Cream, Sugar, Eggs +more",
+      matchPercent: 88,
+      matchLabel: "Excellent Match",
+      matchColor: "emerald",
+      badge: "AI Analysed",
+      image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      id: "dish-8",
+      title: "Masala Dosa",
+      category: "Breakfast",
+      cuisine: "South Indian",
+      description: "Crispy fermented crepe filled with spiced potato masala served with coconut chutney and sambar.",
+      ingredients: "Rice Batter, Potatoes, Mustard Seeds, Curry Leaves +more",
+      matchPercent: 80,
+      matchLabel: "Strong Match",
+      matchColor: "emerald",
+      badge: "AI Analysed",
+      image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
     },
   ];
 
+  const categories = ["All Categories", "Indian Main Course", "Starters", "Continental", "Desserts", "Breakfast"];
+  const cuisines = ["All Cuisines", "North Indian", "Italian", "Continental", "South Indian"];
+
+  const filteredDishes = menuDishes.filter((dish) => {
+    const matchesSearch = dish.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          dish.ingredients.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCat = selectedCategory === "All Categories" || dish.category === selectedCategory;
+    const matchesCuisine = selectedCuisine === "All Cuisines" || dish.cuisine === selectedCuisine;
+    return matchesSearch && matchesCat && matchesCuisine;
+  });
+
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-[#111111] pb-24 font-sans antialiased">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+    <div className="min-h-screen bg-[#FAF8FD] text-[#111111] pb-16 font-sans antialiased">
+      
+      {/* Container with theme spacing */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 space-y-6 sm:space-y-8">
         
-        {/* HEADER SECTION */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-200/60 pb-6">
-          <div className="space-y-1.5">
-            <div className="text-[10px] uppercase font-bold tracking-[0.22em] text-[#5E3B8C] flex items-center gap-1.5">
-              <span>FORTUNE INTELLIGENCE CORE</span>
-              <span>•</span>
-              <span>SYNCED: TODAY 08:45 AM</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-serif text-[#111111] font-normal leading-none tracking-tight">
+        {/* HEADER ROW */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200/80 pb-5">
+          <div className="space-y-1 text-left">
+            <h1 className="text-3xl sm:text-4xl font-serif text-[#111111] font-bold tracking-tight">
               My Menu
             </h1>
             <p className="text-xs text-slate-500 font-medium">
-              Your menu, analyzed by Fortune AI. Active menu: <strong className="text-[#111111] font-semibold">Autumn/Winter 2025</strong> — Wasabi by Morimoto &amp; Shamiana.
+              Manage your menu items for AI-powered product recommendations.
             </p>
           </div>
 
-          {/* Right Header Stats & Upload Button */}
-          <div className="flex flex-wrap items-center gap-3 self-start md:self-auto">
-            {/* Stat Card 1 */}
-            <div className="bg-white border border-slate-200/80 px-5 py-2.5 rounded-2xl shadow-2xs text-left">
-              <div className="text-[9px] uppercase font-bold tracking-wider text-slate-400">SKU MATCH RATE</div>
-              <div className="text-xl font-serif font-bold text-[#111111] leading-tight flex items-center gap-2 mt-0.5">
-                <span>88.4%</span>
-                <span className="text-[10px] font-sans font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md flex items-center gap-0.5">
-                  ▲ 4.2%
-                </span>
-              </div>
-            </div>
-
-            {/* Stat Card 2 */}
-            <div className="bg-white border border-slate-200/80 px-5 py-2.5 rounded-2xl shadow-2xs text-left">
-              <div className="text-[9px] uppercase font-bold tracking-wider text-slate-400">ACTIVE DISHES</div>
-              <div className="text-xl font-serif font-bold text-[#111111] leading-tight mt-0.5">
-                42 <span className="text-xs font-sans font-normal text-slate-400">in 3 venues</span>
-              </div>
-            </div>
-
-            {/* Upload Button */}
+          {/* Action Buttons Top Right */}
+          <div className="flex items-center gap-3 shrink-0">
             <button
-              onClick={() => alert("Re-upload menu dialog opened.")}
-              className="px-5 py-3 rounded-xl bg-[#1B0B2E] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center gap-2 shadow-md transition-all active:scale-[0.98]"
+              onClick={() => alert("Bulk Upload modal opened.")}
+              className="px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition-all cursor-pointer active:scale-95"
             >
-              <Upload className="w-4 h-4 text-white" />
-              <span>Upload Updated Menu (PDF)</span>
+              <Upload className="w-4 h-4 text-slate-600" />
+              <span>Bulk Upload</span>
+            </button>
+
+            <button
+              onClick={() => alert("Add Menu Item form opened.")}
+              className="px-5 py-2.5 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-[#F5C453] hover:text-white text-xs font-bold flex items-center gap-2 shadow-md transition-all cursor-pointer active:scale-95 border border-[#F5C453]/30"
+            >
+              <Plus className="w-4 h-4" />
+              <span>+ Add Menu Item</span>
             </button>
           </div>
         </div>
 
-        {/* SEARCH & OUTLET FILTERS ROW */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        {/* FILTER & SEARCH BAR CONTAINER */}
+        <div className="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col md:flex-row items-center justify-between gap-3">
           
-          {/* Left Search Input */}
-          <div className="relative w-full sm:w-80">
+          {/* Search Input */}
+          <div className="relative w-full md:w-96">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
             <input
               type="text"
-              placeholder="Search dishes, ingredients, DOP codes..."
-              className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200/90 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/20 shadow-2xs"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search menu items..."
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200/90 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30 transition-all"
             />
           </div>
 
-          {/* Right Outlet Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto custom-scrollbar">
-            {outlets.map((outlet) => (
-              <button
-                key={outlet}
-                onClick={() => setSelectedOutlet(outlet)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
-                  selectedOutlet === outlet
-                    ? "bg-[#1B0B2E] text-white font-bold shadow-xs"
-                    : "bg-white border border-slate-200/90 text-slate-600 hover:bg-slate-50"
-                }`}
+          {/* Dropdown Filters */}
+          <div className="flex items-center gap-3 w-full md:w-auto shrink-0 justify-end">
+            
+            {/* Category Filter */}
+            <div className="relative w-1/2 md:w-44">
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200/90 rounded-xl text-xs font-semibold px-3.5 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30 appearance-none cursor-pointer pr-8"
               >
-                {outlet}
-              </button>
-            ))}
-          </div>
-        </div>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-3 top-2.5 pointer-events-none" />
+            </div>
 
-        {/* CATEGORY TABS & SORT DROPDOWN ROW */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          
-          {/* Left Category Tabs Container */}
-          <div className="bg-slate-100/70 p-1 rounded-2xl flex items-center gap-1 overflow-x-auto custom-scrollbar">
-            {categories.map((cat) => {
-              const isSelected = selectedCategory === cat.label;
-              return (
-                <button
-                  key={cat.label}
-                  onClick={() => setSelectedCategory(cat.label)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                    isSelected
-                      ? "bg-white text-[#9E6E17] font-bold shadow-2xs"
-                      : "text-slate-600 hover:text-slate-900 font-medium"
-                  }`}
-                >
-                  {isSelected && <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#9E6E17] mr-1.5" />}
-                  {cat.label}
-                </button>
-              );
-            })}
-          </div>
+            {/* Cuisine Filter */}
+            <div className="relative w-1/2 md:w-44">
+              <select
+                value={selectedCuisine}
+                onChange={(e) => setSelectedCuisine(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200/90 rounded-xl text-xs font-semibold px-3.5 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/30 appearance-none cursor-pointer pr-8"
+              >
+                {cuisines.map((cui) => (
+                  <option key={cui} value={cui}>{cui}</option>
+                ))}
+              </select>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-3 top-2.5 pointer-events-none" />
+            </div>
 
-          {/* Right Sort Dropdown */}
-          <div className="flex items-center gap-2 shrink-0 self-end lg:self-auto">
-            <span className="text-xs text-slate-500 font-medium">Sort by:</span>
-            <select className="bg-white border border-slate-200/90 rounded-xl text-xs font-semibold px-4 py-2 text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/20 shadow-2xs cursor-pointer">
-              <option>Most Relevant</option>
-              <option>Alphabetical</option>
-              <option>Match Percentage</option>
-            </select>
           </div>
 
         </div>
 
-        {/* 6 DISH CARDS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-          {menuDishes.map((dish) => {
-            const CalloutIcon = dish.calloutIcon;
+        {/* 8 DISH CARDS GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredDishes.map((dish) => {
+            const isExcellent = dish.matchColor === "emerald";
+
             return (
               <div
                 key={dish.id}
-                className="bg-white rounded-[24px] border border-slate-200/80 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white rounded-[24px] border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group text-left"
               >
                 <div>
-                  {/* Top Image Banner */}
-                  <div className="relative h-44 sm:h-48 w-full overflow-hidden">
+                  {/* Top Image Container */}
+                  <div className="relative h-48 w-full overflow-hidden">
                     <Image
                       src={dish.image}
                       alt={dish.title}
                       fill
+                      unoptimized
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                    
-                    {/* Top Row Badges over Image */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                    {/* Top Row Badges: Category Left, AI Analysed Right */}
                     <div className="absolute top-3 left-3 flex items-center gap-2">
-                      <span className="bg-black/60 backdrop-blur-md text-white font-mono text-[9px] px-2.5 py-1 rounded-md uppercase font-bold border border-white/20">
-                        {dish.outlet}
-                      </span>
-                      <span className="bg-[#5E3B8C] text-white text-[9px] font-bold px-2.5 py-1 rounded-md shadow-xs">
-                        {dish.matchBadge}
+                      <span className="bg-[#1C0B33]/80 backdrop-blur-md text-[#F5C453] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-[#F5C453]/30 shadow-xs">
+                        {dish.category}
                       </span>
                     </div>
 
-                    {/* Bookmark Star Icon Top Right */}
-                    <button className="absolute top-3 right-3 text-white/80 hover:text-white transition-colors">
-                      <Star className="w-4 h-4" />
-                    </button>
+                    <div className="absolute top-3 right-3">
+                      <span className="bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md border border-white/20 flex items-center gap-1">
+                        <Sparkles className="w-3 h-3 text-[#F5C453]" />
+                        <span>{dish.badge}</span>
+                      </span>
+                    </div>
 
-                    {/* Bottom Details over Image */}
-                    <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
-                      <div className="text-[9px] uppercase font-bold tracking-wider text-[#F5C453]">
-                        {dish.category}
-                      </div>
-                      <h4 className="text-lg sm:text-xl font-serif font-bold text-white leading-tight mt-0.5">
+                    {/* Bottom Title & Cuisine Over Image */}
+                    <div className="absolute bottom-3 left-4 right-4 text-white">
+                      <h3 className="text-xl font-serif font-bold leading-tight text-white">
                         {dish.title}
-                      </h4>
+                      </h3>
+                      <div className="text-[10px] text-slate-300 font-medium uppercase tracking-wider mt-0.5">
+                        {dish.cuisine}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Card Content Body */}
+                  {/* Body Content */}
                   <div className="p-5 space-y-4">
                     
-                    {/* Ingredients Section */}
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-wider text-slate-400">
-                        <span>DIRECT SUPPLY INGREDIENTS</span>
-                        <span className={`font-bold ${dish.stockColor}`}>{dish.stockStatus}</span>
-                      </div>
+                    {/* Description */}
+                    <p className="text-xs text-slate-600 font-normal leading-relaxed min-h-[36px]">
+                      {dish.description}
+                    </p>
 
-                      <div className="space-y-2 pt-1">
-                        {dish.ingredients.map((ing, idx) => (
-                          <div key={idx} className="flex items-center gap-2 text-xs text-slate-800 font-medium">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#5E3B8C] shrink-0" />
-                            <span>{ing}</span>
-                          </div>
-                        ))}
-                      </div>
+                    {/* Ingredients */}
+                    <div className="text-xs text-slate-500 leading-tight">
+                      <strong className="text-slate-800 font-semibold">Ingredients:</strong>{" "}
+                      <span>{dish.ingredients}</span>
                     </div>
 
-                    {/* AI Callout Insight Box */}
-                    <div className={`p-3.5 rounded-2xl text-xs space-y-1 border ${dish.calloutBg}`}>
-                      <div className={`font-bold flex items-center gap-1.5 text-[10px] tracking-wider uppercase ${dish.calloutTitleColor}`}>
-                        <CalloutIcon className="w-3.5 h-3.5" />
-                        <span>{dish.calloutTitle}</span>
+                    {/* Match Score & Progress Bar */}
+                    <div className="space-y-1.5 pt-1">
+                      <div className="flex items-center justify-between text-xs font-bold">
+                        <span className="text-[#1C0B33]">{dish.matchPercent}%</span>
+                        <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${
+                          isExcellent
+                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                            : "bg-amber-50 text-amber-800 border border-amber-200"
+                        }`}>
+                          {dish.matchLabel}
+                        </span>
                       </div>
-                      <p className="text-[11px] text-slate-600 leading-relaxed font-normal">
-                        {dish.calloutDesc}
-                      </p>
+
+                      {/* Progress Bar */}
+                      <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${
+                            isExcellent
+                              ? "bg-gradient-to-r from-emerald-500 to-teal-600"
+                              : "bg-gradient-to-r from-amber-400 to-amber-600"
+                          }`}
+                          style={{ width: `${dish.matchPercent}%` }}
+                        />
+                      </div>
                     </div>
 
                   </div>
                 </div>
 
-                {/* Card Footer Link */}
-                <button
-                  onClick={() => onNavigateTab("recommendations")}
-                  className="p-4 pt-3 flex items-center justify-between border-t border-slate-100/80 text-xs font-bold text-[#5E3B8C] hover:text-[#2E1658] transition-colors"
-                >
-                  <span>View AI Insights</span>
-                  <ChevronRight className="w-4 h-4 text-[#5E3B8C]" />
-                </button>
+                {/* Card Footer Action Controls */}
+                <div className="p-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2 bg-slate-50/50">
+                  <button
+                    onClick={() => onNavigateTab("recommendations")}
+                    className="flex-1 py-2.5 px-3 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs active:scale-[0.98]"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5 text-[#F5C453]" />
+                    <span>View Recommendations</span>
+                  </button>
+
+                  <button
+                    onClick={() => alert(`Edit ${dish.title}`)}
+                    className="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                    title="Edit dish"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                  </button>
+
+                  <button
+                    onClick={() => alert(`Delete ${dish.title}`)}
+                    className="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
+                    title="Delete dish"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
               </div>
             );
           })}
@@ -370,4 +355,3 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
     </div>
   );
 }
-
