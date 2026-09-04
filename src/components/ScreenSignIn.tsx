@@ -9,7 +9,10 @@ import {
   EyeOff, 
   ArrowRight, 
   Building2, 
-  ShieldCheck
+  ShieldCheck,
+  Sparkles,
+  CheckCircle2,
+  Zap
 } from "lucide-react";
 
 interface ScreenSignInProps {
@@ -23,6 +26,7 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [showProcessModal, setShowProcessModal] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +35,16 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
       setIsLoading(false);
       onSuccessSignIn();
     }, 700);
+  };
+
+  const handleQuickDemoSignIn = () => {
+    setEmail("chef.vikram@tajhotels.com");
+    setPassword("taj_executive_2025");
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      onSuccessSignIn();
+    }, 600);
   };
 
   return (
@@ -126,16 +140,79 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
           </div>
 
           {/* Title Section */}
-          <div className="mb-8">
-            <div className="text-xs uppercase font-bold tracking-wider text-purple-700 mb-1">
-              Institutional Access
+          <div className="mb-6">
+            <div className="flex items-center justify-between">
+              <div className="text-xs uppercase font-bold tracking-wider text-purple-700 mb-1">
+                Institutional Access
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowProcessModal(!showProcessModal)}
+                className="text-xs font-bold text-[#5E3B8C] hover:text-[#1C0B33] bg-[#F4EFFB] hover:bg-purple-100 px-3 py-1 rounded-full border border-purple-200 transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                <span>Login Process Info</span>
+              </button>
             </div>
+
             <h2 className="text-3xl font-serif font-bold text-slate-900 tracking-tight">
               Welcome back
             </h2>
             <p className="text-slate-600 text-sm mt-1.5 leading-relaxed">
-              Sign in to discover products tailored to your menu.
+              Sign in to access your customized menu recommendations and enterprise pricing.
             </p>
+
+            {/* Quick One-Click Demo Login Banner */}
+            <div className="mt-4 p-3 bg-gradient-to-r from-[#1C0B33] to-[#3B1B5E] text-white rounded-2xl border border-purple-900 shadow-md flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full bg-[#F5C453] text-[#1C0B33] font-bold flex items-center justify-center text-xs shrink-0">
+                  <Zap className="w-4 h-4 fill-current" />
+                </div>
+                <div>
+                  <div className="font-bold text-xs text-white">Quick Demo Login</div>
+                  <div className="text-[10px] text-purple-200">Taj Hotel Mumbai (Chef Vikram)</div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleQuickDemoSignIn}
+                className="px-3.5 py-1.5 bg-[#F5C453] hover:bg-amber-300 text-[#1C0B33] text-xs font-bold rounded-xl transition-all shadow-xs whitespace-nowrap cursor-pointer flex items-center gap-1"
+              >
+                <span>1-Click Login</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* EXPANDABLE LOGIN PROCESS GUIDE CARD */}
+            {showProcessModal && (
+              <div className="mt-4 p-4 bg-[#F4EFFB] border border-purple-200 rounded-2xl space-y-2.5 text-left text-xs animate-fade-in">
+                <div className="font-bold text-[#1C0B33] flex items-center gap-1.5 border-b border-purple-200/80 pb-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>3-Step Institutional Login Process</span>
+                </div>
+                <div className="grid grid-cols-1 gap-2 text-[11px] text-slate-700">
+                  <div className="flex items-start gap-2 bg-white p-2 rounded-xl border border-purple-100">
+                    <span className="w-5 h-5 rounded-full bg-[#1C0B33] text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">1</span>
+                    <div>
+                      <strong className="text-slate-900">Enter Business Email & Password:</strong> Use your registered executive credentials (or click 1-Click Login above).
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2 bg-white p-2 rounded-xl border border-purple-100">
+                    <span className="w-5 h-5 rounded-full bg-[#1C0B33] text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">2</span>
+                    <div>
+                      <strong className="text-slate-900">FSSAI & GSTIN License Check:</strong> Automated security validation verifies active enterprise standing.
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2 bg-white p-2 rounded-xl border border-purple-100">
+                    <span className="w-5 h-5 rounded-full bg-[#1C0B33] text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">3</span>
+                    <div>
+                      <strong className="text-slate-900">Access Portal & Cold-Chain Orders:</strong> Direct access to customized catalog pricing, RFQ terms & AI pairing engine.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Form */}

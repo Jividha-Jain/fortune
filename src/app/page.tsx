@@ -34,6 +34,8 @@ export default function Home() {
     | "insights"
     | "profile"
     | "onboarding"
+    | "signin"
+    | "register"
   >("insights");
 
   // Onboarding sub-step state (1 to 5) when activeTab === "onboarding"
@@ -121,6 +123,20 @@ export default function Home() {
         {activeTab === "profile" && (
           <ScreenProfile
             onNavigateOnboarding={() => setActiveTab("onboarding")}
+          />
+        )}
+
+        {activeTab === "signin" && (
+          <ScreenSignIn
+            onNavigateRegister={() => setActiveTab("register")}
+            onSuccessSignIn={() => setActiveTab("dashboard")}
+          />
+        )}
+
+        {activeTab === "register" && (
+          <ScreenRegister
+            onNavigateSignIn={() => setActiveTab("signin")}
+            onSuccessRegister={() => setActiveTab("onboarding")}
           />
         )}
 

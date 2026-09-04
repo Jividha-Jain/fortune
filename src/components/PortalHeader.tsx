@@ -16,12 +16,13 @@ import {
   Sparkles,
   ShieldCheck,
   CheckCircle2,
-  X
+  X,
+  LogIn
 } from "lucide-react";
 
 interface PortalHeaderProps {
-  activeTab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding";
-  setActiveTab: (tab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding") => void;
+  activeTab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding" | "signin" | "register";
+  setActiveTab: (tab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding" | "signin" | "register") => void;
 }
 
 export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderProps) {
@@ -49,6 +50,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
   ];
 
   const profileMenuItems = [
+    { id: "signin", label: "Sign In / Partner Login", icon: LogIn, badge: "Login Screen", desc: "Institutional credentials sign-in" },
     { id: "mymenu", label: "My Menu", icon: UtensilsCrossed, badge: "6 Dishes", desc: "View active paired dishes" },
     { id: "orders", label: "Orders", icon: Package, badge: "2 Active", desc: "Live dispatch & telemetry" },
     { id: "enquiries", label: "Enquiries", icon: Mail, badge: "RFQ", desc: "Commercial quotation terms" },
@@ -233,13 +235,13 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
 
                 <button
                   onClick={() => {
-                    setActiveTab("onboarding");
+                    setActiveTab("signin");
                     setShowProfileMenu(false);
                   }}
                   className="px-3 py-1.5 rounded-lg text-red-500 hover:text-red-700 hover:bg-red-50 font-bold flex items-center gap-1.5 text-xs cursor-pointer"
                 >
                   <LogOut className="w-3.5 h-3.5" />
-                  <span>Switch Account</span>
+                  <span>Sign Out / Switch</span>
                 </button>
               </div>
 
