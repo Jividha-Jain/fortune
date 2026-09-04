@@ -39,7 +39,7 @@ export default function Home() {
     | "signin"
     | "register"
     | "hotel-details"
-  >("shortlist");
+  >("profile");
 
   // Onboarding sub-step state (1 to 5) when activeTab === "onboarding"
   const [onboardingStep, setOnboardingStep] = useState<number>(1);
