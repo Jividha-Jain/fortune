@@ -177,10 +177,15 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
               </div>
 
               <div className="space-y-2">
-                {/* KYC Badge */}
-                <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#FFFBEB] text-[#B45309] border border-[#FDE68A] text-xs font-bold">
-                  <Hourglass className="w-3.5 h-3.5 text-[#B45309]" />
-                  <span>KYC Under Review</span>
+                {/* KYC Badge & Running Marquee Ticker Line */}
+                <div className="inline-flex items-center gap-2 max-w-md w-full bg-[#FFFBEB] text-[#B45309] border border-[#FDE68A] px-3 py-1.5 rounded-full text-xs font-bold overflow-hidden">
+                  <Hourglass className="w-3.5 h-3.5 text-[#B45309] shrink-0" />
+                  <div className="overflow-hidden flex-1 relative">
+                    <div className="top-kyc-marquee flex items-center gap-8 whitespace-nowrap">
+                      <span>KYC Under Review — Establishment verification pending. Upload FSSAI &amp; GST for Net-30 credit terms.</span>
+                      <span>KYC Under Review — Establishment verification pending. Upload FSSAI &amp; GST for Net-30 credit terms.</span>
+                    </div>
+                  </div>
                 </div>
 
                 <h2 className="text-3xl font-serif font-bold text-[#111111]">

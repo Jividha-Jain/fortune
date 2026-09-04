@@ -81,16 +81,30 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
 
   return (
     <>
-      {/* PERSISTENT TOP KYC INCOMPLETE ALERT BANNER (CONTINUOUS INFINITE MARQUEE TICKER) */}
+      {/* PERSISTENT TOP KYC INCOMPLETE ALERT BANNER (GUARANTEED CONTINUOUS TICKER) */}
       {isKycBannerVisible && !isKycCompleted && (
         <div className="bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-[#1C0B33] px-4 py-2 text-xs font-bold flex items-center justify-between shadow-md border-b border-amber-600/30 sticky top-0 z-50 overflow-hidden">
-          
+          <style>{`
+            @keyframes topKycMarquee {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-50%); }
+            }
+            .top-kyc-marquee {
+              display: flex !important;
+              width: max-content !important;
+              animation: topKycMarquee 18s linear infinite !important;
+            }
+            .top-kyc-marquee:hover {
+              animation-play-state: paused !important;
+            }
+          `}</style>
+
           {/* Continuous Running Marquee Ticker Track */}
           <div className="overflow-hidden flex-1 mr-4 relative">
-            <div className="animate-marquee-continuous flex items-center gap-12 whitespace-nowrap">
+            <div className="top-kyc-marquee flex items-center gap-12 whitespace-nowrap">
               {/* Loop Item 1 */}
               <div className="flex items-center gap-2.5">
-                <span className="font-extrabold uppercase tracking-wider text-[10px] bg-[#1C0B33] text-[#F5C453] px-2 py-0.5 rounded flex items-center gap-1">
+                <span className="font-extrabold uppercase tracking-wider text-[10px] bg-[#1C0B33] text-[#F5C453] px-2 py-0.5 rounded flex items-center gap-1 shrink-0">
                   <span>⚠️</span>
                   <span>KYC INCOMPLETE</span>
                 </span>
@@ -101,7 +115,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
 
               {/* Loop Item 2 (Seamless Repeat) */}
               <div className="flex items-center gap-2.5">
-                <span className="font-extrabold uppercase tracking-wider text-[10px] bg-[#1C0B33] text-[#F5C453] px-2 py-0.5 rounded flex items-center gap-1">
+                <span className="font-extrabold uppercase tracking-wider text-[10px] bg-[#1C0B33] text-[#F5C453] px-2 py-0.5 rounded flex items-center gap-1 shrink-0">
                   <span>⚠️</span>
                   <span>KYC INCOMPLETE</span>
                 </span>
