@@ -53,7 +53,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8FD] relative">
       {/* Top Portal Header (Shown when authenticated) */}
-      {activeTab !== "signin" && activeTab !== "register" && (
+      {activeTab !== "signin" && activeTab !== "register" && activeTab !== "onboarding" && (
         <PortalHeader activeTab={activeTab as any} setActiveTab={(tab) => setActiveTab(tab as any)} />
       )}
 
@@ -138,7 +138,7 @@ export default function Home() {
         {activeTab === "register" && (
           <ScreenRegister
             onNavigateSignIn={() => setActiveTab("signin")}
-            onSuccessRegister={() => setActiveTab("onboarding")}
+            onSuccessRegister={() => setActiveTab("dashboard")}
           />
         )}
 
@@ -166,80 +166,10 @@ export default function Home() {
 
             {onboardingStep === 5 && (
               <ScreenSignIn
-                onNavigateRegister={() => setOnboardingStep(1)}
+                onNavigateRegister={() => setActiveTab("register")}
                 onSuccessSignIn={() => setActiveTab("dashboard")}
               />
             )}
-
-            {/* FLOATING ONBOARDING STEP CONTROLLER */}
-            <div className="fixed bottom-4 right-4 z-40">
-              {showStepJump ? (
-                <div className="bg-[#1A1035] text-white border border-purple-800/80 rounded-2xl p-3 shadow-2xl space-y-2 text-xs w-64 backdrop-blur-xl animate-fade-in">
-                  <div className="flex items-center justify-between text-purple-300 border-b border-purple-900 pb-2">
-                    <span className="font-bold font-serif flex items-center gap-1.5">
-                      <Layers className="w-3.5 h-3.5 text-amber-400" /> Onboarding Steps (5 Total)
-                    </span>
-                    <button
-                      onClick={() => setShowStepJump(false)}
-                      className="text-purple-400 hover:text-white font-bold"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                  <div className="space-y-1">
-                    {onboardingTitles.map((title, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          setOnboardingStep(idx + 1);
-                          setShowStepJump(false);
-                        }}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                          onboardingStep === idx + 1
-                            ? "bg-purple-600 text-white font-bold"
-                            : "text-purple-200/80 hover:bg-purple-900/50 hover:text-white"
-                        }`}
-                      >
-                        {title}
-                      </button>
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => setActiveTab("dashboard")}
-                    className="w-full py-1.5 bg-amber-400 text-purple-950 font-bold rounded-lg text-center mt-1"
-                  >
-                    Go to Portal Dashboard ➔
-                  </button>
-                </div>
-              ) : (
-                <div className="bg-[#1A1035]/90 hover:bg-[#1A1035] text-white border border-purple-700/60 rounded-full px-3.5 py-1.5 shadow-xl flex items-center gap-2 text-xs backdrop-blur-md transition-all">
-                  <button
-                    onClick={() => setOnboardingStep((prev) => Math.max(1, prev - 1))}
-                    disabled={onboardingStep === 1}
-                    className="disabled:opacity-30 hover:text-amber-300 transition-colors"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-
-                  <button
-                    onClick={() => setShowStepJump(true)}
-                    className="flex items-center gap-1.5 font-medium hover:text-amber-300 transition-colors"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Onboarding Step {onboardingStep} of 5</span>
-                    <span className="text-[10px] opacity-60">▾</span>
-                  </button>
-
-                  <button
-                    onClick={() => setOnboardingStep((prev) => Math.min(5, prev + 1))}
-                    disabled={onboardingStep === 5}
-                    className="disabled:opacity-30 hover:text-amber-300 transition-colors"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              )}
-            </div>
           </div>
         )}
       </main>
