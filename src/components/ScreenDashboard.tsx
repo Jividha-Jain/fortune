@@ -223,10 +223,10 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                 return (
                   <div
                     key={item.id}
-                    className="bg-white rounded-[28px] border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group text-left relative"
+                    className="bg-white rounded-[32px] border border-purple-100/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_16px_40px_rgba(28,11,51,0.1)] hover:border-purple-300/60 hover:-translate-y-1.5 transition-all duration-500 overflow-hidden flex flex-col justify-between group text-left relative"
                   >
-                    {/* Top Edge-to-Edge Image Banner with Overlaid Badges */}
-                    <div className="relative h-60 w-full overflow-hidden bg-slate-100 group/img">
+                    {/* Top Image Banner with Soft Overlaid Badges */}
+                    <div className="relative h-64 w-full overflow-hidden bg-slate-100 group/img rounded-t-[32px]">
                       <Image
                         src={item.image}
                         alt={item.title}
@@ -234,16 +234,15 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                         unoptimized
                         className="object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
                       />
-                      {/* Gradient overlay for contrast */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-70 pointer-events-none" />
 
-                      {/* Top Left Brand Badge */}
-                      <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-sm border border-white/60">
+                      {/* Top Left Brand Pill */}
+                      <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full text-[10.5px] font-extrabold text-slate-900 uppercase tracking-widest shadow-md border border-white/80">
                         {item.brand}
                       </div>
 
-                      {/* Top Right Intended Dish Pill with Chef Hat Icon */}
-                      <div className={`absolute top-3.5 right-3.5 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-extrabold border flex items-center gap-1.5 shadow-sm ${
+                      {/* Top Right Intended Dish Pill */}
+                      <div className={`absolute top-4 right-4 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-bold border flex items-center gap-1.5 shadow-md ${
                         item.forDishTheme === "purple"
                           ? "bg-[#F4EFFB]/95 text-[#5E3B8C] border-[#E2D4F7]"
                           : item.forDishTheme === "emerald"
@@ -262,32 +261,34 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                     </div>
 
                     {/* Card Content Section */}
-                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
                       
                       {/* Title & Description */}
                       <div className="space-y-2">
-                        <h3 className="font-serif text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#1C0B33] transition-colors">
-                          {item.title}
-                        </h3>
+                        <div className="flex items-center justify-between gap-2">
+                          <h3 className="font-serif text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#5E3B8C] transition-colors">
+                            {item.title}
+                          </h3>
+                        </div>
 
-                        <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                        <p className="text-xs text-slate-500 font-medium leading-relaxed">
                           {item.description}
                         </p>
                       </div>
 
-                      {/* Light Amber / Yellow Note Box (Rendered when note exists) */}
+                      {/* Soft Amber Chef Note Box */}
                       {hasNote && (
-                        <div className="bg-[#FFFBEB] border border-[#FDE68A] p-3.5 rounded-2xl flex items-start gap-2.5 text-xs text-[#92400E] font-medium shadow-2xs">
-                          <Lightbulb className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
+                        <div className="bg-gradient-to-r from-amber-50 to-orange-50/70 border border-amber-200/80 p-3.5 rounded-2xl flex items-start gap-2.5 text-xs text-amber-900 font-medium shadow-2xs">
+                          <Lightbulb className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                           <span className="leading-relaxed">{notesState[item.id]}</span>
                         </div>
                       )}
 
-                      {/* Executive Action Row */}
-                      <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
+                      {/* Sweet Action Row */}
+                      <div className="flex items-center gap-2.5 pt-3 border-t border-slate-100">
                         <button
                           onClick={() => onNavigateTab("product-detail")}
-                          className="flex-1 py-3 px-4 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+                          className="flex-1 py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#1C0B33] to-[#2E1254] hover:from-[#2B1B4E] hover:to-[#3E1A6E] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-[0.98]"
                         >
                           <span>View Product</span>
                           <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
@@ -295,7 +296,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
                         <button
                           onClick={() => openNoteModal(item.id)}
-                          className="w-10 h-10 rounded-xl bg-purple-50 text-[#5E3B8C] border border-purple-100 hover:bg-purple-100 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                          className="w-11 h-11 rounded-2xl bg-purple-50 hover:bg-purple-100 text-[#5E3B8C] border border-purple-200/70 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
                           title="Chef's Note"
                         >
                           <MessageSquare className="w-4 h-4" />
@@ -303,7 +304,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
                         <button
                           onClick={() => alert("Added to bookmarks")}
-                          className="w-10 h-10 rounded-xl bg-slate-50 text-slate-500 border border-slate-200 hover:bg-slate-100 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                          className="w-11 h-11 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200/70 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
                           title="Bookmark"
                         >
                           <Bookmark className="w-4 h-4" />
