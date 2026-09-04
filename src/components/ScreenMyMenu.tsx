@@ -7,12 +7,12 @@ import {
   Upload, 
   Plus, 
   Sparkles, 
-  Edit3, 
   Trash2, 
-  Maximize2,
   ChevronDown,
   UtensilsCrossed,
-  Filter
+  Heart,
+  Pencil,
+  ArrowRight
 } from "lucide-react";
 
 interface ScreenMyMenuProps {
@@ -31,10 +31,10 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
       category: "Indian Main Course",
       cuisine: "North Indian",
       description: "Tender chicken pieces cooked in a rich, creamy tomato-based gravy with aromatic spices and butter.",
-      ingredients: "Chicken, Tomatoes, Butter, Cream +more",
+      ingredientPills: ["Chicken", "Tomatoes", "Butter", "+ more"],
       matchPercent: 92,
       matchLabel: "Excellent Match",
-      matchColor: "emerald", // emerald match bar
+      matchColor: "emerald",
       badge: "AI Analysed",
       image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
     },
@@ -44,7 +44,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
       category: "Starters",
       cuisine: "North Indian",
       description: "Cottage cheese cubes marinated in spiced yogurt and grilled to perfection in a tandoor.",
-      ingredients: "Paneer, Yogurt, Red Chili, Turmeric +more",
+      ingredientPills: ["Paneer", "Yogurt", "Red Chili", "+ more"],
       matchPercent: 78,
       matchLabel: "Strong Match",
       matchColor: "emerald",
@@ -57,7 +57,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
       category: "Indian Main Course",
       cuisine: "North Indian",
       description: "Fragrant basmati rice layered with spiced vegetables, saffron, and fresh herbs.",
-      ingredients: "Basmati Rice, Mixed Vegetables, Saffron, Yogurt +more",
+      ingredientPills: ["Basmati Rice", "Mixed Vegetables", "Saffron", "+ more"],
       matchPercent: 71,
       matchLabel: "Potential Match",
       matchColor: "amber",
@@ -70,7 +70,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
       category: "Continental",
       cuisine: "Italian",
       description: "Creamy fettuccine pasta tossed in a rich parmesan and butter sauce with garlic.",
-      ingredients: "Fettuccine Pasta, Heavy Cream, Parmesan, Butter +more",
+      ingredientPills: ["Fettuccine Pasta", "Heavy Cream", "Parmesan", "+ more"],
       matchPercent: 95,
       matchLabel: "Excellent Match",
       matchColor: "emerald",
@@ -83,7 +83,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
       category: "Continental",
       cuisine: "Continental",
       description: "Herb-marinated chicken breast grilled to perfection, served with seasonal vegetables.",
-      ingredients: "Chicken Breast, Olive Oil, Rosemary, Thyme +more",
+      ingredientPills: ["Chicken Breast", "Olive Oil", "Rosemary", "+ more"],
       matchPercent: 82,
       matchLabel: "Strong Match",
       matchColor: "emerald",
@@ -96,7 +96,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
       category: "Starters",
       cuisine: "Continental",
       description: "Crisp romaine lettuce with parmesan shavings, croutons, and classic Caesar dressing.",
-      ingredients: "Romaine Lettuce, Parmesan, Croutons, Anchovy +more",
+      ingredientPills: ["Romaine Lettuce", "Parmesan", "Croutons", "+ more"],
       matchPercent: 65,
       matchLabel: "Potential Match",
       matchColor: "amber",
@@ -109,7 +109,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
       category: "Desserts",
       cuisine: "Continental",
       description: "Rich dark chocolate mousse topped with whipped cream and berry compote.",
-      ingredients: "Dark Chocolate, Heavy Cream, Sugar, Eggs +more",
+      ingredientPills: ["Dark Chocolate", "Heavy Cream", "Sugar", "+ more"],
       matchPercent: 88,
       matchLabel: "Excellent Match",
       matchColor: "emerald",
@@ -122,7 +122,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
       category: "Breakfast",
       cuisine: "South Indian",
       description: "Crispy fermented crepe filled with spiced potato masala served with coconut chutney and sambar.",
-      ingredients: "Rice Batter, Potatoes, Mustard Seeds, Curry Leaves +more",
+      ingredientPills: ["Rice Batter", "Potatoes", "Mustard Seeds", "+ more"],
       matchPercent: 80,
       matchLabel: "Strong Match",
       matchColor: "emerald",
@@ -136,7 +136,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
 
   const filteredDishes = menuDishes.filter((dish) => {
     const matchesSearch = dish.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          dish.ingredients.toLowerCase().includes(searchQuery.toLowerCase());
+                          dish.ingredientPills.some((ing) => ing.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesCat = selectedCategory === "All Categories" || dish.category === selectedCategory;
     const matchesCuisine = selectedCuisine === "All Cuisines" || dish.cuisine === selectedCuisine;
     return matchesSearch && matchesCat && matchesCuisine;
@@ -229,19 +229,19 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
 
         </div>
 
-        {/* 8 DISH CARDS GRID */}
+        {/* 8 DISH CARDS GRID - EXACT MATCH TO USER REFERENCE SCREENSHOT */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDishes.map((dish) => {
-            const isExcellent = dish.matchColor === "emerald";
+            const isPotential = dish.matchLabel === "Potential Match";
 
             return (
               <div
                 key={dish.id}
-                className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between text-left"
+                className="bg-white rounded-[22px] border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between text-left"
               >
                 <div>
                   {/* Top Image Container */}
-                  <div className="relative h-48 w-full overflow-hidden">
+                  <div className="relative h-48 sm:h-52 w-full overflow-hidden">
                     <Image
                       src={dish.image}
                       alt={dish.title}
@@ -249,54 +249,61 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                       unoptimized
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
 
-                    {/* Top Row Badges: Category Left, AI Analysed Right */}
-                    <div className="absolute top-3 left-3">
-                      <span className="bg-black/60 backdrop-blur-xs text-white text-[10px] font-semibold px-2.5 py-1 rounded-md">
-                        {dish.category}
-                      </span>
+                    {/* Top Left Category Badge with Cloche Icon */}
+                    <div className="absolute top-3 left-3 bg-black/45 backdrop-blur-md px-3 py-1 rounded-full text-white text-[11px] font-medium flex items-center gap-1.5 border border-white/10 shadow-xs">
+                      <UtensilsCrossed className="w-3 h-3 text-white/90" />
+                      <span>{dish.category}</span>
                     </div>
 
-                    <div className="absolute top-3 right-3">
-                      <span className="bg-[#1C0B33] text-white text-[10px] font-semibold px-2.5 py-1 rounded-md flex items-center gap-1 border border-[#F5C453]/30">
-                        <Sparkles className="w-3 h-3 text-[#F5C453]" />
-                        <span>{dish.badge}</span>
-                      </span>
+                    {/* Top Right AI Badge */}
+                    <div className="absolute top-3 right-3 bg-[#170C31]/90 backdrop-blur-md px-3 py-1 rounded-full text-white text-[11px] font-medium flex items-center gap-1.5 border border-purple-400/20 shadow-xs">
+                      <Sparkles className="w-3 h-3 text-[#F5C453]" />
+                      <span>{dish.badge}</span>
                     </div>
 
-                    {/* Bottom Title & Cuisine Over Image */}
-                    <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
-                      <h3 className="text-lg font-serif font-bold leading-tight text-white">
+                    {/* Bottom Right Circle Heart Bookmark Button */}
+                    <button className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-black/60 transition-colors cursor-pointer">
+                      <Heart className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Body Content below Image */}
+                  <div className="p-5 space-y-3">
+                    
+                    {/* Dish Title & Subtitle */}
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 leading-tight">
                         {dish.title}
                       </h3>
-                      <div className="text-[10px] text-slate-300 font-medium">
+                      <div className="text-xs text-slate-500 font-medium mt-0.5">
                         {dish.cuisine}
                       </div>
                     </div>
-                  </div>
 
-                  {/* Body Content */}
-                  <div className="p-4 space-y-3">
-                    
                     {/* Description */}
-                    <p className="text-xs text-slate-600 font-normal leading-relaxed min-h-[36px]">
+                    <p className="text-xs text-slate-500 leading-relaxed font-normal min-h-[36px]">
                       {dish.description}
                     </p>
 
-                    {/* Ingredients */}
-                    <div className="text-xs text-slate-500 font-medium leading-tight">
-                      <span className="font-semibold text-slate-700">Ingredients:</span> {dish.ingredients}
+                    {/* Ingredients Row with Rounded Pills */}
+                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                      <span className="text-xs font-bold text-slate-800 shrink-0 mr-0.5">Ingredients:</span>
+                      {dish.ingredientPills.map((ing, i) => (
+                        <span key={i} className="bg-slate-100/90 text-slate-600 text-[11px] font-medium px-2.5 py-0.5 rounded-md">
+                          {ing}
+                        </span>
+                      ))}
                     </div>
 
                     {/* Match Score & Progress Bar */}
-                    <div className="space-y-1.5 pt-1">
-                      <div className="flex items-center justify-between text-xs font-bold">
-                        <span className="text-[#111111] font-bold">{dish.matchPercent}%</span>
-                        <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-semibold ${
-                          isExcellent
-                            ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                            : "bg-amber-50 text-amber-800 border border-amber-200"
+                    <div className="space-y-1.5 pt-2">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="font-extrabold text-slate-900 text-sm">{dish.matchPercent}%</span>
+                        <span className={`text-[10px] px-3 py-0.5 rounded-full font-bold ${
+                          isPotential
+                            ? "bg-amber-50 text-amber-700 border border-amber-200"
+                            : "bg-emerald-50 text-emerald-600 border border-emerald-100"
                         }`}>
                           {dish.matchLabel}
                         </span>
@@ -306,7 +313,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                       <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full transition-all duration-300 ${
-                            isExcellent ? "bg-emerald-600" : "bg-amber-500"
+                            isPotential ? "bg-amber-500" : "bg-emerald-500"
                           }`}
                           style={{ width: `${dish.matchPercent}%` }}
                         />
@@ -317,26 +324,27 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                 </div>
 
                 {/* Card Footer Action Controls */}
-                <div className="p-3 pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2 bg-white">
+                <div className="p-4 pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2.5 bg-white">
                   <button
                     onClick={() => onNavigateTab("recommendations")}
-                    className="flex-1 py-2.5 px-3 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-[0.98]"
+                    className="flex-1 py-2.5 px-4 rounded-xl bg-[#140A28] hover:bg-[#20113D] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-xs transition-all cursor-pointer active:scale-[0.98]"
                   >
-                    <Maximize2 className="w-3.5 h-3.5 text-[#F5C453]" />
+                    <Sparkles className="w-3.5 h-3.5 text-[#F5C453]" />
                     <span>View Recommendations</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
 
                   <button
                     onClick={() => alert(`Edit ${dish.title}`)}
-                    className="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
+                    className="w-9 h-9 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer shrink-0"
                     title="Edit dish"
                   >
-                    <Edit3 className="w-3.5 h-3.5" />
+                    <Pencil className="w-3.5 h-3.5" />
                   </button>
 
                   <button
                     onClick={() => alert(`Delete ${dish.title}`)}
-                    className="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-red-50 hover:border-red-200 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
+                    className="w-9 h-9 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-red-50 hover:text-red-500 transition-colors cursor-pointer shrink-0"
                     title="Delete dish"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
