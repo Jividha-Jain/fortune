@@ -203,34 +203,67 @@ export default function ScreenHotelDetails({ onComplete }: ScreenHotelDetailsPro
               </div>
             </div>
 
-            {/* GSTIN & FSSAI (Clean statutory fields) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1.5">
-                  GSTIN Number
+            {/* KYC VERIFICATION DETAILS SECTION */}
+            <div className="pt-3 border-t border-slate-200/80 space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="block text-[11px] uppercase font-bold tracking-wider text-[#5E3B8C]">
+                  KYC &amp; License Verification Details
                 </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.gstin}
-                  onChange={(e) => setFormData({ ...formData, gstin: e.target.value })}
-                  placeholder="27AAACI1681G1Z8"
-                  className="w-full px-3.5 py-3 bg-white border border-slate-200 rounded-xl text-xs font-mono uppercase font-bold text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-[#5E3B8C] focus:border-transparent focus:outline-none transition-all shadow-2xs"
-                />
+                <span className="text-[10px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">
+                  Verification Pending
+                </span>
               </div>
 
+              {/* GSTIN & FSSAI 2-col */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] uppercase font-bold text-slate-600 mb-1">
+                    GSTIN Registration Number
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.gstin}
+                    onChange={(e) => setFormData({ ...formData, gstin: e.target.value })}
+                    placeholder="27AAACI1681G1Z8"
+                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-mono uppercase font-bold text-slate-900 focus:ring-2 focus:ring-[#5E3B8C] focus:outline-none transition-all shadow-2xs"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] uppercase font-bold text-slate-600 mb-1">
+                    FSSAI Food License Number (14 Digits)
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.fssai}
+                    onChange={(e) => setFormData({ ...formData, fssai: e.target.value })}
+                    placeholder="10014022003189"
+                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 focus:ring-2 focus:ring-[#5E3B8C] focus:outline-none transition-all shadow-2xs"
+                  />
+                </div>
+              </div>
+
+              {/* KYC Document Upload File Box */}
               <div>
-                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1.5">
-                  FSSAI License
+                <label className="block text-[10px] uppercase font-bold text-slate-600 mb-1">
+                  KYC Document Upload (FSSAI / GST Certificate)
                 </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.fssai}
-                  onChange={(e) => setFormData({ ...formData, fssai: e.target.value })}
-                  placeholder="10014022003189"
-                  className="w-full px-3.5 py-3 bg-white border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-[#5E3B8C] focus:border-transparent focus:outline-none transition-all shadow-2xs"
-                />
+                <div className="p-3 bg-white border border-dashed border-purple-200/90 rounded-xl flex items-center justify-between text-xs shadow-2xs">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-purple-100 text-[#5E3B8C] flex items-center justify-center font-bold shrink-0">
+                      <FileText className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="font-mono text-xs font-bold text-slate-900">fssai_gstin_certificate.pdf</div>
+                      <div className="text-[10px] text-slate-400">PDF Document • 2.4 MB</div>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                    Uploaded ✓
+                  </span>
+                </div>
               </div>
             </div>
 
