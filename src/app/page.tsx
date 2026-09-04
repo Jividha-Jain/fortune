@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import PortalHeader from "@/components/PortalHeader";
+import PortalFooter from "@/components/PortalFooter";
 import ScreenDashboard from "@/components/ScreenDashboard";
 import ScreenProductsCatalog from "@/components/ScreenProductsCatalog";
 import ScreenProductDetail from "@/components/ScreenProductDetail";
@@ -181,6 +182,11 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {/* Bottom Footer (Shown when authenticated) */}
+      {activeTab !== "signin" && activeTab !== "register" && activeTab !== "hotel-details" && activeTab !== "onboarding" && (
+        <PortalFooter onNavigateTab={(tab) => setActiveTab(tab as any)} />
+      )}
     </div>
   );
 }
