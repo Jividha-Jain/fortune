@@ -209,6 +209,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                         src={sku.image}
                         alt={sku.title}
                         fill
+                        unoptimized
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       {/* Top Left Match Badge */}

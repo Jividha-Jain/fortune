@@ -595,6 +595,7 @@ export default function ScreenProductsCatalog({ onSelectProduct }: ScreenProduct
                             src={p.image}
                             alt={p.title}
                             fill
+                            unoptimized
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                           

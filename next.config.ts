@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "fortunegourmet.com",
+      },
+      {
+        protocol: "http",
+        hostname: "fortunegourmet.com",
+      },
     ],
   },
 };
