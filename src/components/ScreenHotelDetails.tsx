@@ -22,7 +22,8 @@ export default function ScreenHotelDetails({ onComplete }: ScreenHotelDetailsPro
     address: "Apollo Bunder, Colaba",
     city: "Mumbai, Maharashtra",
     headChef: "Chef Vikram Singh",
-    staffCount: "35 Culinary Staff",
+    chefPhone: "+91 98765 43210",
+    staffCount: "35 Culinary Staff & Chefs",
     gstin: "27AAACI1681G1Z8",
     fssai: "10014022003189",
   });
@@ -86,7 +87,7 @@ export default function ScreenHotelDetails({ onComplete }: ScreenHotelDetailsPro
 
       {/* RIGHT SIDE: CLEAN, ELEGANT HUMAN-DESIGNED FORM */}
       <div className="lg:w-1/2 flex flex-col justify-between p-6 sm:p-10 lg:p-14 bg-[#FAF8FD] min-h-screen lg:min-h-full">
-        <div className="max-w-md w-full mx-auto my-auto space-y-6">
+        <div className="max-w-md w-full mx-auto my-auto space-y-5">
           
           {/* Header */}
           <div className="space-y-1 text-left">
@@ -94,16 +95,16 @@ export default function ScreenHotelDetails({ onComplete }: ScreenHotelDetailsPro
               Establishment Details
             </h2>
             <p className="text-slate-500 text-sm leading-relaxed">
-              Enter your property location and business registration info.
+              Enter your property location, kitchen staff info, and business registration.
             </p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4 text-left">
+          <form onSubmit={handleSubmit} className="space-y-3.5 text-left">
             
             {/* Property Name */}
             <div>
-              <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1.5">
+              <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1">
                 Property / Hotel Name
               </label>
               <div className="relative">
@@ -124,7 +125,7 @@ export default function ScreenHotelDetails({ onComplete }: ScreenHotelDetailsPro
             {/* Address & City */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1.5">
+                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1">
                   Address / Bay
                 </label>
                 <div className="relative">
@@ -143,8 +144,8 @@ export default function ScreenHotelDetails({ onComplete }: ScreenHotelDetailsPro
               </div>
 
               <div>
-                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1.5">
-                  City
+                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1">
+                  City &amp; Pincode
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -155,18 +156,18 @@ export default function ScreenHotelDetails({ onComplete }: ScreenHotelDetailsPro
                     required
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    placeholder="Mumbai"
+                    placeholder="Mumbai, Maharashtra"
                     className="w-full pl-10 pr-3 py-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-[#5E3B8C] focus:border-transparent focus:outline-none transition-all shadow-2xs"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Executive Chef & Staff */}
+            {/* Executive Chef & Phone */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1.5">
-                  Executive Chef
+                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1">
+                  Executive / Head Chef
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -184,22 +185,42 @@ export default function ScreenHotelDetails({ onComplete }: ScreenHotelDetailsPro
               </div>
 
               <div>
-                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1.5">
-                  Staff Count
+                <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1">
+                  Chef Contact Phone Number
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <Users className="w-4 h-4" />
+                    <span className="text-xs font-bold text-slate-400">📞</span>
                   </div>
                   <input
                     type="text"
                     required
-                    value={formData.staffCount}
-                    onChange={(e) => setFormData({ ...formData, staffCount: e.target.value })}
-                    placeholder="35 Chefs"
+                    value={formData.chefPhone}
+                    onChange={(e) => setFormData({ ...formData, chefPhone: e.target.value })}
+                    placeholder="+91 98765 43210"
                     className="w-full pl-10 pr-3 py-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-[#5E3B8C] focus:border-transparent focus:outline-none transition-all shadow-2xs"
                   />
                 </div>
+              </div>
+            </div>
+
+            {/* Kitchen Staff Count */}
+            <div>
+              <label className="block text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-1">
+                Total Kitchen Staff Count
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <Users className="w-4 h-4" />
+                </div>
+                <input
+                  type="text"
+                  required
+                  value={formData.staffCount}
+                  onChange={(e) => setFormData({ ...formData, staffCount: e.target.value })}
+                  placeholder="e.g. 35 Chefs & Culinary Staff"
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-[#5E3B8C] focus:border-transparent focus:outline-none transition-all shadow-2xs"
+                />
               </div>
             </div>
 
