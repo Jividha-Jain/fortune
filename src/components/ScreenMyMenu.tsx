@@ -229,7 +229,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
             return (
               <div
                 key={dish.id}
-                className="bg-white rounded-[24px] border border-slate-200/80 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between text-left"
+                className="bg-white rounded-[24px] border border-slate-200/90 hover:border-[#5E3B8C]/30 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_-6px_rgba(28,11,51,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group text-left relative"
               >
                 <div>
                   {/* Top Image Container */}
@@ -239,7 +239,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                       alt={dish.title}
                       fill
                       unoptimized
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
 
                     {/* Top-Left Category Badge */}
@@ -255,7 +255,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                     </div>
 
                     {/* Bottom-Right Circle Heart Bookmark Button */}
-                    <button className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-black/60 transition-colors cursor-pointer">
+                    <button className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-black/60 hover:scale-105 transition-all cursor-pointer">
                       <Heart className="w-4.5 h-4.5" />
                     </button>
                   </div>
@@ -265,16 +265,16 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                     
                     {/* Dish Title & Subtitle */}
                     <div>
-                      <h3 className="text-2xl font-serif font-bold text-[#111111] leading-tight">
+                      <h3 className="text-2xl font-serif font-bold text-[#111111] group-hover:text-[#140A28] transition-colors leading-tight">
                         {dish.title}
                       </h3>
-                      <div className="text-xs text-slate-500 font-medium mt-0.5">
+                      <div className="text-xs text-[#5E3B8C] font-semibold tracking-wide uppercase mt-0.5">
                         {dish.cuisine}
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-xs text-slate-500 leading-relaxed font-normal min-h-[38px]">
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal min-h-[38px]">
                       {dish.description}
                     </p>
 
@@ -282,7 +282,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       <span className="text-xs font-bold text-[#111111] shrink-0 mr-0.5">Ingredients:</span>
                       {dish.ingredientPills.map((ing, i) => (
-                        <span key={i} className="bg-[#F1F3F5] text-[#4A5568] text-[11px] font-medium px-2.5 py-1 rounded-md">
+                        <span key={i} className="bg-slate-100/90 hover:bg-[#F4EFFB] hover:text-[#5E3B8C] text-[#4A5568] text-[11px] font-medium px-2.5 py-1 rounded-md transition-colors border border-slate-200/40">
                           {ing}
                         </span>
                       ))}
@@ -292,7 +292,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                     <div className="space-y-1.5 pt-2">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-extrabold text-[#111111] text-base">{dish.matchPercent}%</span>
-                        <span className={`text-[11px] px-3.5 py-0.5 rounded-full font-bold ${
+                        <span className={`text-[11px] px-3.5 py-0.5 rounded-full font-bold shadow-2xs ${
                           isPotential
                             ? "bg-[#FFF6E5] text-[#D97706] border border-[#FDE68A]"
                             : "bg-[#E8F8F0] text-[#0D8A54] border border-[#C5F0D8]"
@@ -304,7 +304,7 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                       {/* Progress Bar */}
                       <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                         <div
-                          className={`h-full rounded-full transition-all duration-300 ${
+                          className={`h-full rounded-full transition-all duration-500 ${
                             isPotential ? "bg-[#D97706]" : "bg-[#0D8A54]"
                           }`}
                           style={{ width: `${dish.matchPercent}%` }}
@@ -319,24 +319,24 @@ export default function ScreenMyMenu({ onNavigateTab }: ScreenMyMenuProps) {
                 <div className="p-4 pt-3 flex items-center justify-between gap-2.5 bg-white border-t border-slate-100">
                   <button
                     onClick={() => onNavigateTab("recommendations")}
-                    className="flex-1 py-3 px-4 rounded-xl bg-[#140A28] hover:bg-[#221242] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer active:scale-[0.98]"
+                    className="group/btn flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#140A28] via-[#241347] to-[#140A28] hover:from-[#20113D] hover:to-[#311B5B] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer active:scale-[0.98] border border-[#F5C453]/20"
                   >
                     <Sparkles className="w-3.5 h-3.5 text-[#F5C453]" />
                     <span>View Recommendations</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
 
                   <button
                     onClick={() => alert(`Edit ${dish.title}`)}
-                    className="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer shrink-0"
+                    className="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:bg-purple-50 hover:border-purple-200 hover:text-[#5E3B8C] transition-all cursor-pointer shrink-0 shadow-2xs"
                     title="Edit dish"
                   >
-                    <Pencil className="w-4 h-4 text-slate-500" />
+                    <Pencil className="w-4 h-4" />
                   </button>
 
                   <button
                     onClick={() => alert(`Delete ${dish.title}`)}
-                    className="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-red-50 hover:text-red-500 transition-colors cursor-pointer shrink-0"
+                    className="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all cursor-pointer shrink-0 shadow-2xs"
                     title="Delete dish"
                   >
                     <Trash2 className="w-4 h-4" />
