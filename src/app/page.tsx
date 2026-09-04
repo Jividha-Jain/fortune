@@ -10,6 +10,7 @@ import ScreenAIRecommendations from "@/components/ScreenAIRecommendations";
 import ScreenMyMenu from "@/components/ScreenMyMenu";
 import ScreenConceptDetail from "@/components/ScreenConceptDetail";
 import ScreenShortlist from "@/components/ScreenShortlist";
+import ScreenWatchlist from "@/components/ScreenWatchlist";
 import ScreenEnquiries from "@/components/ScreenEnquiries";
 import ScreenOrders from "@/components/ScreenOrders";
 import ScreenInsights from "@/components/ScreenInsights";
@@ -31,6 +32,7 @@ export default function Home() {
     | "recommendations"
     | "concept-detail"
     | "shortlist"
+    | "watchlist"
     | "enquiries"
     | "orders"
     | "insights"
@@ -103,6 +105,12 @@ export default function Home() {
           <ScreenShortlist
             onNavigateEnquiries={() => setActiveTab("enquiries")}
             onNavigateProducts={() => setActiveTab("products")}
+          />
+        )}
+
+        {activeTab === "watchlist" && (
+          <ScreenWatchlist
+            onNavigateTab={(tab) => setActiveTab(tab as any)}
           />
         )}
 

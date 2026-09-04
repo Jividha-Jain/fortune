@@ -10,6 +10,7 @@ import {
   Mail,
   User,
   Star,
+  Bookmark,
   Heart,
   LogOut,
   Settings,
@@ -21,8 +22,8 @@ import {
 } from "lucide-react";
 
 interface PortalHeaderProps {
-  activeTab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding" | "signin" | "register";
-  setActiveTab: (tab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding" | "signin" | "register") => void;
+  activeTab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "watchlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding" | "signin" | "register";
+  setActiveTab: (tab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "watchlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding" | "signin" | "register") => void;
 }
 
 export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderProps) {
@@ -70,6 +71,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
 
   const profileMenuItems = [
     { id: "mymenu", label: "My Menu", icon: UtensilsCrossed, badge: "6 Dishes", desc: "View active paired dishes" },
+    { id: "watchlist", label: "Watchlist", icon: Bookmark, badge: "4 Tracked", desc: "Price locks & stock alerts" },
     { id: "orders", label: "Orders", icon: Package, badge: "2 Active", desc: "Live dispatch & telemetry" },
     { id: "enquiries", label: "Enquiries", icon: Mail, badge: "RFQ", desc: "Commercial quotation terms" },
     { id: "shortlist", label: "Shortlist", icon: Star, badge: "4 Saved", desc: "Curated executive selection" },
