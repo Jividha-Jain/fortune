@@ -263,26 +263,34 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                     {/* Card Content Section */}
                     <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
                       
-                      {/* Title & Description */}
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between gap-2">
+                      {/* Title, Description & Note / Spec Area */}
+                      <div className="space-y-3 flex-1 flex flex-col justify-between">
+                        <div className="space-y-1.5">
                           <h3 className="font-serif text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#5E3B8C] transition-colors">
                             {item.title}
                           </h3>
+
+                          <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                            {item.description}
+                          </p>
                         </div>
 
-                        <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                          {item.description}
-                        </p>
+                        {/* Note Box or Matching Quality Spec Pill */}
+                        {hasNote ? (
+                          <div className="bg-gradient-to-r from-amber-50 to-orange-50/70 border border-amber-200/80 p-3 rounded-2xl flex items-start gap-2.5 text-xs text-amber-900 font-medium shadow-2xs">
+                            <Lightbulb className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">{notesState[item.id]}</span>
+                          </div>
+                        ) : (
+                          <div className="bg-purple-50/60 border border-purple-100/70 p-3 rounded-2xl flex items-center justify-between text-[11px] text-[#5E3B8C] font-semibold">
+                            <span className="flex items-center gap-1.5">
+                              <Sparkles className="w-3.5 h-3.5 text-purple-600" />
+                              <span>Artisanal Quality</span>
+                            </span>
+                            <span className="text-slate-400 text-[10px] font-bold uppercase tracking-wider">HORECA Standard</span>
+                          </div>
+                        )}
                       </div>
-
-                      {/* Soft Amber Chef Note Box */}
-                      {hasNote && (
-                        <div className="bg-gradient-to-r from-amber-50 to-orange-50/70 border border-amber-200/80 p-3.5 rounded-2xl flex items-start gap-2.5 text-xs text-amber-900 font-medium shadow-2xs">
-                          <Lightbulb className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">{notesState[item.id]}</span>
-                        </div>
-                      )}
 
                       {/* Sweet Action Row */}
                       <div className="flex items-center gap-2.5 pt-3 border-t border-slate-100">
