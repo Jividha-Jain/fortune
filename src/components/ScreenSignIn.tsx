@@ -101,7 +101,7 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
               Welcome back
             </h2>
             <p className="text-slate-500 text-sm leading-relaxed">
-              Sign in to your institutional executive portal.
+              Sign in to your account.
             </p>
           </div>
 
@@ -222,18 +222,18 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
               <div className="w-full border-t border-slate-200" />
             </div>
             <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-widest text-slate-400">
-              <span className="bg-[#FAF8FD] px-3">New Partner Account</span>
+              <span className="bg-[#FAF8FD] px-3">Don&apos;t have an account?</span>
             </div>
           </div>
 
-          {/* Create Partner Account Action */}
+          {/* Create Account Action */}
           <button
             type="button"
             onClick={onNavigateRegister}
             className="w-full py-3.5 px-6 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-[#1C0B33] font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
           >
-            <span>Create Institutional Account</span>
-            <Building2 className="w-4 h-4 text-[#5E3B8C]" />
+            <span>Create Account</span>
+            <ArrowRight className="w-4 h-4 text-[#5E3B8C]" />
           </button>
         </div>
 
