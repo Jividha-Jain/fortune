@@ -3,44 +3,51 @@
 import React from "react";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { ALL_PRODUCTS } from "@/data/productsData";
 
 interface AIPairingSuggestionsSectionProps {
   onNavigateTab: (tab: "products" | "product-detail" | "recommendations" | "mymenu") => void;
 }
 
 export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairingSuggestionsSectionProps) {
+  // Find official Fortune Gourmet products from catalog
+  const mozzarellaProduct = ALL_PRODUCTS.find((p) => p.id === "zanetti-mozzarella-bufala");
+  const parmesanProduct = ALL_PRODUCTS.find((p) => p.id === "gran-spicco-200gm");
+  const salmonProduct = ALL_PRODUCTS.find((p) => p.id === "fortune-atlantic-salmon-trim-d");
+  const butterProduct = ALL_PRODUCTS.find((p) => p.id === "butter-unsalted-200gm");
+
   const cards = [
     {
       id: "card-1",
-      bgColor: "bg-[#FAF5EE]", // Warm cream/peach pastel matching screenshot
+      bgColor: "bg-[#FAF5EE]", // Warm cream/peach pastel
       dishTitle: "Margherita Pizza",
-      productSubtitle: "with Black Truffle Oil",
+      productSubtitle: "with Zanetti Mozzarella di Bufala",
       dishImage: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=300&q=80",
+      productImage: mozzarellaProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/1bbm-500x500.png",
     },
     {
       id: "card-2",
-      bgColor: "bg-[#F3EEFA]", // Soft purple/lavender pastel matching screenshot
+      bgColor: "bg-[#F3EEFA]", // Soft purple/lavender pastel
       dishTitle: "Mushroom Pasta",
-      productSubtitle: "with Fresh Truffle",
+      productSubtitle: "with Gran Spicco Parmesan",
       dishImage: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=300&q=80",
+      productImage: parmesanProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/Gran-Spicco-200gr-500x500.jpg",
     },
     {
       id: "card-3",
-      bgColor: "bg-[#FAF6EF]", // Light warm almond pastel matching screenshot
+      bgColor: "bg-[#FAF6EF]", // Light warm almond pastel
       dishTitle: "Grilled Salmon",
-      productSubtitle: "with Yuzu Dressing",
+      productSubtitle: "with Atlantic Salmon Fillet",
       dishImage: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1582979512210-99b6a53385f9?auto=format&fit=crop&w=300&q=80",
+      productImage: salmonProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/Tomex-Salmon-fish-fillet-500x500.jpg",
     },
     {
       id: "card-4",
-      bgColor: "bg-[#FCF4FA]", // Soft pink/rose pastel matching screenshot
+      bgColor: "bg-[#FCF4FA]", // Soft pink/rose pastel
       dishTitle: "Chocolate Cake",
-      productSubtitle: "with Sea Salt",
+      productSubtitle: "with Lurpak Unsalted Butter",
       dishImage: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80",
-      productImage: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=300&q=80",
+      productImage: butterProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/lurpak-500x500.png",
     },
   ];
 
@@ -63,7 +70,7 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
           </div>
 
           {/* Main Title: Better Ingredients, Brighter Dishes. */}
-          <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-serif font-bold text-[#151221] leading-[1.12] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-serif font-bold text-[#151221] leading-[1.12] tracking-tight">
             Better Ingredients,<br />
             <span className="text-[#2B145E]">Brighter Dishes.</span>
           </h1>
@@ -83,7 +90,7 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
             <div className="w-10 h-[1.5px] bg-[#6B5A94]/40 rounded-full mt-1.5 ml-auto" />
           </div>
 
-          {/* Top-Right Circular Plate Graphic (Flex child, stays cleanly inside top section) */}
+          {/* Top-Right Circular Plate Graphic */}
           <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden shadow-xl border-4 border-white shrink-0 bg-white z-10 pointer-events-none">
             <Image
               src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80"
@@ -125,14 +132,14 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
                   +
                 </div>
 
-                {/* Product Item Container */}
-                <div className="relative w-20 h-24 sm:w-22 sm:h-26 rounded-2xl overflow-hidden shadow-sm border border-white shrink-0 group-hover:scale-105 transition-transform duration-300 bg-white">
+                {/* Official Fortune Gourmet Product Image Container */}
+                <div className="relative w-20 h-24 sm:w-22 sm:h-26 rounded-2xl overflow-hidden shadow-xs border border-slate-200/60 shrink-0 group-hover:scale-105 transition-transform duration-300 bg-white flex items-center justify-center p-1">
                   <Image
                     src={card.productImage}
                     alt={card.productSubtitle}
                     fill
                     unoptimized
-                    className="object-cover"
+                    className="object-contain p-1 rounded-xl"
                   />
                 </div>
 
