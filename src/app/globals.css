@@ -220,4 +220,19 @@ h1, h2, h3, h4 {
   animation: reverseSpinRing 14s linear infinite;
 }
 
+@keyframes marqueeTicker {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-continuous {
+  display: flex;
+  width: max-content;
+  animation: marqueeTicker 22s linear infinite;
+}
+
+.animate-marquee-continuous:hover {
+  animation-play-state: paused;
+}
+
 

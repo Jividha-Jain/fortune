@@ -81,26 +81,42 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
 
   return (
     <>
-      {/* PERSISTENT TOP KYC INCOMPLETE ALERT BANNER */}
+      {/* PERSISTENT TOP KYC INCOMPLETE ALERT BANNER (CONTINUOUS INFINITE MARQUEE TICKER) */}
       {isKycBannerVisible && !isKycCompleted && (
-        <div className="bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-[#1C0B33] px-4 py-2.5 text-xs font-bold flex items-center justify-between shadow-md border-b border-amber-600/30 sticky top-0 z-50 animate-fade-in">
-          <div className="flex items-center gap-2.5 max-w-5xl mx-auto text-left">
-            <span className="w-5 h-5 rounded-full bg-[#1C0B33] text-[#F5C453] flex items-center justify-center text-[10px] shrink-0 font-bold">
-              ⚠️
-            </span>
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="font-extrabold uppercase tracking-wider text-[10px] bg-[#1C0B33] text-[#F5C453] px-2 py-0.5 rounded">
-                KYC Incomplete
-              </span>
-              <span className="font-semibold text-[#1C0B33]">
-                Your establishment verification is pending. Upload your FSSAI / GST license to activate Net-30 credit limits &amp; express dispatch.
-              </span>
+        <div className="bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-[#1C0B33] px-4 py-2 text-xs font-bold flex items-center justify-between shadow-md border-b border-amber-600/30 sticky top-0 z-50 overflow-hidden">
+          
+          {/* Continuous Running Marquee Ticker Track */}
+          <div className="overflow-hidden flex-1 mr-4 relative">
+            <div className="animate-marquee-continuous flex items-center gap-12 whitespace-nowrap">
+              {/* Loop Item 1 */}
+              <div className="flex items-center gap-2.5">
+                <span className="font-extrabold uppercase tracking-wider text-[10px] bg-[#1C0B33] text-[#F5C453] px-2 py-0.5 rounded flex items-center gap-1">
+                  <span>⚠️</span>
+                  <span>KYC INCOMPLETE</span>
+                </span>
+                <span className="font-bold text-[#1C0B33]">
+                  Your establishment verification is pending. Upload your FSSAI &amp; GST license to activate Net-30 credit limits &amp; priority cold-chain dispatch across all outlets.
+                </span>
+              </div>
+
+              {/* Loop Item 2 (Seamless Repeat) */}
+              <div className="flex items-center gap-2.5">
+                <span className="font-extrabold uppercase tracking-wider text-[10px] bg-[#1C0B33] text-[#F5C453] px-2 py-0.5 rounded flex items-center gap-1">
+                  <span>⚠️</span>
+                  <span>KYC INCOMPLETE</span>
+                </span>
+                <span className="font-bold text-[#1C0B33]">
+                  Your establishment verification is pending. Upload your FSSAI &amp; GST license to activate Net-30 credit limits &amp; priority cold-chain dispatch across all outlets.
+                </span>
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+
+          {/* Right Fixed Action Buttons */}
+          <div className="flex items-center gap-2 shrink-0 z-10 bg-amber-400 pl-2">
             <button
               onClick={() => setShowKycModal(true)}
-              className="px-3 py-1.5 bg-[#1C0B33] hover:bg-black text-amber-300 rounded-lg text-[11px] font-bold transition-all cursor-pointer shadow-xs whitespace-nowrap active:scale-95"
+              className="px-3.5 py-1.5 bg-[#1C0B33] hover:bg-black text-[#F5C453] rounded-full text-[11px] font-bold transition-all cursor-pointer shadow-xs whitespace-nowrap active:scale-95 border border-[#F5C453]/30"
             >
               Complete KYC Now →
             </button>
