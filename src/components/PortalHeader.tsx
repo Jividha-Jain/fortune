@@ -66,7 +66,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
     { id: "dashboard", label: "Dashboard" },
     { id: "products", label: "Products" },
     { id: "recommendations", label: "AI Recommendations" },
-    { id: "enquiries", label: "Enquiries" },
+    { id: "profile", label: "Business Profile" },
   ];
 
   const profileMenuItems = [
