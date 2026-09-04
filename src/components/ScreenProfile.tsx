@@ -104,49 +104,31 @@ export default function ScreenProfile({ onNavigateOnboarding, onNavigateTab }: S
         {/* TWO COLUMN GRID: REGULATORY LICENSES & KEY CONTACTS */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
-          {/* Regulatory Licenses Vault (7 cols) */}
+          {/* Procurement Preferences (7 cols) */}
           <div className="lg:col-span-7 bg-white rounded-[26px] p-6 sm:p-7 border border-slate-200/80 shadow-[0_10px_35px_-10px_rgba(28,11,51,0.03)] space-y-5 text-left">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <h3 className="text-lg font-serif font-bold text-[#111111]">Compliance &amp; Licenses</h3>
-                <p className="text-xs text-slate-500">Verified statutory documents for cold-chain ordering</p>
+                <h3 className="text-lg font-serif font-bold text-[#111111]">Delivery &amp; Service Protocols</h3>
+                <p className="text-xs text-slate-500 font-medium">Configured dispatch parameters for Taj Mahal Palace</p>
               </div>
-              <span className="text-[10px] font-bold bg-[#E6F9F0] text-[#0D9488] border border-[#BBF7D0] px-2.5 py-1 rounded-full">
-                100% Compliant
+              <span className="text-[10px] font-bold bg-purple-50 text-[#5E3B8C] border border-purple-200 px-2.5 py-1 rounded-full">
+                Active Partner
               </span>
             </div>
 
-            <div className="space-y-3">
-              {/* GST Document */}
-              <div className="p-4 bg-[#FAF8FD] rounded-2xl border border-purple-100/80 flex items-center justify-between gap-3">
-                <div className="space-y-0.5">
-                  <div className="text-[10px] uppercase font-bold text-slate-400">GSTIN REGISTRATION</div>
-                  <div className="font-mono font-bold text-sm text-[#111111]">27AAACI1681G1Z8</div>
-                  <div className="text-[11px] text-slate-500">Maharashtra • Verified Active</div>
-                </div>
-                <button
-                  onClick={() => alert("Downloading GST Certificate PDF...")}
-                  className="p-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center gap-1 cursor-pointer"
-                >
-                  <Download className="w-3.5 h-3.5 text-[#5E3B8C]" />
-                  <span>PDF</span>
-                </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* Delivery Window */}
+              <div className="p-4 bg-[#FAF8FD] rounded-2xl border border-purple-100/80 space-y-1">
+                <div className="text-[10px] uppercase font-bold text-slate-400">DISPATCH WINDOW</div>
+                <div className="font-serif font-bold text-sm text-[#111111]">Early Morning (06:00 - 08:30 AM)</div>
+                <div className="text-[11px] text-slate-500">Dedicated Loading Bay 2</div>
               </div>
 
-              {/* FSSAI Document */}
-              <div className="p-4 bg-[#FAF8FD] rounded-2xl border border-purple-100/80 flex items-center justify-between gap-3">
-                <div className="space-y-0.5">
-                  <div className="text-[10px] uppercase font-bold text-slate-400">FSSAI CENTRAL LICENSE</div>
-                  <div className="font-mono font-bold text-sm text-[#111111]">10014022003189</div>
-                  <div className="text-[11px] text-slate-500">Category: 5-Star Hotel &amp; Food Import • Exp: Dec 2026</div>
-                </div>
-                <button
-                  onClick={() => alert("Downloading FSSAI License PDF...")}
-                  className="p-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center gap-1 cursor-pointer"
-                >
-                  <Download className="w-3.5 h-3.5 text-[#5E3B8C]" />
-                  <span>PDF</span>
-                </button>
+              {/* Cold Chain Standard */}
+              <div className="p-4 bg-[#FAF8FD] rounded-2xl border border-purple-100/80 space-y-1">
+                <div className="text-[10px] uppercase font-bold text-slate-400">LOGISTICS FLEET</div>
+                <div className="font-serif font-bold text-sm text-[#111111]">Dual-Temp Multi-Zone Van</div>
+                <div className="text-[11px] text-slate-500">Chilled (+4°C) &amp; Frozen (-18°C)</div>
               </div>
             </div>
           </div>

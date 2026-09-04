@@ -147,15 +147,8 @@ export default function Home() {
           <div className="flex-1 flex flex-col relative">
             {onboardingStep === 1 && (
               <ScreenRegister
-                onNavigateSignIn={() => setOnboardingStep(5)}
-                onSuccessRegister={() => setOnboardingStep(2)}
-              />
-            )}
-
-            {onboardingStep === 2 && (
-              <ScreenBusinessDetails
-                onBack={() => setOnboardingStep(1)}
-                onNext={() => setOnboardingStep(3)}
+                onNavigateSignIn={() => setActiveTab("signin")}
+                onSuccessRegister={() => setActiveTab("dashboard")}
               />
             )}
 
