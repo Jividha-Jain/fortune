@@ -10,7 +10,8 @@ import {
   ArrowRight, 
   Building2, 
   ShieldCheck,
-  Zap
+  Zap,
+  Loader2
 } from "lucide-react";
 
 interface ScreenSignInProps {
@@ -202,7 +203,10 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
               className="w-full py-3.5 px-6 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.98] cursor-pointer"
             >
               {isLoading ? (
-                <span className="inline-block animate-spin font-bold">↻ Signing in...</span>
+                <div className="flex items-center justify-center gap-2 font-medium">
+                  <Loader2 className="w-4 h-4 animate-spin text-[#F5C453]" />
+                  <span>Signing in...</span>
+                </div>
               ) : (
                 <>
                   <span>Sign In to Portal</span>
