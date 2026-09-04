@@ -5,25 +5,13 @@ import Image from "next/image";
 import {
   Sparkles,
   ArrowRight,
+  ChevronRight,
   Package,
-  X,
-  Search,
-  Hourglass,
-  Users,
-  CheckCircle2,
-  Calendar,
-  Phone,
-  Mail,
-  Utensils,
-  Plus,
-  SlidersHorizontal,
-  BarChart3,
-  User,
-  Check,
-  ChevronDown,
+  ChefHat,
+  Lightbulb,
   MessageSquare,
   Bookmark,
-  ChefHat
+  X
 } from "lucide-react";
 
 import AIPairingSuggestionsSection from "./AIPairingSuggestionsSection";
@@ -33,11 +21,7 @@ interface ScreenDashboardProps {
 }
 
 export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<"All" | "Excellent Match" | "Strong Match">("All");
   const [activeNoteModalId, setActiveNoteModalId] = useState<string | null>(null);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
-
   const [notesState, setNotesState] = useState<Record<string, string>>({
     "halloumi-200gm": "Requested sample batch for Paneer Tikka replacement test.",
   });
@@ -48,68 +32,39 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
       id: "halloumi-200gm",
       brand: "FORTUNE SELECT",
       title: "Halloumi 200 GM",
-      status: "Under Review",
-      statusType: "under_review",
-      relatedDish: "Paneer Tikka",
-      description: "Perfectly firm & flavorful. Ideal for grilling and high-heat cooking. High melting point replacement.",
-      date: "1 Mar 2026",
-      channel: "Phone",
-      channelType: "phone",
-      contact: "Priya Mehta",
-      contactRole: "Sales Manager",
+      description: "Perfectly firm & flavorful. Ideal for grilling and high-heat cooking.",
+      forDish: "For Paneer Tikka",
+      forDishTheme: "purple",
       matchPercent: 78,
       matchType: "STRONG",
       matchLabel: "Strong Match",
-      tags: ["Cheese", "Grilling", "Paneer Replacement"],
-      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=400&q=80",
-      stepProgress: 2,
-      submittedDate: "1 Mar 2026",
-      underReviewNote: "Sample requested",
+      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=800&q=80",
       productId: "gran-spicco-200gm"
     },
     {
       id: "queso-formage",
       brand: "FIORELLA",
       title: "Queso Formage (Shredded & Cubes)",
-      status: "Sales Contacted",
-      statusType: "sales_contacted",
-      relatedDish: "Alfredo Pasta",
-      description: "Rich, creamy and melts beautifully. Perfect for pastas, pizzas, and baked continental dishes.",
-      date: "25 Feb 2026",
-      channel: "Email",
-      channelType: "email",
-      contact: "Priya Mehta",
-      contactRole: "Sales Manager",
+      description: "Rich, creamy and melts beautifully. Perfect for pastas and baked dishes.",
+      forDish: "For Alfredo Pasta",
+      forDishTheme: "emerald",
       matchPercent: 95,
       matchType: "EXCELLENT",
       matchLabel: "Excellent Match",
-      tags: ["Cheese", "Shredded", "Continental"],
-      image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=400&q=80",
-      stepProgress: 3,
-      submittedDate: "25 Feb 2026",
-      salesContactedNote: "In conversation",
+      image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=80",
       productId: "zanetti-mozzarella-bufala"
     },
     {
       id: "lurpak-butter",
       brand: "LURPAK",
       title: "Lurpak Unsalted Butter 200g",
-      status: "Submitted",
-      statusType: "submitted",
-      relatedDish: "Chocolate Mousse",
-      description: "Premium European butter with rich, natural taste. Elevates your desserts, bakery section, and sauces.",
-      date: "20 Feb 2026",
-      channel: "Phone",
-      channelType: "phone",
-      contact: "Priya Mehta",
-      contactRole: "Sales Manager",
+      description: "Premium European butter with rich, natural taste. Elevates your desserts.",
+      forDish: "For Chocolate Mousse",
+      forDishTheme: "amber",
       matchPercent: 94,
       matchType: "EXCELLENT",
       matchLabel: "Excellent Match",
-      tags: ["Butter", "Unsalted", "Bakery Use"],
       image: "https://fortunegourmet.com/wp-content/uploads/2025/03/lurpak-500x500.png",
-      stepProgress: 1,
-      submittedDate: "20 Feb 2026",
       productId: "butter-unsalted-200gm"
     },
   ];
@@ -129,69 +84,94 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
     }
   };
 
-  const filteredCards = dashboardCards.filter((item) => {
-    const matchesSearch = 
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.relatedDish.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase());
-
-    if (activeFilter === "All") return matchesSearch;
-    return matchesSearch && item.matchLabel === activeFilter;
-  });
-
   return (
-    <div className="min-h-screen bg-[#FAF8FD] text-[#111111] pb-16 font-sans relative overflow-hidden antialiased">
+    <div className="min-h-screen bg-[#FAFAFA] text-[#111111] pb-12 sm:pb-16 font-sans relative overflow-hidden antialiased">
       
-      {/* Background Decorative Glows */}
+      {/* Subtle Background Pattern & Ambient Luxury Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(#241347_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.025] pointer-events-none" />
       <div className="absolute top-0 right-0 w-[900px] h-[900px] bg-gradient-to-bl from-[#D7A742]/12 via-[#241347]/5 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-[450px] left-[-150px] w-[600px] h-[600px] bg-gradient-to-tr from-[#241347]/8 via-[#D7A742]/3 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 space-y-8 sm:space-y-10 relative z-10">
 
-        {/* TOP HERO DASHBOARD GREETING & RECOMMENDATION BANNER */}
+        {/* TOP HERO SECTION */}
         <div className="space-y-6">
-          <div className="max-w-xl space-y-3 text-left">
-            <div className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#241347] flex items-center gap-2">
+          
+          {/* Left Hero Title & Outlets Status Header */}
+          <div className="max-w-xl space-y-4 text-left">
+            <div className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#241347] flex items-center gap-2 mb-1">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D7A742] animate-pulse" />
               <Sparkles className="w-3.5 h-3.5 text-[#241347]" />
               <span>Executive Kitchen Intelligence</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl font-serif text-[#111111] font-normal tracking-[-0.02em] leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#111111] font-normal tracking-[-0.02em] leading-[1.08]">
               Good morning,<br />
               <span className="font-bold text-[#241347] font-serif bg-gradient-to-r from-[#241347] via-[#3B1F70] to-[#241347] bg-clip-text text-transparent">Taj Hotel Mumbai</span>
             </h1>
 
-            <div className="w-16 h-[3px] bg-gradient-to-r from-[#D7A742] to-[#E5BC5E] rounded-full my-2 shadow-xs" />
+            <div className="w-16 h-[3px] bg-gradient-to-r from-[#D7A742] to-[#E5BC5E] rounded-full my-3.5 shadow-xs" />
 
-            <p className="text-slate-500 text-sm font-medium leading-relaxed">
-              Here&apos;s what Fortune found for your signature autumn menu.
+            <p className="text-[#555555] text-sm sm:text-base font-medium leading-relaxed">
+              Here&apos;s what Fortune found for your menu.
             </p>
           </div>
 
-          {/* HERO BANNER CARD */}
-          <div className="w-full bg-gradient-to-r from-[#1F0E37] via-[#1A0A30] to-[#140626] rounded-[28px] p-8 sm:p-10 text-white shadow-2xl border border-[#D7A742]/30 relative z-10 overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-6 text-left">
+          {/* HERO RECOMMENDATION CARD - SEAMLESS RADIAL MASK BLEND */}
+          <div className="w-full bg-gradient-to-r from-[#1F0E37] via-[#1A0A30] to-[#140626] rounded-[24px] lg:rounded-[28px] p-8 sm:p-10 lg:p-12 text-white shadow-2xl border border-[#D7A742]/30 relative z-10 overflow-hidden min-h-[380px] lg:min-h-[420px] flex items-center text-left">
             
-            {/* Left Content */}
-            <div className="w-full lg:w-[55%] space-y-5 relative z-10">
+            {/* Right Side Dish Image with Elliptical Radial Fade Blend */}
+            <div 
+              className="absolute top-0 right-0 bottom-0 w-full lg:w-[62%] h-full pointer-events-none z-0"
+              style={{
+                WebkitMaskImage: "radial-gradient(ellipse 65% 75% at 65% 50%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.8) 55%, rgba(0,0,0,0) 80%)",
+                maskImage: "radial-gradient(ellipse 65% 75% at 65% 50%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.8) 55%, rgba(0,0,0,0) 80%)",
+              }}
+            >
+              <Image
+                src="/image/Dashboard.png"
+                alt="Executive Gourmet Dish Presentation"
+                fill
+                unoptimized
+                className="object-cover object-[65%_center] lg:object-right"
+                priority
+              />
+            </div>
+
+            {/* Concentric Golden Ring Arcs Centered Over the Dish */}
+            <div className="absolute -top-36 -right-36 w-[620px] sm:w-[720px] lg:w-[820px] h-[620px] sm:h-[720px] lg:h-[820px] pointer-events-none z-1 flex items-center justify-center">
+              <div className="w-full h-full rounded-full border border-[#D7A742]/45 flex items-center justify-center p-14 lg:p-20">
+                <div className="w-full h-full rounded-full border border-[#D7A742]/35 flex items-center justify-center p-14 lg:p-20">
+                  <div className="w-full h-full rounded-full border border-[#D7A742]/20" />
+                </div>
+              </div>
+            </div>
+
+            {/* Left Side Content Overlay */}
+            <div className="w-full lg:w-[50%] space-y-6 relative z-10">
+              
+              {/* Gold Outline Badge */}
               <div className="inline-flex items-center gap-2 bg-[#1C0B33]/80 backdrop-blur-md border border-[#D7A742]/60 px-3.5 py-1.5 rounded-lg text-[#EBB738] text-[11px] font-bold tracking-widest uppercase shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#EBB738]" />
                 <span>FORTUNE CULINARY PAIRING ENGINE</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-serif leading-[1.15] tracking-tight">
+              {/* Title */}
+              <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-serif leading-[1.12] tracking-tight">
                 <span className="text-[#F5C453] font-normal block font-serif">12 Fortune products</span>
                 <span className="text-white font-normal block font-serif mt-1">match your menu</span>
               </h2>
 
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-md font-normal">
-                Based on 42 dishes analyzed from your current Wasabi &amp; Shamiana autumn dining menus. Discover direct cold-chain replacements, artisanal certifications, and higher kitchen yield.
+              {/* Description */}
+              <p className="text-slate-300/90 text-sm leading-relaxed max-w-md font-normal">
+                Based on 42 dishes we&apos;ve analyzed from your current Wasabi &amp; Shamiana autumn dining menus. Discover direct cold-chain replacements, artisanal certifications, and higher kitchen yield.
               </p>
 
+              {/* Buttons */}
               <div className="flex flex-wrap items-center gap-4 pt-1">
                 <button
                   onClick={() => onNavigateTab("products")}
-                  className="px-7 py-3.5 rounded-xl bg-[#E5B83B] hover:bg-[#F3C74C] text-[#1C0B33] font-bold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-lg transition-all active:scale-[0.98] cursor-pointer"
+                  className="px-7 py-3.5 rounded-xl bg-[#E5B83B] hover:bg-[#F3C74C] text-[#1C0B33] font-bold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-lg transition-all duration-300 active:scale-[0.98] cursor-pointer"
                 >
                   <span>View Matches</span>
                   <ArrowRight className="w-4 h-4" />
@@ -199,276 +179,201 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
                 <button
                   onClick={() => onNavigateTab("recommendations")}
-                  className="px-7 py-3.5 rounded-xl bg-transparent hover:bg-white/10 border border-[#D7A742]/60 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 backdrop-blur-md active:scale-[0.98] cursor-pointer"
+                  className="px-7 py-3.5 rounded-xl bg-transparent hover:bg-white/10 border border-[#D7A742]/60 hover:border-[#D7A742] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2.5 backdrop-blur-md active:scale-[0.98] cursor-pointer"
                 >
                   <span>Explore Recommendations</span>
                   <Package className="w-4 h-4 text-white" />
                 </button>
               </div>
-            </div>
 
-            {/* Right Side Dish Image */}
-            <div className="relative w-full lg:w-96 h-52 sm:h-64 rounded-2xl overflow-hidden border border-[#D7A742]/30 shadow-xl shrink-0">
-              <Image
-                src="/image/Dashboard.png"
-                alt="Executive Gourmet Dish Presentation"
-                fill
-                unoptimized
-                className="object-cover"
-                priority
-              />
             </div>
 
           </div>
+
         </div>
 
-        {/* MATCHED PRODUCTS READY FOR ORDER - EXACT 1:1 CARD DESIGN MATCH */}
-        <div className="space-y-6 pt-4 text-left">
-          
+        {/* SECTION 1: MATCHED SKUS READY FOR ORDER - EXACT 1:1 PIXEL MATCH TO REFERENCE IMAGE */}
+        <div className="space-y-6 pt-4 relative text-left">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
             <div>
               <div className="text-[10px] uppercase font-bold tracking-[0.22em] text-[#5E3B8C] flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#5E3B8C]" />
                 <span>MATCHED PRODUCTS READY FOR ORDER</span>
               </div>
-              <h3 className="text-2xl lg:text-3xl font-serif text-[#111111] font-bold mt-0.5 tracking-tight">
+              <h3 className="text-2xl lg:text-3xl font-serif text-[#111111] font-normal mt-0.5 tracking-tight">
                 Recommended for Your Kitchen
               </h3>
-              <p className="text-xs text-slate-500 font-medium mt-1">
+              <p className="text-xs text-slate-400 font-medium mt-1">
                 Calibrated with your exact signature recipes for seamless kitchen switchovers.
               </p>
             </div>
 
-            {/* Search and filter options */}
-            <div className="flex items-center gap-2 overflow-x-auto shrink-0">
-              {(["All", "Excellent Match", "Strong Match"] as const).map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    activeFilter === filter
-                      ? "bg-[#1C0B33] text-white shadow-2xs"
-                      : "bg-white border border-slate-200/90 text-slate-700 hover:bg-purple-50 hover:text-[#5E3B8C]"
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="text-xs text-slate-500 font-medium">Sort by:</span>
+              <select className="bg-white border border-slate-200/90 rounded-full text-xs font-semibold px-4 py-1.5 text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/20 shadow-2xs cursor-pointer">
+                <option>Highest Match %</option>
+                <option>Category</option>
+                <option>Delivery Time</option>
+              </select>
             </div>
           </div>
 
-          {/* 3 PRODUCT CARDS USING EXACT PIXEL-PERFECT HORIZONTAL LAYOUT */}
-          <div className="space-y-4">
-            {filteredCards.map((item) => {
-              const hasNote = Boolean(notesState[item.id]);
+          {/* 3 Product Cards Grid matching reference image pixel-by-pixel */}
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+              {dashboardCards.map((item) => {
+                const hasNote = Boolean(notesState[item.id]);
 
-              return (
-                <div
-                  key={item.id}
-                  className="bg-white rounded-3xl border border-slate-200/90 p-6 shadow-2xs hover:shadow-md transition-all duration-300 text-left flex flex-col lg:flex-row gap-6 justify-between items-stretch group"
-                >
-                  {/* LEFT MAIN CONTENT */}
-                  <div className="flex-1 space-y-4">
-                    
-                    {/* Top Row: Thumbnail + Brand Badge + Product Title + Meta Info */}
-                    <div className="flex flex-col sm:flex-row items-start gap-4">
-                      
-                      {/* Image Container with Utensils Icon Badge */}
-                      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          fill
-                          unoptimized
-                          className="object-cover"
-                        />
-                        <div className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-xs text-[#5E3B8C] flex items-center justify-center shadow-xs border border-purple-100">
-                          <Utensils className="w-3.5 h-3.5" />
-                        </div>
+                return (
+                  <div
+                    key={item.id}
+                    className="bg-white rounded-[28px] border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group text-left relative"
+                  >
+                    {/* Top Edge-to-Edge Image Banner with Overlaid Badges */}
+                    <div className="relative h-56 w-full overflow-hidden bg-slate-100 group/img">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        unoptimized
+                        className="object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
+                      />
+
+                      {/* Top Left Brand Badge */}
+                      <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-xs">
+                        {item.brand}
                       </div>
 
-                      {/* Title & Metadata */}
-                      <div className="space-y-1.5 flex-1">
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
-                              {item.brand}
-                            </span>
-                            <h3 className="text-xl font-serif font-bold text-[#111111] group-hover:text-[#1C0B33] transition-colors">
-                              {item.title}
-                            </h3>
-                          </div>
+                      {/* Top Right Intended Dish Pill with Chef Hat Icon */}
+                      <div className={`absolute top-3.5 right-3.5 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-extrabold border flex items-center gap-1.5 shadow-xs ${
+                        item.forDishTheme === "purple"
+                          ? "bg-[#F4EFFB]/95 text-[#5E3B8C] border-[#E2D4F7]"
+                          : item.forDishTheme === "emerald"
+                          ? "bg-[#E6F9F0]/95 text-[#0D9488] border-[#BBF7D0]"
+                          : "bg-[#FEF6E6]/95 text-[#B45309] border-[#FDE68A]"
+                      }`}>
+                        <ChefHat className={`w-3.5 h-3.5 ${
+                          item.forDishTheme === "purple"
+                            ? "text-[#5E3B8C]"
+                            : item.forDishTheme === "emerald"
+                            ? "text-[#0D9488]"
+                            : "text-[#B45309]"
+                        }`} />
+                        <span>{item.forDish}</span>
+                      </div>
+                    </div>
 
-                          {/* AI Match Score Badge */}
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs text-slate-400 font-medium">Match:</span>
-                            <span className={`text-xs font-extrabold px-3 py-1 rounded-full ${
-                              item.matchType === "EXCELLENT"
-                                ? "bg-emerald-100/70 text-emerald-900"
-                                : "bg-purple-100/70 text-[#5E3B8C]"
-                            }`}>
-                              {item.matchPercent}% {item.matchLabel}
-                            </span>
-                          </div>
-                        </div>
+                    {/* Card Content Section */}
+                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                      
+                      {/* Title & Description */}
+                      <div className="space-y-1.5">
+                        <h3 className="font-serif text-xl sm:text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#1C0B33] transition-colors">
+                          {item.title}
+                        </h3>
 
-                        {/* Related Dish */}
-                        <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium pt-0.5">
-                          <ChefHat className="w-3.5 h-3.5 text-purple-600" />
-                          <span>Related dish: <strong className="text-slate-800 font-bold">{item.relatedDish}</strong></span>
-                        </div>
-
-                        {/* Description */}
-                        <p className="text-xs text-slate-600 leading-relaxed font-normal pt-1">
+                        <p className="text-xs text-slate-500 font-normal leading-relaxed">
                           {item.description}
                         </p>
+                      </div>
 
-                        {/* Chef Note if present */}
-                        {hasNote && (
-                          <div className="bg-[#FFFBEB] border border-[#FDE68A] p-2.5 rounded-xl flex items-center gap-2 text-xs text-[#92400E] font-medium mt-1">
-                            <MessageSquare className="w-3.5 h-3.5 text-[#D97706] shrink-0" />
-                            <span>Note: {notesState[item.id]}</span>
-                          </div>
-                        )}
+                      {/* Light Amber / Yellow Note Box (Rendered when note exists) */}
+                      {hasNote && (
+                        <div className="bg-[#FFFBEB] border border-[#FDE68A] p-3 rounded-2xl flex items-start gap-2.5 text-xs text-[#92400E] font-medium shadow-2xs">
+                          <Lightbulb className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{notesState[item.id]}</span>
+                        </div>
+                      )}
 
-                        {/* Tags */}
-                        <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                          {item.tags.map((tag, idx) => (
-                            <span
-                              key={idx}
-                              className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-[11px] font-medium"
-                            >
-                              {tag}
+                      {/* AI Pairing Score Section */}
+                      <div className="space-y-2 pt-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            AI PAIRING SCORE
+                          </span>
+
+                          <div className="flex items-center gap-2">
+                            <span className="font-black text-slate-900 text-sm sm:text-base">
+                              {item.matchPercent}%
                             </span>
-                          ))}
+                            <span className={`text-[10.5px] font-extrabold px-3 py-0.5 rounded-full ${
+                              item.matchType === "EXCELLENT"
+                                ? "bg-[#E6F9F0] text-[#0D9488]"
+                                : "bg-[#F4EFFB] text-[#5E3B8C]"
+                            }`}>
+                              {item.matchLabel}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Full-width Progress Bar Track */}
+                        <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div
+                            style={{ width: `${item.matchPercent}%` }}
+                            className={`h-full rounded-full transition-all duration-1000 ease-out ${
+                              item.matchType === "EXCELLENT" ? "bg-[#0D9488]" : "bg-[#5E3B8C]"
+                            }`}
+                          />
                         </div>
                       </div>
 
-                    </div>
+                      {/* Bottom Action Row */}
+                      <div className="flex items-center gap-2.5 pt-2">
+                        
+                        {/* Primary "View Product →" Button */}
+                        <button
+                          onClick={() => onNavigateTab("product-detail")}
+                          className="flex-1 py-3 px-5 rounded-2xl bg-[#1B0B2E] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.98]"
+                        >
+                          <span>View Product</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
+                        </button>
 
-                    {/* TIMELINE STEPPER (4 STAGES) */}
-                    <div className="pt-4 border-t border-slate-100">
-                      <div className="relative flex items-center justify-between max-w-xl mx-auto px-4">
-                        <div className="absolute left-6 right-6 top-3.5 h-[2px] bg-slate-200 -z-0" />
-                        <div 
-                          className="absolute left-6 top-3.5 h-[2px] bg-purple-700 transition-all duration-500 -z-0"
-                          style={{
-                            width: item.stepProgress === 1 ? "0%" : item.stepProgress === 2 ? "33%" : item.stepProgress === 3 ? "66%" : "100%"
-                          }}
-                        />
+                        {/* Comment / Chef Note Square Button */}
+                        <button
+                          onClick={() => openNoteModal(item.id)}
+                          className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 border transition-all cursor-pointer shadow-2xs active:scale-95 ${
+                            item.forDishTheme === "purple"
+                              ? "bg-[#F4EFFB] text-[#5E3B8C] border-[#E2D4F7] hover:bg-[#E9DDF8]"
+                              : item.forDishTheme === "emerald"
+                              ? "bg-[#E6F9F0] text-[#0D9488] border-[#BBF7D0] hover:bg-[#D1F4E4]"
+                              : "bg-[#FEF6E6] text-[#B45309] border-[#FDE68A] hover:bg-[#FDE8C7]"
+                          }`}
+                          title="Chef's Note"
+                        >
+                          <MessageSquare className="w-4 h-4" />
+                        </button>
 
-                        {/* Stage 1 */}
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                            item.stepProgress >= 1 
-                              ? "bg-[#1C0B33] text-white shadow-xs" 
-                              : "bg-white border-2 border-slate-300 text-slate-400"
-                          }`}>
-                            <Check className="w-3.5 h-3.5" />
-                          </div>
-                          <div className="mt-2 space-y-0.5">
-                            <div className="text-[11px] font-bold text-slate-900">Recipe Matched</div>
-                            <div className="text-[10px] text-slate-400 font-medium">{item.submittedDate}</div>
-                          </div>
-                        </div>
-
-                        {/* Stage 2 */}
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                            item.stepProgress > 2
-                              ? "bg-[#1C0B33] text-white"
-                              : item.stepProgress === 2
-                              ? "bg-amber-500 text-white ring-4 ring-amber-100"
-                              : "bg-white border-2 border-slate-300 text-slate-400"
-                          }`}>
-                            {item.stepProgress > 2 ? <Check className="w-3.5 h-3.5" /> : <div className="w-2 h-2 rounded-full bg-white" />}
-                          </div>
-                          <div className="mt-2 space-y-0.5">
-                            <div className="text-[11px] font-bold text-slate-900">Sample Testing</div>
-                            {item.underReviewNote && (
-                              <div className="text-[10px] text-slate-400 font-medium">{item.underReviewNote}</div>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Stage 3 */}
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                            item.stepProgress > 3
-                              ? "bg-[#1C0B33] text-white"
-                              : item.stepProgress === 3
-                              ? "bg-[#5E3B8C] text-white ring-4 ring-purple-100"
-                              : "bg-white border-2 border-slate-300 text-slate-400"
-                          }`}>
-                            {item.stepProgress > 3 ? <Check className="w-3.5 h-3.5" /> : <div className="w-2 h-2 rounded-full bg-white" />}
-                          </div>
-                          <div className="mt-2 space-y-0.5">
-                            <div className="text-[11px] font-bold text-slate-900">Sales Contacted</div>
-                            {item.salesContactedNote && (
-                              <div className="text-[10px] text-slate-400 font-medium">{item.salesContactedNote}</div>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Stage 4 */}
-                        <div className="relative z-10 flex flex-col items-center text-center">
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                            item.stepProgress >= 4
-                              ? "bg-emerald-600 text-white"
-                              : "bg-white border-2 border-slate-300 text-slate-400"
-                          }`}>
-                            {item.stepProgress >= 4 ? <Check className="w-3.5 h-3.5" /> : null}
-                          </div>
-                          <div className="mt-2 space-y-0.5">
-                            <div className="text-[11px] font-bold text-slate-900">In Menu</div>
-                          </div>
-                        </div>
+                        {/* Bookmark Icon Button */}
+                        <button
+                          onClick={() => alert("Added to bookmarks")}
+                          className="w-11 h-11 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                          title="Bookmark item"
+                        >
+                          <Bookmark className="w-4 h-4" />
+                        </button>
 
                       </div>
+
                     </div>
 
                   </div>
+                );
+              })}
+            </div>
 
-                  {/* RIGHT SIDE CONTACT PERSON PANEL */}
-                  <div className="w-full lg:w-56 bg-slate-50/80 rounded-2xl p-4 border border-slate-100 flex flex-col justify-between shrink-0 space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-purple-100 text-[#5E3B8C] flex items-center justify-center shrink-0">
-                        <User className="w-4 h-4" />
-                      </div>
-                      <div className="text-left">
-                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Contact Person</div>
-                        <div className="text-xs font-bold text-slate-900">{item.contact}</div>
-                        <div className="text-[10px] text-slate-500 font-medium">{item.contactRole}</div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => onNavigateTab("product-detail")}
-                        className="w-full py-2.5 px-3 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
-                      >
-                        <span>View Details</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-
-                      <button
-                        onClick={() => openNoteModal(item.id)}
-                        className="w-full py-2.5 px-3 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs"
-                      >
-                        <MessageSquare className="w-3.5 h-3.5 text-slate-600" />
-                        <span>Chef Note</span>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-              );
-            })}
+            {/* Right Floating Navigation Button */}
+            <button
+              onClick={() => onNavigateTab("products")}
+              className="hidden lg:flex w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md items-center justify-center text-slate-700 hover:bg-slate-50 absolute -right-5 top-1/2 -translate-y-1/2 z-10 transition-all hover:scale-105 cursor-pointer"
+              title="Browse All Products"
+            >
+              <ChevronRight className="w-5 h-5 text-slate-600" />
+            </button>
           </div>
-
         </div>
 
-        {/* AI PAIRING SUGGESTIONS SECTION */}
+        {/* SECTION 2: AI PAIRING SUGGESTIONS */}
         <AIPairingSuggestionsSection onNavigateTab={onNavigateTab} />
 
       </div>
