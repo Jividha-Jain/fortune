@@ -58,14 +58,14 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
   const currentProductObj = productsList.find((p) => p.name === selectedProduct) || productsList[0];
 
   const handleSwap = () => {
-    // Swap animation / trigger
+    // Swap animation or trigger
   };
 
   return (
-    <div className="w-full bg-[#FAF9F6] rounded-[32px] p-6 sm:p-8 lg:p-10 border border-slate-100 shadow-[0_4px_30px_rgba(0,0,0,0.02)] space-y-8 font-sans text-left relative overflow-hidden">
+    <div className="w-full bg-[#FAF9F6] rounded-[32px] p-6 sm:p-8 lg:p-10 border border-slate-100 shadow-[0_4px_30px_rgba(0,0,0,0.02)] space-y-8 font-sans text-left relative">
       
       {/* 1. HERO SECTION WITH BURRATA SALAD ARTWORK */}
-      <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pt-2 pr-0 lg:pr-12">
         
         {/* Left Side Content */}
         <div className="space-y-4 max-w-xl z-10">
@@ -89,23 +89,23 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
         </div>
 
         {/* Right Side: Cursive Handwriting Annotation + Top Right Burrata Plate */}
-        <div className="hidden md:flex items-center gap-4 relative z-10 shrink-0">
+        <div className="hidden md:flex items-center gap-6 relative z-10 shrink-0">
           
           {/* Cursive Handwriting Text */}
-          <div className="text-right font-serif italic text-lg sm:text-xl text-[#4A5568] font-medium leading-tight relative pr-4">
+          <div className="text-right font-serif italic text-lg sm:text-xl text-[#4A5568] font-medium leading-tight relative">
             <span>Good<br />Ingredients<br />Create<br />Great Stories</span>
             {/* Small yellow underline stroke */}
             <div className="w-12 h-1 bg-[#F5C242] rounded-full mt-1 ml-auto" />
           </div>
 
           {/* Top Right Plate Image (Caprese Burrata Salad with Basil & Tomatoes) */}
-          <div className="relative w-44 h-44 sm:w-56 sm:h-56 rounded-full overflow-hidden shadow-2xl border-4 border-white">
+          <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden shadow-2xl border-4 border-white shrink-0 bg-slate-100">
             <Image
-              src="https://images.unsplash.com/photo-1592417817098-8f3d6eb23659?auto=format&fit=crop&w=600&q=80"
-              alt="Burrata Caprese Salad"
+              src="https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=600&q=80"
+              alt="Fresh Puglia Burrata Dish"
               fill
               unoptimized
-              className="object-cover scale-110"
+              className="object-cover scale-105"
             />
           </div>
 
@@ -124,7 +124,7 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
               I HAVE A DISH
             </span>
             <div className="bg-[#FAFBFD] border border-slate-200/80 rounded-2xl p-2.5 px-3 flex items-center gap-3 relative cursor-pointer hover:border-slate-300 transition-colors">
-              <div className="relative w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-slate-200">
+              <div className="relative w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-slate-200 bg-slate-100">
                 <Image src={currentDishObj.image} alt={currentDishObj.name} fill unoptimized className="object-cover" />
               </div>
               <select
@@ -154,7 +154,7 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
               I HAVE A PRODUCT
             </span>
             <div className="bg-[#FAFBFD] border border-slate-200/80 rounded-2xl p-2.5 px-3 flex items-center gap-3 relative cursor-pointer hover:border-slate-300 transition-colors">
-              <div className="relative w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-slate-200">
+              <div className="relative w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-slate-200 bg-slate-100">
                 <Image src={currentProductObj.image} alt={currentProductObj.name} fill unoptimized className="object-cover" />
               </div>
               <select
@@ -215,7 +215,7 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
               className="bg-white rounded-[24px] p-4 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-all duration-300 flex items-stretch gap-4 group"
             >
               {/* Left Image Column */}
-              <div className="relative w-32 sm:w-36 h-36 sm:h-40 rounded-2xl overflow-hidden shrink-0">
+              <div className="relative w-32 sm:w-36 h-36 sm:h-40 rounded-2xl overflow-hidden shrink-0 bg-slate-100">
                 <Image
                   src={card.image}
                   alt={card.title}
