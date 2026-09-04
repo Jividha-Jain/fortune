@@ -25,7 +25,15 @@ import {
   User,
   ShieldCheck,
   TrendingUp,
-  X
+  X,
+  Navigation,
+  Compass,
+  Crosshair,
+  Maximize2,
+  Minimize2,
+  Zap,
+  Sun,
+  Moon
 } from "lucide-react";
 
 interface ScreenOrdersProps {
@@ -36,6 +44,9 @@ export default function ScreenOrders({ onNavigateTab }: ScreenOrdersProps) {
   const [activeTab, setActiveTab] = useState<"active" | "standing" | "history">("active");
   const [showAllItems, setShowAllItems] = useState(false);
   const [driverModal, setDriverModal] = useState(false);
+  const [mapStyle, setMapStyle] = useState<"street" | "satellite" | "night">("street");
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
+  const [showTraffic, setShowTraffic] = useState<boolean>(true);
 
   const manifestItems = [
     {
@@ -323,64 +334,262 @@ export default function ScreenOrders({ onNavigateTab }: ScreenOrdersProps) {
               {/* LIVE GPS TELEMETRY MAP GRID (12 COLS: 7 MAP, 5 TELEMETRY) */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
                 
-                {/* Visual Live Route Map Box (7 Cols) */}
-                <div className="lg:col-span-7 bg-[#EBE9F5]/40 border border-slate-200/80 rounded-2xl p-5 relative overflow-hidden min-h-[220px] flex flex-col justify-between">
+                {/* Visual Swiggy-Style Interactive Live Route Map Box (7 Cols) */}
+                <div className={`lg:col-span-7 rounded-2xl border relative overflow-hidden min-h-[340px] flex flex-col justify-between transition-all duration-500 shadow-md ${
+                  mapStyle === "street" 
+                    ? "bg-[#EBF0F5] border-slate-300" 
+                    : mapStyle === "satellite" 
+                    ? "bg-[#0B1320] border-slate-800 text-white" 
+                    : "bg-[#0F071F] border-purple-900 text-white"
+                }`}>
                   
-                  {/* Map Weather Badge Top Right */}
-                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md border border-slate-200/80 px-3 py-1 rounded-xl shadow-2xs text-[10px] font-bold text-[#111111] flex items-center gap-1.5 z-10">
-                    <span>🌙</span>
-                    <span>24°C</span>
-                    <span className="text-slate-400 font-normal">Clear</span>
+                  {/* MAP BACKGROUND VECTOR GRAPHICS & STREET GRID (SIMULATING MUMBAI METRO LOGISTICS ROUTE) */}
+                  <div className="absolute inset-0 z-0 opacity-80 pointer-events-none overflow-hidden">
+                    
+                    {/* Water Body (Thane Creek & Arabian Sea Coastline) */}
+                    <svg className="w-full h-full absolute inset-0" viewBox="0 0 1000 400" preserveAspectRatio="none">
+                      {mapStyle === "street" ? (
+                        <>
+                          {/* Land background */}
+                          <rect width="1000" height="400" fill="#E8ECEF" />
+                          {/* Parks / Greenery */}
+                          <path d="M 50,0 Q 200,100 150,300 L 0,300 L 0,0 Z" fill="#D8E8D4" />
+                          <path d="M 600,0 Q 750,80 700,250 L 550,200 Z" fill="#D8E8D4" />
+                          {/* Water (Arabian Sea & Thane Creek) */}
+                          <path d="M 0,220 Q 300,260 500,180 T 1000,240 L 1000,400 L 0,400 Z" fill="#C5DCEF" opacity="0.9" />
+                          {/* Minor Roads Grid */}
+                          <path d="M 0,80 L 1000,120 M 0,160 L 1000,200 M 200,0 L 250,400 M 450,0 L 480,400 M 700,0 L 720,400" stroke="#FFFFFF" strokeWidth="4" />
+                        </>
+                      ) : mapStyle === "satellite" ? (
+                        <>
+                          <rect width="1000" height="400" fill="#0B1320" />
+                          <path d="M 0,220 Q 300,260 500,180 T 1000,240 L 1000,400 L 0,400 Z" fill="#050A14" />
+                          <path d="M 0,80 L 1000,120 M 0,160 L 1000,200 M 200,0 L 250,400 M 700,0 L 720,400" stroke="#1E293B" strokeWidth="2" strokeDasharray="4 4" />
+                        </>
+                      ) : (
+                        <>
+                          <rect width="1000" height="400" fill="#0F071F" />
+                          <path d="M 0,220 Q 300,260 500,180 T 1000,240 L 1000,400 L 0,400 Z" fill="#07030D" />
+                          <path d="M 0,80 L 1000,120 M 0,160 L 1000,200 M 200,0 L 250,400" stroke="#261048" strokeWidth="2" />
+                        </>
+                      )}
+
+                      {/* MAIN EXPRESSWAY HIGHWAY ROUTE (Thick Arterial Road) */}
+                      <path 
+                        d="M 100,100 C 250,80 400,180 600,140 C 720,110 820,240 900,260" 
+                        fill="none" 
+                        stroke={mapStyle === "street" ? "#FFFFFF" : mapStyle === "satellite" ? "#1E293B" : "#241042"} 
+                        strokeWidth="14" 
+                        strokeLinecap="round"
+                      />
+                      <path 
+                        d="M 100,100 C 250,80 400,180 600,140 C 720,110 820,240 900,260" 
+                        fill="none" 
+                        stroke={mapStyle === "street" ? "#F59E0B" : mapStyle === "satellite" ? "#D97706" : "#7C3AED"} 
+                        strokeWidth="8" 
+                        strokeLinecap="round"
+                        opacity="0.3"
+                      />
+
+                      {/* SWIGGY LIVE ACTIVE GPS ROUTE (GLOWING ANIMATED TRAIL) */}
+                      <path 
+                        d="M 100,100 C 250,80 400,180 600,140 C 720,110 820,240 900,260" 
+                        fill="none" 
+                        stroke={mapStyle === "street" ? "#5E3B8C" : mapStyle === "satellite" ? "#10B981" : "#A855F7"} 
+                        strokeWidth="5" 
+                        strokeLinecap="round"
+                      />
+                      {/* Animated Moving Dash Segment */}
+                      <path 
+                        d="M 100,100 C 250,80 400,180 600,140 C 720,110 820,240 900,260" 
+                        fill="none" 
+                        stroke="#F5C453" 
+                        strokeWidth="5" 
+                        strokeDasharray="16 20" 
+                        strokeLinecap="round"
+                        className="animate-pulse"
+                      />
+                    </svg>
                   </div>
 
-                  {/* Graphic Route SVG Line connecting from Left to Right */}
-                  <svg className="w-full h-full absolute inset-0 text-[#5E3B8C] pointer-events-none z-0" viewBox="0 0 1000 200" preserveAspectRatio="none">
-                    <path 
-                      d="M 120 140 C 250 20, 600 20, 750 120 C 800 150, 850 140, 880 140" 
-                      fill="none" 
-                      stroke="#5E3B8C" 
-                      strokeWidth="3" 
-                      strokeDasharray="6 6" 
-                    />
-                  </svg>
-
-                  {/* Live Truck Marker on the Route Apex */}
-                  <div className="absolute top-[32%] left-[42%] -translate-y-1/2 -translate-x-1/2 z-10">
-                    <div className="bg-[#6B4699] text-white px-3 py-1.5 rounded-full shadow-md border-2 border-white flex items-center gap-1.5">
-                      <Truck className="w-4 h-4 text-white" />
-                      <span className="text-[10px] font-bold tracking-wider text-amber-300 font-mono">MH-04-FG-9021</span>
+                  {/* MAP TOP CONTROLS TOOLBAR (SWIGGY LIVE GPS HEADER) */}
+                  <div className="relative z-10 p-3 flex flex-wrap items-center justify-between gap-2">
+                    
+                    {/* Live GPS Pulse Badge */}
+                    <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 px-3 py-1.5 rounded-full shadow-sm text-xs font-bold flex items-center gap-2">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                      </span>
+                      <span className="text-[#111111] dark:text-white font-mono text-[11px]">LIVE GPS • Eastern Express Hwy</span>
                     </div>
+
+                    {/* Map Controls: Style Switcher & Zoom */}
+                    <div className="flex items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-1 rounded-full border border-slate-200/80 dark:border-slate-700 shadow-sm text-[11px]">
+                      
+                      {/* Street View Toggle */}
+                      <button
+                        onClick={() => setMapStyle("street")}
+                        className={`px-2.5 py-1 rounded-full font-bold transition-all cursor-pointer ${
+                          mapStyle === "street" 
+                            ? "bg-[#1C0B33] text-white shadow-xs" 
+                            : "text-slate-600 hover:text-slate-900 dark:text-slate-300"
+                        }`}
+                      >
+                        Street
+                      </button>
+
+                      {/* Satellite View Toggle */}
+                      <button
+                        onClick={() => setMapStyle("satellite")}
+                        className={`px-2.5 py-1 rounded-full font-bold transition-all cursor-pointer ${
+                          mapStyle === "satellite" 
+                            ? "bg-[#1C0B33] text-white shadow-xs" 
+                            : "text-slate-600 hover:text-slate-900 dark:text-slate-300"
+                        }`}
+                      >
+                        Satellite
+                      </button>
+
+                      {/* Night Mode Toggle */}
+                      <button
+                        onClick={() => setMapStyle("night")}
+                        className={`px-2.5 py-1 rounded-full font-bold transition-all cursor-pointer ${
+                          mapStyle === "night" 
+                            ? "bg-[#5E3B8C] text-white shadow-xs" 
+                            : "text-slate-600 hover:text-slate-900 dark:text-slate-300"
+                        }`}
+                      >
+                        Night
+                      </button>
+
+                      <div className="w-px h-3 bg-slate-300 dark:bg-slate-700 mx-0.5" />
+
+                      {/* Recenter Button */}
+                      <button
+                        onClick={() => alert("Recentered camera on Vehicle #MH-04-FG-9021")}
+                        className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 cursor-pointer"
+                        title="Recenter GPS"
+                      >
+                        <Crosshair className="w-3.5 h-3.5" />
+                      </button>
+
+                    </div>
+
                   </div>
 
-                  {/* Mumbai City Pin near Destination */}
-                  <div className="absolute bottom-[28%] right-[22%] z-10 flex items-center gap-1 text-[11px] font-bold text-[#111111]">
-                    <span>Mumbai</span>
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#5E3B8C] border-2 border-white shadow-xs" />
-                  </div>
-
-                  {/* Map Waypoints Row */}
-                  <div className="relative z-10 flex justify-between items-end w-full h-full pt-16">
-                    {/* Point 1: Bhiwandi Cold Hub */}
-                    <div className="bg-white/95 backdrop-blur-md border border-slate-200/90 p-3 rounded-2xl shadow-xs text-left max-w-[140px]">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-[#111111]">
-                        <div className="w-5 h-5 rounded-lg bg-[#5E3B8C]/15 text-[#5E3B8C] flex items-center justify-center shrink-0">
-                          <Box className="w-3.5 h-3.5 text-[#5E3B8C]" />
+                  {/* MAP INTERACTIVE PINS & MOVING SWIGGY VEHICLE MARKER */}
+                  <div className="relative z-10 w-full flex-1 my-2 min-h-[160px]">
+                    
+                    {/* ORIGIN PIN: BHIWANDI COLD HUB (TOP LEFT) */}
+                    <div className="absolute top-[18%] left-[8%] z-10 group">
+                      <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-300 dark:border-slate-700 px-3 py-1.5 rounded-2xl shadow-lg flex items-center gap-2 transition-transform group-hover:scale-105">
+                        <div className="w-6 h-6 rounded-lg bg-slate-100 dark:bg-slate-800 text-[#5E3B8C] flex items-center justify-center font-bold text-xs shrink-0">
+                          <Box className="w-3.5 h-3.5" />
                         </div>
-                        <span>Bhiwandi Cold Hub</span>
+                        <div className="text-left">
+                          <div className="font-bold text-slate-900 dark:text-white text-xs leading-tight">Bhiwandi Hub</div>
+                          <div className="text-[9px] text-slate-500 font-mono">Dispatched 02:20 AM</div>
+                        </div>
                       </div>
-                      <div className="text-[10px] text-slate-400 font-medium pl-6">02:20 AM</div>
+                      {/* Pulse Ring below Origin */}
+                      <div className="w-3 h-3 bg-slate-400 rounded-full border-2 border-white mx-auto mt-1 shadow-md" />
                     </div>
 
-                    {/* Point 2: Destination Taj Mahal Palace */}
-                    <div className="bg-white/95 backdrop-blur-md border border-slate-200/90 p-3 rounded-2xl shadow-xs text-left max-w-[160px]">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-[#111111]">
-                        <div className="w-5 h-5 rounded-lg bg-[#5E3B8C] text-white flex items-center justify-center shrink-0">
-                          <MapPin className="w-3.5 h-3.5 text-white" />
-                        </div>
-                        <span>Taj Mahal Palace Loading Bay 2</span>
+                    {/* WAYPOINT LANDMARK: VIKHROLI EXPRESSWAY */}
+                    <div className="absolute top-[48%] left-[34%] z-10 hidden sm:block">
+                      <div className="bg-slate-900/80 text-white text-[9px] font-bold px-2 py-0.5 rounded-md border border-slate-700 backdrop-blur-xs flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                        <span>Vikhroli Toll (Passed)</span>
                       </div>
-                      <div className="text-[10px] text-[#0D9488] font-bold pl-6">ETA 05:45 AM</div>
                     </div>
+
+                    {/* SWIGGY-STYLE LIVE MOVING VEHICLE MARKER (CENTER ROUTE APEX) */}
+                    <div className="absolute top-[34%] left-[58%] -translate-x-1/2 -translate-y-1/2 z-30 group cursor-pointer">
+                      
+                      {/* Outer Glowing Pulsing Beacon Rings (Swiggy Signature Pulse) */}
+                      <div className="absolute -inset-4 rounded-full bg-[#5E3B8C]/30 animate-ping pointer-events-none" />
+                      <div className="absolute -inset-2 rounded-full bg-amber-400/40 animate-pulse pointer-events-none" />
+
+                      {/* Vehicle Main Marker Badge */}
+                      <div className="relative bg-[#1C0B33] text-white px-3.5 py-1.5 rounded-full shadow-2xl border-2 border-[#F5C453] flex items-center gap-2 hover:scale-110 transition-transform">
+                        <div className="w-5 h-5 rounded-full bg-[#F5C453] text-[#1C0B33] flex items-center justify-center shrink-0">
+                          <Truck className="w-3.5 h-3.5 stroke-[2.5]" />
+                        </div>
+                        <div className="text-left leading-none">
+                          <div className="text-[11px] font-bold font-mono text-[#F5C453]">MH-04-FG-9021</div>
+                          <div className="text-[9px] text-purple-200 font-semibold mt-0.5">42 km/h • Chilled</div>
+                        </div>
+                      </div>
+
+                      {/* Tooltip on Hover */}
+                      <div className="absolute left-1/2 -translate-x-1/2 top-10 bg-slate-900 text-white text-[10px] py-1 px-2.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl z-40 border border-slate-700 pointer-events-none font-medium">
+                        Driver Ramesh Kumar • Temperature verified -19.2°C
+                      </div>
+
+                    </div>
+
+                    {/* DESTINATION PIN: TAJ MAHAL PALACE (BOTTOM RIGHT) */}
+                    <div className="absolute bottom-[10%] right-[6%] z-20 group">
+                      <div className="bg-[#1C0B33] text-white border-2 border-emerald-400 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2 transition-transform group-hover:scale-105">
+                        <div className="w-7 h-7 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
+                          <MapPin className="w-4 h-4 fill-current" />
+                        </div>
+                        <div className="text-left">
+                          <div className="font-bold text-white text-xs leading-tight">Taj Mahal Palace</div>
+                          <div className="text-[10px] text-emerald-300 font-bold flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>Bay 2 • ETA 05:45 AM</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* SWIGGY LIVE ORDER TRACKING BOTTOM BAR */}
+                  <div className="relative z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/80 dark:border-slate-800 p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+                    
+                    {/* Left: Driver Status Info */}
+                    <div className="flex items-center gap-3">
+                      <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 border-[#5E3B8C]">
+                        <Image
+                          src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=200&q=80"
+                          alt="Driver Ramesh"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                          <span>Ramesh is delivering your order</span>
+                          <span className="bg-amber-100 text-amber-900 text-[9px] font-bold px-2 py-0.2 rounded-full">5★ Driver</span>
+                        </div>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                          14.2 km remaining • On schedule for 05:45 AM delivery
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Quick Actions */}
+                    <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                      <button
+                        onClick={() => setDriverModal(true)}
+                        className="flex-1 sm:flex-initial bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                      >
+                        <Phone className="w-3.5 h-3.5 text-amber-400" />
+                        <span>Call Driver</span>
+                      </button>
+
+                      <button
+                        onClick={() => alert("Copied Live Delivery Tracking URL to clipboard.")}
+                        className="bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold px-3 py-2 rounded-xl transition-all cursor-pointer"
+                        title="Share Tracking Link"
+                      >
+                        <Navigation className="w-3.5 h-3.5 text-slate-600 dark:text-slate-300" />
+                      </button>
+                    </div>
+
                   </div>
 
                 </div>
