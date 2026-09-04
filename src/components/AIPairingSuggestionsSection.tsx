@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { ALL_PRODUCTS } from "@/data/productsData";
 
 interface AIPairingSuggestionsSectionProps {
@@ -58,8 +58,8 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
   return (
     <div className="w-full bg-[#FAF9FC] rounded-[36px] p-6 sm:p-8 lg:p-10 border border-slate-100 shadow-[0_4px_30px_rgba(0,0,0,0.02)] space-y-8 font-sans text-left relative overflow-hidden">
       
-      {/* Soft Purple Radial Background Disc Bleeding in Top-Right */}
-      <div className="absolute top-[-50px] right-[-50px] w-[500px] h-[500px] bg-gradient-to-bl from-[#ECE5F8]/90 via-[#F3EDFB]/50 to-transparent rounded-full blur-2xl pointer-events-none z-0" />
+      {/* Soft Purple Background Disc at Top Right */}
+      <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-gradient-to-bl from-[#ECE5F8]/70 via-[#F3EDFB]/40 to-transparent rounded-full blur-2xl pointer-events-none z-0" />
 
       {/* 1. TOP HERO SECTION */}
       <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 z-10 pt-2 min-h-[140px]">
@@ -114,14 +114,15 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
         {cards.map((card) => (
           <div
             key={card.id}
-            className={`${card.bgColor} rounded-[28px] p-5 sm:p-6 border border-slate-200/40 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[300px] text-left`}
+            onClick={() => onNavigateTab("recommendations")}
+            className={`${card.bgColor} rounded-[28px] p-5 sm:p-6 border border-slate-200/50 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group min-h-[290px] text-left cursor-pointer`}
           >
             <div>
               {/* Card Top Composition: Dish Circle + Plus Badge + Product Item */}
               <div className="relative flex items-center justify-between gap-1 py-3 px-1 h-36">
                 
                 {/* Dish Plate Circle */}
-                <div className="relative w-26 h-26 sm:w-28 sm:h-28 rounded-full overflow-hidden shadow-md border-2 border-white shrink-0 group-hover:scale-105 transition-transform duration-300 bg-white">
+                <div className="relative w-26 h-26 sm:w-28 sm:h-28 rounded-full overflow-hidden shadow-md ring-4 ring-white shrink-0 group-hover:scale-105 transition-transform duration-300 bg-white">
                   <Image
                     src={card.dishImage}
                     alt={card.dishTitle}
@@ -132,29 +133,29 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
                 </div>
 
                 {/* Plus Circle Badge */}
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white text-[#2B145E] font-bold text-xs flex items-center justify-center shrink-0 shadow-sm border border-purple-100/80 z-10 -mx-3">
+                <div className="w-7 h-7 rounded-full bg-white text-[#2B145E] font-extrabold text-xs flex items-center justify-center shrink-0 shadow-md ring-2 ring-purple-100/90 z-10 -mx-3">
                   +
                 </div>
 
-                {/* Official Fortune Gourmet Product Image Container (Sleek dark frame for catalog JPEGs) */}
-                <div className="relative w-20 h-24 sm:w-22 sm:h-26 rounded-2xl overflow-hidden shadow-md border border-slate-900/10 shrink-0 group-hover:scale-105 transition-transform duration-300 bg-[#111111] p-1">
+                {/* Product Image with mix-blend-screen for seamless black background removal */}
+                <div className="relative w-20 h-24 sm:w-22 sm:h-26 rounded-2xl overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-300 flex items-center justify-center bg-black/5 p-1">
                   <Image
                     src={card.productImage}
                     alt={card.productSubtitle}
                     fill
                     unoptimized
-                    className="object-contain p-1 rounded-xl"
+                    className="object-contain mix-blend-screen filter drop-shadow-sm p-1"
                   />
                 </div>
 
               </div>
 
               {/* Title & Subtitle */}
-              <div className="mt-4 space-y-0.5">
+              <div className="mt-5 space-y-1">
                 <h3 className="text-lg font-serif font-bold text-[#151221] leading-snug">
                   {card.dishTitle}
                 </h3>
-                <p className="text-xs text-slate-500 font-normal truncate">
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">
                   {card.productSubtitle}
                 </p>
               </div>
