@@ -31,6 +31,49 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
   // Default to Stage 3 (NEW MENU IDEAS) as requested by user screenshot
   const [activeStage, setActiveStage] = useState(3);
   const [ideaFilter, setIdeaFilter] = useState("ALL");
+  const [selectedHotelDish, setSelectedHotelDish] = useState("Margherita Pizza at Shamiana");
+  const [selectedFortuneProduct, setSelectedFortuneProduct] = useState("Puglia Fresh Burrata 200g");
+
+  const pairingOptions = [
+    {
+      hotelDish: "Margherita Pizza at Shamiana",
+      fortuneProduct: "Puglia Fresh Burrata 200g",
+      upgradedConcept: "Garden Vegetable & Burrata Pizza",
+      marginLift: "+24% Margin",
+      priceLift: "+₹450 / Cover",
+      description: "Upgrade your standard Margherita Pizza base with imported Puglia Burrata for an opulent vegetarian signature dish.",
+      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80",
+    },
+    {
+      hotelDish: "Wild Mushroom Risotto",
+      fortuneProduct: "TartufLanghe White Truffle Butter",
+      upgradedConcept: "Truffle & Forest Mushroom Risotto",
+      marginLift: "+18% Check Lift",
+      priceLift: "+₹620 / Cover",
+      description: "Finish your existing Mushroom Risotto with authentic Alba Truffle Butter to create tableside aromatic dining theater.",
+      image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80",
+    },
+    {
+      hotelDish: "Atlantic Salmon Fillet Starter",
+      fortuneProduct: "Norwegian Salmon Fillet (Trim D)",
+      upgradedConcept: "Cured Salmon Carpaccio",
+      marginLift: "-31% Trim Waste",
+      priceLift: "+₹580 / Cover",
+      description: "Utilize whole Norwegian Salmon cuts across both Wasabi sushi counter and Shamiana dinner menu, drastically reducing trim waste.",
+      image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=400&q=80",
+    },
+    {
+      hotelDish: "Standard Grilled Beef Striploin",
+      fortuneProduct: "Fortune Australian Wagyu Striploin MB5+",
+      upgradedConcept: "Signature Australian Wagyu Striploin MB5+",
+      marginLift: "+22% Gross Profit",
+      priceLift: "+₹1,400 / Cover",
+      description: "Swap standard grain-fed beef with Australian Wagyu MB5+ to command premium steakhouse cover pricing.",
+      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80",
+    },
+  ];
+
+  const currentPairing = pairingOptions.find(p => p.hotelDish === selectedHotelDish) || pairingOptions[0];
 
   // STAGE 1: PRODUCT MATCHES (12 items)
   const productMatches = [
@@ -342,7 +385,108 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
               </div>
             </div>
           </div>
+        </div>
 
+        {/* INTERACTIVE CHEF'S CULINARY UPGRADE ENGINE: DISH + PRODUCT ➔ UPGRADED GOURMET CONCEPT */}
+        <div className="bg-[#1C0B33] text-white rounded-[24px] p-6 lg:p-7 shadow-xl border border-[#D7A742]/40 relative overflow-hidden text-left space-y-5">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#D7A742]/20 border border-[#D7A742]/40 flex items-center justify-center text-[#EBB738]">
+                <Sparkles className="w-5 h-5 text-[#EBB738]" />
+              </div>
+              <div>
+                <h3 className="text-lg font-serif font-bold text-[#F5C453]">
+                  Chef&apos;s Culinary Upgrade Engine
+                </h3>
+                <p className="text-xs text-slate-300 font-medium">
+                  Select your hotel&apos;s current menu item + Fortune Gourmet product to generate upgraded high-margin gourmet concepts.
+                </p>
+              </div>
+            </div>
+            
+            <div className="bg-[#2D164F] px-3.5 py-1.5 rounded-full border border-[#D7A742]/30 text-[11px] font-bold text-[#EBB738] shrink-0">
+              ⚡ Dish + Ingredient Matcher
+            </div>
+          </div>
+
+          {/* Interactive Formula Selection Row */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+            
+            {/* Step 1: Hotel's Existing Dish */}
+            <div className="md:col-span-5 bg-white/5 border border-white/10 rounded-xl p-3 space-y-1">
+              <label className="text-[10px] uppercase font-bold text-[#EBB738] block tracking-wider">1. Your Current Hotel Dish</label>
+              <select
+                value={selectedHotelDish}
+                onChange={(e) => {
+                  setSelectedHotelDish(e.target.value);
+                  const matched = pairingOptions.find(p => p.hotelDish === e.target.value);
+                  if (matched) setSelectedFortuneProduct(matched.fortuneProduct);
+                }}
+                className="w-full bg-[#2A1548] text-white border border-[#D7A742]/40 rounded-lg p-2 text-xs font-semibold focus:outline-none cursor-pointer"
+              >
+                {pairingOptions.map(p => (
+                  <option key={p.hotelDish} value={p.hotelDish}>{p.hotelDish}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Plus Indicator */}
+            <div className="md:col-span-1 flex items-center justify-center font-bold text-xl text-[#EBB738]">
+              +
+            </div>
+
+            {/* Step 2: Fortune Gourmet Ingredient */}
+            <div className="md:col-span-6 bg-white/5 border border-white/10 rounded-xl p-3 space-y-1">
+              <label className="text-[10px] uppercase font-bold text-[#EBB738] block tracking-wider">2. Fortune Gourmet Product</label>
+              <select
+                value={selectedFortuneProduct}
+                onChange={(e) => {
+                  setSelectedFortuneProduct(e.target.value);
+                  const matched = pairingOptions.find(p => p.fortuneProduct === e.target.value);
+                  if (matched) setSelectedHotelDish(matched.hotelDish);
+                }}
+                className="w-full bg-[#2A1548] text-white border border-[#D7A742]/40 rounded-lg p-2 text-xs font-semibold focus:outline-none cursor-pointer"
+              >
+                {pairingOptions.map(p => (
+                  <option key={p.fortuneProduct} value={p.fortuneProduct}>{p.fortuneProduct}</option>
+                ))}
+              </select>
+            </div>
+
+          </div>
+
+          {/* Active Combination Result Card */}
+          {currentPairing && (
+            <div className="bg-gradient-to-r from-[#2D164F] to-[#200B3B] border border-[#D7A742]/50 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-xl overflow-hidden relative shrink-0 border border-[#D7A742]/40 shadow-sm">
+                  <Image src={currentPairing.image} alt={currentPairing.upgradedConcept} fill unoptimized className="object-cover" />
+                </div>
+                <div>
+                  <div className="text-[10px] text-[#EBB738] uppercase font-bold tracking-wider flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-[#EBB738]" />
+                    <span>RECOMMENDED GOURMET SIGNATURE DISH</span>
+                  </div>
+                  <h4 className="text-base sm:text-lg font-serif font-bold text-white mt-0.5">{currentPairing.upgradedConcept}</h4>
+                  <p className="text-xs text-slate-300 font-normal leading-snug max-w-xl">{currentPairing.description}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 px-3.5 py-2 rounded-xl text-center">
+                  <div className="text-[9px] uppercase font-bold tracking-wider">PROJECTED MARGIN</div>
+                  <div className="text-xs font-bold font-serif">{currentPairing.marginLift}</div>
+                </div>
+
+                <button
+                  onClick={() => alert("Added " + currentPairing.upgradedConcept + " recipe proposal to your executive shortlist!")}
+                  className="px-4 py-2.5 rounded-xl bg-[#D7A742] hover:bg-[#E5BC5E] text-[#1C0B33] font-bold text-xs shadow-md transition-colors cursor-pointer active:scale-[0.98]"
+                >
+                  Add to Proposal
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 3 RECOMMENDATION STAGE CARDS (Matching Reference Image Pixel-for-Pixel) */}

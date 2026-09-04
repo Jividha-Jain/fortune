@@ -29,7 +29,9 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
     {
       oppId: "#OPP-01",
       title: "Garden Vegetable & Burrata Pizza",
-      desc: "Capitalize on high demand for premium vegetarian wood-fired pizza using imported Puglia Burrata. Offers higher margin cluster with a +24% gross profit expectation over regular bocconcini.",
+      currentDish: "Margherita Pizza at Shamiana",
+      fortuneProduct: "Puglia Fresh Burrata 200g",
+      desc: "Pair your existing Margherita Pizza base with imported Puglia Burrata to launch a high-margin premium vegetarian wood-fired signature.",
       keyIngredient: "Puglia Fresh Burrata 200g",
       targetOutlet: "Shamiana All-Day",
       metricLabel: "Projected Margin",
@@ -39,7 +41,9 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
     {
       oppId: "#OPP-02",
       title: "Truffle & Forest Mushroom Risotto",
-      desc: "Elevate average check by 18% with TartufLanghe Italian Truffle Butter. Introduces decadent aromatic theater to dinner services while utilizing identical Carnaroli rice stocks.",
+      currentDish: "Wild Mushroom Risotto",
+      fortuneProduct: "TartufLanghe Truffle Butter",
+      desc: "Elevate your existing Mushroom Risotto by finishing with Alba White Truffle Butter to boost per-cover check size by +18%.",
       keyIngredient: "TartufLanghe White Truffle Butter",
       targetOutlet: "Shamiana Fine Dining",
       metricLabel: "Projected Check Lift",
@@ -49,8 +53,10 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
     {
       oppId: "#OPP-03",
       title: "Cured Salmon Carpaccio",
-      desc: "Utilize whole Norwegian salmon cuts across both Wasabi sushi counter and Shamiana dinner menu, drastically reducing trim waste and unlocking cross-kitchen volume pricing.",
-      keyIngredient: "Whole Norwegian Salmon Superior",
+      currentDish: "Atlantic Salmon Starter",
+      fortuneProduct: "Norwegian Salmon (Trim D)",
+      desc: "Combine Norwegian Salmon Fillet with your cold appetiser station to cut trim waste by -31% across Wasabi & Shamiana.",
+      keyIngredient: "Norwegian Salmon Fillet Trim D",
       targetOutlet: "Dual Station Sync",
       metricLabel: "Waste Reduction",
       metricValue: "-31% Kitchen Trim",
@@ -332,9 +338,27 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                     <h4 className="text-lg sm:text-[20px] font-serif font-bold text-[#111111] leading-snug mt-3 mb-2 max-w-[55%]">
                       {opp.title}
                     </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed font-normal mb-6 max-w-[55%] min-h-[64px]">
+                    <p className="text-xs text-slate-500 leading-relaxed font-normal mb-3 max-w-[55%] min-h-[48px]">
                       {opp.desc}
                     </p>
+
+                    {/* Culinary Pairing Formula Box: Current Dish + Fortune Product ➔ New Concept */}
+                    <div className="bg-[#F8F5FD] border border-purple-100 rounded-xl p-2.5 mb-4 max-w-[55%] text-[10px] space-y-1 shadow-2xs">
+                      <div className="text-[9px] font-bold uppercase tracking-wider text-[#5E3B8C] flex items-center gap-1">
+                        <Sparkles className="w-3 h-3 text-[#5E3B8C]" />
+                        <span>Dish Upgrade Formula</span>
+                      </div>
+                      <div className="text-[10px] font-medium text-slate-700 leading-tight space-y-0.5">
+                        <div className="flex items-center gap-1">
+                          <span className="text-slate-400 font-semibold">Current Dish:</span>
+                          <strong className="text-slate-900 font-bold truncate">{opp.currentDish}</strong>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-[#5E3B8C] font-semibold">+ Fortune Product:</span>
+                          <strong className="text-[#5E3B8C] font-extrabold truncate">{opp.fortuneProduct}</strong>
+                        </div>
+                      </div>
+                    </div>
 
                     {/* 3-Column Metadata Row */}
                     <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-100/90 text-xs">

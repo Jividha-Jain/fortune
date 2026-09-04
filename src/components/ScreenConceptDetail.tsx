@@ -107,7 +107,37 @@ export default function ScreenConceptDetail({ onBack, onNavigateShortlist }: Scr
           
           {/* LEFT COLUMN: WHY WE RECOMMEND & RATIONALE (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
-            
+          
+            {/* CULINARY PAIRING & UPGRADE FORMULA CARD */}
+            <div className="bg-[#1C0B33] text-white rounded-3xl p-6 lg:p-8 border border-[#D7A742]/40 shadow-md space-y-4">
+              <div className="flex items-center gap-2 border-b border-white/10 pb-3 text-[#EBB738]">
+                <Sparkles className="w-5 h-5 text-[#EBB738]" />
+                <h3 className="text-lg font-serif font-bold text-white">
+                  Culinary Pairing &amp; Upgrade Formula
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-3.5 space-y-1 text-left">
+                  <span className="text-[9px] uppercase font-bold text-[#EBB738] block tracking-wider">1. Your Current Hotel Dish</span>
+                  <div className="font-bold text-white text-sm">Margherita Pizza at Shamiana</div>
+                  <p className="text-[10px] text-slate-400">Standard wood-fired pizza base with local mozzarella curd.</p>
+                </div>
+
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-3.5 space-y-1 text-left">
+                  <span className="text-[9px] uppercase font-bold text-[#EBB738] block tracking-wider">2. Fortune Gourmet Product</span>
+                  <div className="font-bold text-[#EBB738] text-sm">Puglia Fresh Burrata 200g</div>
+                  <p className="text-[10px] text-slate-300">Air-flown fresh water buffalo cream cheese log.</p>
+                </div>
+
+                <div className="bg-[#2D164F] border border-[#D7A742]/50 rounded-2xl p-3.5 space-y-1 text-left">
+                  <span className="text-[9px] uppercase font-bold text-emerald-400 block tracking-wider">➔ 3. Upgraded Gourmet Concept</span>
+                  <div className="font-bold text-white text-sm font-serif">Garden Vegetable &amp; Burrata Pizza</div>
+                  <p className="text-[10px] text-emerald-300 font-semibold">+24% Margin Lift • ₹1,450 Menu Price</p>
+                </div>
+              </div>
+            </div>
+
             {/* Why We Recommend This */}
             <div className="bg-white rounded-3xl p-6 lg:p-8 border border-purple-100/90 shadow-xs space-y-4">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
