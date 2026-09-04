@@ -45,11 +45,39 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
   };
 
   return (
-    <div className="min-h-[calc(100vh-61px)] flex flex-col lg:flex-row bg-[#FAF8FD] selection:bg-purple-200">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#FAF8FD] selection:bg-purple-200">
       
-      {/* LEFT SIDE: CLEAN, SIMPLE FORM & QUICK DEMO LOGIN */}
-      <div className="lg:w-1/2 flex flex-col justify-between p-6 sm:p-10 lg:p-14 bg-[#FAF8FD]">
-        <div className="max-w-md w-full mx-auto my-auto space-y-6">
+      {/* LEFT SIDE: BREATHTAKING HIGH-RESOLUTION GOURMET FOOD IMAGE */}
+      <div className="relative lg:w-1/2 min-h-[400px] lg:min-h-screen bg-slate-950 flex flex-col justify-end p-8 sm:p-12 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/gourmet_hero.jpg"
+            alt="Gourmet Wagyu & Black Truffle Culinary Presentation"
+            fill
+            className="object-cover object-center brightness-[0.8] contrast-[1.05]"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#120926]/90 via-black/20 to-black/30" />
+        </div>
+
+        {/* Minimal High-End Quote Overlay */}
+        <div className="relative z-10 bg-black/40 backdrop-blur-xl border border-white/20 p-6 rounded-2xl max-w-lg text-left text-white shadow-2xl space-y-2">
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F5C453]">
+            FINE DINING PROCUREMENT
+          </div>
+          <h3 className="text-xl sm:text-2xl font-serif font-bold text-white leading-tight">
+            &ldquo;The standard of gourmet dining across India&apos;s leading hotel chains and fine dining establishments.&rdquo;
+          </h3>
+          <p className="text-xs text-slate-200 font-medium leading-relaxed">
+            Delivering imported DOP cheeses, black truffles, air-freighted Atlantic seafood, and artisanal meats.
+          </p>
+        </div>
+      </div>
+
+      {/* RIGHT SIDE: CLEAN & SIMPLE LOGIN FORM */}
+      <div className="lg:w-1/2 flex flex-col justify-between p-6 sm:p-10 lg:p-12 bg-[#FAF8FD] min-h-screen lg:min-h-full">
+        <div className="max-w-md w-full mx-auto my-auto space-y-5">
           
           {/* Brand Logo Header */}
           <div className="flex items-center gap-3">
@@ -67,7 +95,7 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
           </div>
 
           {/* Title */}
-          <div className="space-y-1 text-left pt-2">
+          <div className="space-y-1 text-left pt-1">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight">
               Welcome back
             </h2>
@@ -77,9 +105,9 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
           </div>
 
           {/* QUICK 1-CLICK DEMO LOGIN CARD */}
-          <div className="p-4 bg-gradient-to-r from-[#1C0B33] via-[#2B124C] to-[#3B1B5E] text-white rounded-2xl border border-[#F5C453]/30 shadow-lg flex items-center justify-between gap-3 text-left">
+          <div className="p-4 bg-gradient-to-r from-[#1C0B33] via-[#2B124C] to-[#3B1B5E] text-white rounded-2xl border border-[#F5C453]/30 shadow-md flex items-center justify-between gap-3 text-left">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#F5C453] text-[#1C0B33] font-bold flex items-center justify-center shrink-0 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-[#F5C453] text-[#1C0B33] font-bold flex items-center justify-center shrink-0 shadow-xs">
                 <Zap className="w-5 h-5 fill-current" />
               </div>
               <div>
@@ -148,7 +176,7 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
             </div>
 
             {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between text-xs pt-1">
+            <div className="flex items-center justify-between text-xs pt-0.5">
               <label className="flex items-center gap-2 text-slate-600 cursor-pointer">
                 <input
                   type="checkbox"
@@ -185,7 +213,7 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
           </form>
 
           {/* Divider */}
-          <div className="relative my-6">
+          <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-200" />
             </div>
@@ -205,41 +233,13 @@ export default function ScreenSignIn({ onNavigateRegister, onSuccessSignIn }: Sc
           </button>
         </div>
 
-        {/* Left Bottom Footer */}
-        <div className="max-w-md w-full mx-auto text-xs text-slate-400 flex items-center justify-between pt-6 border-t border-slate-200/60">
+        {/* Right Bottom Footer */}
+        <div className="max-w-md w-full mx-auto text-xs text-slate-400 flex items-center justify-between pt-4 mt-4 border-t border-slate-200/60">
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
             <span>FSSAI &amp; GSTIN Verified Supplier</span>
           </div>
           <div>© {new Date().getFullYear()} Fortune Gourmet</div>
-        </div>
-      </div>
-
-      {/* RIGHT SIDE: BREATHTAKING HIGH-RESOLUTION LUXURY FINE DINING IMAGE */}
-      <div className="relative lg:w-1/2 min-h-[450px] lg:min-h-full bg-slate-950 flex flex-col justify-end p-8 sm:p-12 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/gourmet_hero.jpg"
-            alt="Gourmet Wagyu & Black Truffle Culinary Presentation"
-            fill
-            className="object-cover object-center brightness-[0.8] contrast-[1.05]"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#120926]/90 via-black/20 to-black/30" />
-        </div>
-
-        {/* Minimal High-End Quote Overlay */}
-        <div className="relative z-10 bg-black/40 backdrop-blur-xl border border-white/20 p-6 rounded-2xl max-w-lg text-left text-white shadow-2xl space-y-2">
-          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F5C453]">
-            FINE DINING PROCUREMENT
-          </div>
-          <h3 className="text-xl sm:text-2xl font-serif font-bold text-white leading-tight">
-            &ldquo;The standard of gourmet dining across India&apos;s leading hotel chains and fine dining establishments.&rdquo;
-          </h3>
-          <p className="text-xs text-slate-200 font-medium leading-relaxed">
-            Delivering imported DOP cheeses, black truffles, air-freighted Atlantic seafood, and artisanal meats.
-          </p>
         </div>
       </div>
 
