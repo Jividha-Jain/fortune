@@ -160,17 +160,6 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
               </div>
             </div>
 
-            {/* View Recipe Link */}
-            <div className="pt-4 border-t border-slate-900/5 mt-4">
-              <button
-                onClick={() => onNavigateTab("recommendations")}
-                className="text-[#2B145E] hover:text-[#18093D] text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer group/btn"
-              >
-                <span>View Recipe</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#2B145E] group-hover/btn:translate-x-1 transition-transform" />
-              </button>
-            </div>
-
           </div>
         ))}
       </div>
