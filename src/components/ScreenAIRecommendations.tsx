@@ -26,7 +26,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
   const [filterMatch, setFilterMatch] = useState<"ALL" | "EXCELLENT" | "STRONG" | "NEEDS_REVIEW">("ALL");
   const [sortBy, setSortBy] = useState("Best Match");
 
-  // Tracked Shortlist state
+  // Tracked Shortlist and Bookmark state
   const [shortlistedIds, setShortlistedIds] = useState<string[]>([]);
   const [bookmarkedIds, setBookmarkedIds] = useState<string[]>([]);
 
@@ -42,7 +42,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
     );
   };
 
-  // 6 Exact Menu Dishes & Pairing Recommendations from reference screenshot
+  // 6 Exact Menu Dishes & Pairing Recommendations with high quality food images
   const recommendationsData = [
     {
       id: "rec-1",
@@ -50,7 +50,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
       dishCuisine: "Italian",
       dishDesc: "Rich and creamy pasta with a velvety cheese sauce.",
       tags: ["Pasta", "Cheese", "Creamy"],
-      dishImage: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=400&q=80",
+      dishImage: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=600&q=80",
       matchPercent: 95,
       matchType: "EXCELLENT",
       matchLabel: "Excellent Match",
@@ -65,7 +65,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
       dishCuisine: "Continental",
       dishDesc: "Smooth and rich chocolate dessert with a silky texture.",
       tags: ["Dessert", "Chocolate", "Creamy"],
-      dishImage: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=400&q=80",
+      dishImage: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80",
       matchPercent: 94,
       matchType: "EXCELLENT",
       matchLabel: "Excellent Match",
@@ -80,7 +80,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
       dishCuisine: "North Indian",
       dishDesc: "Slow-cooked chicken in a rich, creamy tomato gravy.",
       tags: ["Chicken", "Gravy", "Spices"],
-      dishImage: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=400&q=80",
+      dishImage: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=600&q=80",
       matchPercent: 92,
       matchType: "EXCELLENT",
       matchLabel: "Excellent Match",
@@ -95,7 +95,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
       dishCuisine: "North Indian",
       dishDesc: "Grilled cottage cheese with aromatic spices.",
       tags: ["Paneer", "Tandoor", "Spices"],
-      dishImage: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=400&q=80",
+      dishImage: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=600&q=80",
       matchPercent: 78,
       matchType: "STRONG",
       matchLabel: "Strong Match",
@@ -110,7 +110,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
       dishCuisine: "Continental",
       dishDesc: "Juicy grilled chicken with herbs and light seasoning.",
       tags: ["Chicken", "Herbs", "Grill"],
-      dishImage: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=400&q=80",
+      dishImage: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80",
       matchPercent: 82,
       matchType: "STRONG",
       matchLabel: "Strong Match",
@@ -125,7 +125,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
       dishCuisine: "North Indian",
       dishDesc: "Fragrant basmati rice with spices and vegetables.",
       tags: ["Rice", "Spices", "Vegetarian"],
-      dishImage: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=400&q=80",
+      dishImage: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
       matchPercent: 71,
       matchType: "NEEDS_REVIEW",
       matchLabel: "Needs Review",
@@ -155,7 +155,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 space-y-6 sm:space-y-8">
         
         {/* HERO BANNER - TURN INGREDIENTS INTO EXTRAORDINARY DISHES */}
-        <div className="bg-gradient-to-r from-[#F7F3FC] via-[#FAF8FD] to-white rounded-[28px] p-8 sm:p-10 border border-[#E9DDF8] shadow-2xs relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-6 text-left">
+        <div className="bg-gradient-to-r from-[#F4EFFB] via-[#FAF8FD] to-white rounded-[28px] p-8 sm:p-10 border border-[#E9DDF8] shadow-2xs relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-6 text-left">
           
           <div className="space-y-3 max-w-xl relative z-10">
             <div className="text-[10px] uppercase font-bold tracking-[0.22em] text-[#5E3B8C] flex items-center gap-1.5">
@@ -202,45 +202,45 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
           {/* Card 1 */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between text-left">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between text-left hover:shadow-md transition-shadow">
             <div className="space-y-0.5">
               <div className="text-[11px] text-slate-400 font-medium">Dishes Analysed</div>
               <div className="text-3xl font-serif font-bold text-[#111111]">8</div>
             </div>
-            <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+            <div className="w-11 h-11 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
               <UtensilsCrossed className="w-5 h-5" />
             </div>
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between text-left">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between text-left hover:shadow-md transition-shadow">
             <div className="space-y-0.5">
               <div className="text-[11px] text-slate-400 font-medium">Products Matched</div>
               <div className="text-3xl font-serif font-bold text-[#111111]">12</div>
             </div>
-            <div className="w-10 h-10 rounded-full bg-purple-50 text-[#5E3B8C] flex items-center justify-center shrink-0">
+            <div className="w-11 h-11 rounded-full bg-purple-50 text-[#5E3B8C] flex items-center justify-center shrink-0">
               <Layers className="w-5 h-5" />
             </div>
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between text-left">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between text-left hover:shadow-md transition-shadow">
             <div className="space-y-0.5">
               <div className="text-[11px] text-slate-400 font-medium">Excellent Matches</div>
               <div className="text-3xl font-serif font-bold text-[#111111]">5</div>
             </div>
-            <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <div className="w-11 h-11 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
               <Star className="w-5 h-5" />
             </div>
           </div>
 
           {/* Card 4 */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between text-left">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between text-left hover:shadow-md transition-shadow">
             <div className="space-y-0.5">
               <div className="text-[11px] text-slate-400 font-medium">Needs Review</div>
               <div className="text-3xl font-serif font-bold text-[#111111]">3</div>
             </div>
-            <div className="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+            <div className="w-11 h-11 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
               <Clock className="w-5 h-5" />
             </div>
           </div>
@@ -271,7 +271,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                 onClick={() => setFilterMatch("ALL")}
                 className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   filterMatch === "ALL"
-                    ? "bg-[#130A24] text-white shadow-2xs"
+                    ? "bg-[#1C0B33] text-white shadow-2xs"
                     : "bg-white border border-slate-200/90 text-slate-700 hover:bg-slate-50"
                 }`}
               >
@@ -282,7 +282,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                 onClick={() => setFilterMatch("EXCELLENT")}
                 className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   filterMatch === "EXCELLENT"
-                    ? "bg-[#130A24] text-white shadow-2xs"
+                    ? "bg-[#1C0B33] text-white shadow-2xs"
                     : "bg-white border border-slate-200/90 text-slate-700 hover:bg-slate-50"
                 }`}
               >
@@ -293,7 +293,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                 onClick={() => setFilterMatch("STRONG")}
                 className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   filterMatch === "STRONG"
-                    ? "bg-[#130A24] text-white shadow-2xs"
+                    ? "bg-[#1C0B33] text-white shadow-2xs"
                     : "bg-white border border-slate-200/90 text-slate-700 hover:bg-slate-50"
                 }`}
               >
@@ -304,7 +304,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                 onClick={() => setFilterMatch("NEEDS_REVIEW")}
                 className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   filterMatch === "NEEDS_REVIEW"
-                    ? "bg-[#130A24] text-white shadow-2xs"
+                    ? "bg-[#1C0B33] text-white shadow-2xs"
                     : "bg-white border border-slate-200/90 text-slate-700 hover:bg-slate-50"
                 }`}
               >
@@ -351,7 +351,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
           </button>
         </div>
 
-        {/* 6 HORIZONTAL PAIRING CARDS GRID (100% MATCHED TO REFERENCE SCREENSHOT) */}
+        {/* 6 ELEGANT PAIRING CARDS GRID */}
         <div className="space-y-4">
           {filteredRecs.map((rec) => {
             const isShortlisted = shortlistedIds.includes(rec.id);
@@ -360,42 +360,42 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
             return (
               <div
                 key={rec.id}
-                className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-2xs hover:shadow-md transition-all flex flex-col lg:flex-row items-center justify-between gap-6 text-left"
+                className="bg-white rounded-[26px] border border-slate-200/90 hover:border-[#5E3B8C]/40 p-5 sm:p-6 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_-8px_rgba(28,11,51,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col lg:flex-row items-center justify-between gap-6 text-left group relative"
               >
                 
                 {/* 1. LEFT DISH BLOCK */}
                 <div className="flex items-start gap-4 flex-1 w-full lg:w-auto">
-                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200/60">
+                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200/80 shadow-2xs">
                     <Image
                       src={rec.dishImage}
                       alt={rec.dishTitle}
                       fill
                       unoptimized
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
 
                   <div className="space-y-1.5 flex-1">
-                    <span className="text-[9px] uppercase font-bold tracking-widest text-slate-400 bg-slate-100 px-2 py-0.5 rounded-md inline-block">
+                    <span className="text-[9px] uppercase font-bold tracking-[0.2em] text-[#5E3B8C] bg-[#F4EFFB] border border-[#E2D4F7] px-2.5 py-0.5 rounded-md inline-block">
                       YOUR DISH
                     </span>
 
-                    <h3 className="text-xl font-serif font-bold text-[#111111] leading-tight">
+                    <h3 className="text-2xl font-serif font-bold text-slate-900 group-hover:text-[#1C0B33] transition-colors leading-tight">
                       {rec.dishTitle}
                     </h3>
 
-                    <div className="text-xs text-slate-400 font-medium">
+                    <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">
                       {rec.dishCuisine}
                     </div>
 
-                    <p className="text-xs text-slate-500 leading-snug font-normal line-clamp-2">
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal min-h-[36px]">
                       {rec.dishDesc}
                     </p>
 
                     {/* Tag Pills */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
                       {rec.tags.map((tag) => (
-                        <span key={tag} className="text-[10px] text-slate-600 bg-slate-100 font-medium px-2 py-0.5 rounded-md">
+                        <span key={tag} className="bg-slate-100 hover:bg-purple-50 text-slate-600 hover:text-[#5E3B8C] text-[10.5px] font-medium px-2.5 py-0.5 rounded-md border border-slate-200/50 transition-colors">
                           {tag}
                         </span>
                       ))}
@@ -405,14 +405,14 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
 
                 {/* 2. CENTER MATCH RING NODE */}
                 <div className="flex flex-col items-center justify-center shrink-0 my-2 lg:my-0 px-2">
-                  <div className={`w-20 h-20 rounded-full border-[3.5px] bg-white flex flex-col items-center justify-center text-center shadow-2xs ${
+                  <div className={`w-20 h-20 rounded-full border-[4px] bg-white flex flex-col items-center justify-center text-center shadow-md relative z-10 ${
                     rec.matchType === "NEEDS_REVIEW"
-                      ? "border-amber-500"
+                      ? "border-amber-500 text-amber-600"
                       : rec.matchType === "STRONG"
-                      ? "border-emerald-500"
-                      : "border-emerald-500"
+                      ? "border-amber-500 text-amber-600"
+                      : "border-emerald-500 text-emerald-600"
                   }`}>
-                    <span className="text-base font-extrabold text-[#111111] leading-none">
+                    <span className="text-base font-extrabold leading-none">
                       {rec.matchPercent}%
                     </span>
                     <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
@@ -420,20 +420,20 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                     </span>
                   </div>
 
-                  <span className={`mt-2 text-[10px] font-bold px-3 py-0.5 rounded-full border ${
+                  <span className={`mt-2 text-[10px] font-bold px-3.5 py-0.5 rounded-full border shadow-2xs ${
                     rec.matchType === "NEEDS_REVIEW"
-                      ? "bg-amber-50 text-amber-700 border-amber-200"
+                      ? "bg-amber-50 text-amber-800 border-amber-200/80"
                       : rec.matchType === "STRONG"
-                      ? "bg-amber-50 text-amber-700 border-amber-200"
-                      : "bg-emerald-50 text-emerald-600 border-emerald-100"
+                      ? "bg-amber-50 text-amber-800 border-amber-200/80"
+                      : "bg-emerald-50 text-emerald-700 border-emerald-200/80"
                   }`}>
                     {rec.matchLabel}
                   </span>
                 </div>
 
                 {/* 3. RECOMMENDED PRODUCT BLOCK */}
-                <div className="bg-[#F8F6FC] p-3 rounded-2xl border border-purple-100/60 flex items-center gap-3.5 w-full lg:w-72 shrink-0">
-                  <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-xl bg-white overflow-hidden p-1 shrink-0 border border-slate-200/80 flex items-center justify-center shadow-2xs">
+                <div className="bg-gradient-to-r from-[#F8F6FC] to-[#F4EFFB]/80 p-3.5 rounded-2xl border border-[#E2D4F7] flex items-center gap-3.5 w-full lg:w-72 shrink-0 shadow-2xs">
+                  <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-xl bg-white overflow-hidden p-1.5 shrink-0 border border-slate-200/90 shadow-2xs flex items-center justify-center">
                     <Image
                       src={rec.recommendedImage}
                       alt={rec.recommendedTitle}
@@ -450,7 +450,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                     <h4 className="text-xs font-serif font-bold text-[#111111] leading-snug line-clamp-2">
                       {rec.recommendedTitle}
                     </h4>
-                    <div className="text-[11px] text-slate-400 font-medium">
+                    <div className="text-[11px] text-[#5E3B8C] font-semibold">
                       {rec.recommendedBrand}
                     </div>
                   </div>
@@ -462,20 +462,20 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                   {/* View Details Primary Button */}
                   <button
                     onClick={() => onSelectProduct(rec.productId)}
-                    className="flex-1 lg:flex-none w-full py-2.5 px-4 rounded-xl bg-[#130A28] hover:bg-[#221242] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-all cursor-pointer whitespace-nowrap active:scale-[0.98]"
+                    className="flex-1 lg:flex-none w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#1C0B33] via-[#2D1252] to-[#1C0B33] hover:from-[#2B1B4E] hover:to-[#3C276B] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer border border-[#F5C453]/30 active:scale-[0.98] whitespace-nowrap"
                   >
                     <span>View Details</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
                   </button>
 
                   <div className="flex items-center gap-2 w-full lg:w-auto">
                     {/* Shortlist Button */}
                     <button
                       onClick={() => toggleShortlist(rec.id)}
-                      className={`flex-1 py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-1 transition-all cursor-pointer whitespace-nowrap ${
+                      className={`flex-1 py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-1 transition-all cursor-pointer whitespace-nowrap shadow-2xs ${
                         isShortlisted
                           ? "bg-purple-50 border-[#5E3B8C] text-[#5E3B8C]"
-                          : "bg-white border-slate-200 hover:bg-slate-50 text-slate-700"
+                          : "bg-white border-slate-200/90 hover:bg-purple-50 hover:border-purple-200 text-slate-700 hover:text-[#5E3B8C]"
                       }`}
                     >
                       {isShortlisted ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
@@ -485,10 +485,10 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
                     {/* Bookmark Icon Button */}
                     <button
                       onClick={() => toggleBookmark(rec.id)}
-                      className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all cursor-pointer shrink-0 ${
+                      className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all cursor-pointer shrink-0 shadow-2xs ${
                         isBookmarked
-                          ? "bg-[#130A28] border-[#130A28] text-[#F5C453]"
-                          : "bg-white border-slate-200 text-slate-400 hover:bg-purple-50 hover:text-[#5E3B8C]"
+                          ? "bg-[#1C0B33] border-[#1C0B33] text-[#F5C453]"
+                          : "bg-white border-slate-200/90 text-slate-400 hover:bg-purple-50 hover:border-purple-200 hover:text-[#5E3B8C]"
                       }`}
                       title="Bookmark recommendation"
                     >
@@ -506,7 +506,7 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
         {/* BOTTOM PROMOTIONAL BANNER */}
         <div className="bg-[#F7F3FC] rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-[#E9DDF8] text-left">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#5E3B8C] text-white flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-[#5E3B8C] text-white flex items-center justify-center shrink-0 shadow-xs">
               <Sparkles className="w-5 h-5 text-[#F5C453]" />
             </div>
             <div>
@@ -521,10 +521,10 @@ export default function ScreenAIRecommendations({ onSelectProduct }: ScreenAIRec
 
           <button
             onClick={() => onSelectProduct("all")}
-            className="px-5 py-2.5 rounded-xl bg-[#130A28] hover:bg-[#221242] text-white text-xs font-bold flex items-center gap-2 shadow-xs transition-all cursor-pointer shrink-0"
+            className="px-5 py-2.5 rounded-xl bg-[#1C0B33] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center gap-2 shadow-md transition-all cursor-pointer shrink-0 border border-[#F5C453]/30"
           >
             <span>Explore Products</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
           </button>
         </div>
 
