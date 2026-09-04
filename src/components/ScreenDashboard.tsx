@@ -196,11 +196,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
         <div className="space-y-6 pt-4 relative text-left">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
             <div>
-              <div className="text-[10px] uppercase font-bold tracking-[0.22em] text-[#5E3B8C] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#5E3B8C]" />
-                <span>MATCHED PRODUCTS READY FOR ORDER</span>
-              </div>
-              <h3 className="text-2xl lg:text-3xl font-serif text-[#111111] font-normal mt-0.5 tracking-tight">
+              <h3 className="text-2xl lg:text-3xl font-serif text-[#111111] font-bold tracking-tight">
                 Recommended for Your Kitchen
               </h3>
               <p className="text-xs text-slate-400 font-medium mt-1">
@@ -210,7 +206,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
             <div className="flex items-center gap-2 shrink-0">
               <span className="text-xs text-slate-500 font-medium">Sort by:</span>
-              <select className="bg-white border border-slate-200/90 rounded-full text-xs font-semibold px-4 py-1.5 text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/20 shadow-2xs cursor-pointer">
+              <select className="bg-white border border-slate-200/90 rounded-full text-xs font-semibold px-4 py-2 text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#5E3B8C]/20 shadow-2xs cursor-pointer">
                 <option>Highest Match %</option>
                 <option>Category</option>
                 <option>Delivery Time</option>
@@ -230,7 +226,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                     className="bg-white rounded-[28px] border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group text-left relative"
                   >
                     {/* Top Edge-to-Edge Image Banner with Overlaid Badges */}
-                    <div className="relative h-56 w-full overflow-hidden bg-slate-100 group/img">
+                    <div className="relative h-60 w-full overflow-hidden bg-slate-100 group/img">
                       <Image
                         src={item.image}
                         alt={item.title}
@@ -240,7 +236,7 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                       />
 
                       {/* Top Left Brand Badge */}
-                      <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-xs">
+                      <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-xs border border-slate-200/60">
                         {item.brand}
                       </div>
 
@@ -264,11 +260,11 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                     </div>
 
                     {/* Card Content Section */}
-                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                       
                       {/* Title & Description */}
-                      <div className="space-y-1.5">
-                        <h3 className="font-serif text-xl sm:text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#1C0B33] transition-colors">
+                      <div className="space-y-2">
+                        <h3 className="font-serif text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#1C0B33] transition-colors">
                           {item.title}
                         </h3>
 
@@ -279,21 +275,21 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
 
                       {/* Light Amber / Yellow Note Box (Rendered when note exists) */}
                       {hasNote && (
-                        <div className="bg-[#FFFBEB] border border-[#FDE68A] p-3 rounded-2xl flex items-start gap-2.5 text-xs text-[#92400E] font-medium shadow-2xs">
+                        <div className="bg-[#FFFBEB] border border-[#FDE68A] p-3.5 rounded-2xl flex items-start gap-2.5 text-xs text-[#92400E] font-medium shadow-2xs">
                           <Lightbulb className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
                           <span className="leading-relaxed">{notesState[item.id]}</span>
                         </div>
                       )}
 
                       {/* AI Pairing Score Section */}
-                      <div className="space-y-2 pt-1">
+                      <div className="space-y-2 pt-2">
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                             AI PAIRING SCORE
                           </span>
 
                           <div className="flex items-center gap-2">
-                            <span className="font-black text-slate-900 text-sm sm:text-base">
+                            <span className="font-black text-slate-900 text-base">
                               {item.matchPercent}%
                             </span>
                             <span className={`text-[10.5px] font-extrabold px-3 py-0.5 rounded-full ${
@@ -315,44 +311,6 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                             }`}
                           />
                         </div>
-                      </div>
-
-                      {/* Bottom Action Row */}
-                      <div className="flex items-center gap-2.5 pt-2">
-                        
-                        {/* Primary "View Product →" Button */}
-                        <button
-                          onClick={() => onNavigateTab("product-detail")}
-                          className="flex-1 py-3 px-5 rounded-2xl bg-[#1B0B2E] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.98]"
-                        >
-                          <span>View Product</span>
-                          <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
-                        </button>
-
-                        {/* Comment / Chef Note Square Button */}
-                        <button
-                          onClick={() => openNoteModal(item.id)}
-                          className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 border transition-all cursor-pointer shadow-2xs active:scale-95 ${
-                            item.forDishTheme === "purple"
-                              ? "bg-[#F4EFFB] text-[#5E3B8C] border-[#E2D4F7] hover:bg-[#E9DDF8]"
-                              : item.forDishTheme === "emerald"
-                              ? "bg-[#E6F9F0] text-[#0D9488] border-[#BBF7D0] hover:bg-[#D1F4E4]"
-                              : "bg-[#FEF6E6] text-[#B45309] border-[#FDE68A] hover:bg-[#FDE8C7]"
-                          }`}
-                          title="Chef's Note"
-                        >
-                          <MessageSquare className="w-4 h-4" />
-                        </button>
-
-                        {/* Bookmark Icon Button */}
-                        <button
-                          onClick={() => alert("Added to bookmarks")}
-                          className="w-11 h-11 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
-                          title="Bookmark item"
-                        >
-                          <Bookmark className="w-4 h-4" />
-                        </button>
-
                       </div>
 
                     </div>
