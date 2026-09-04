@@ -36,7 +36,7 @@ export default function Home() {
     | "onboarding"
     | "signin"
     | "register"
-  >("insights");
+  >("signin");
 
   // Onboarding sub-step state (1 to 5) when activeTab === "onboarding"
   const [onboardingStep, setOnboardingStep] = useState<number>(1);
@@ -52,8 +52,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8FD] relative">
-      {/* Top Portal Header */}
-      <PortalHeader activeTab={activeTab as any} setActiveTab={(tab) => setActiveTab(tab as any)} />
+      {/* Top Portal Header (Shown when authenticated) */}
+      {activeTab !== "signin" && activeTab !== "register" && (
+        <PortalHeader activeTab={activeTab as any} setActiveTab={(tab) => setActiveTab(tab as any)} />
+      )}
 
       {/* Main Active View */}
       <main className="flex-1 flex flex-col">
