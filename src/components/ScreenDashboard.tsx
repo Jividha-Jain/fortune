@@ -281,13 +281,9 @@ export default function ScreenDashboard({ onNavigateTab }: ScreenDashboardProps)
                         </div>
                       )}
 
-                      {/* AI Pairing Score Section */}
+                      {/* Match Score Section */}
                       <div className="space-y-2 pt-2">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                            AI PAIRING SCORE
-                          </span>
-
+                        <div className="flex items-center justify-end text-xs">
                           <div className="flex items-center gap-2">
                             <span className="font-black text-slate-900 text-base">
                               {item.matchPercent}%
