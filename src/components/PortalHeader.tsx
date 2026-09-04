@@ -22,8 +22,8 @@ import {
 } from "lucide-react";
 
 interface PortalHeaderProps {
-  activeTab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "watchlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding" | "signin" | "register";
-  setActiveTab: (tab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "watchlist" | "enquiries" | "orders" | "insights" | "profile" | "onboarding" | "signin" | "register") => void;
+  activeTab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "watchlist" | "enquiries" | "insights" | "profile" | "onboarding" | "signin" | "register";
+  setActiveTab: (tab: "dashboard" | "mymenu" | "products" | "product-detail" | "recommendations" | "concept-detail" | "shortlist" | "watchlist" | "enquiries" | "insights" | "profile" | "onboarding" | "signin" | "register") => void;
 }
 
 export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderProps) {
@@ -71,7 +71,6 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
   const profileMenuItems = [
     { id: "mymenu", label: "My Menu", icon: UtensilsCrossed, badge: "6 Dishes", desc: "View active paired dishes" },
     { id: "watchlist", label: "Watchlist", icon: Bookmark, badge: "4 Tracked", desc: "Price locks & stock alerts" },
-    { id: "orders", label: "Orders", icon: Package, badge: "2 Active", desc: "Live dispatch & telemetry" },
     { id: "enquiries", label: "Enquiries", icon: Mail, badge: "RFQ", desc: "Commercial quotation terms" },
     { id: "shortlist", label: "Shortlist", icon: Star, badge: "4 Saved", desc: "Curated executive selection" },
     { id: "profile", label: "Profile & Account", icon: User, badge: "Settings", desc: "Taj Executive preferences" },
@@ -219,7 +218,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
               (item.id === "dashboard" && activeTab === "dashboard") || 
               (item.id === "products" && (activeTab === "products" || activeTab === "product-detail" || activeTab === "shortlist")) || 
               (item.id === "recommendations" && (activeTab === "recommendations" || activeTab === "concept-detail" || activeTab === "mymenu")) ||
-              (item.id === "insights" && (activeTab === "insights" || activeTab === "orders" || activeTab === "enquiries"));
+              (item.id === "insights" && (activeTab === "insights" || activeTab === "enquiries"));
 
             return (
               <button
@@ -384,24 +383,10 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
             <div className="absolute top-14 right-0 w-80 bg-white rounded-[24px] border border-slate-200/90 shadow-2xl z-50 p-4 space-y-3 text-left animate-fade-in">
               <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                 <span className="font-serif font-bold text-sm text-[#111111]">Notifications</span>
-                <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">2 New</span>
+                <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">1 New</span>
               </div>
 
               <div className="space-y-2 text-xs">
-                <div 
-                  onClick={() => {
-                    setActiveTab("orders");
-                    setShowNotification(false);
-                  }}
-                  className="p-2.5 bg-[#E6F9F0] border border-[#BBF7D0] rounded-xl cursor-pointer space-y-0.5"
-                >
-                  <div className="font-bold text-[#0D9488] flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Shipment #FG-ORD-2025-0891 In Transit</span>
-                  </div>
-                  <div className="text-[10px] text-slate-600">ETA Today 05:45 AM at Loading Bay 2</div>
-                </div>
-
                 <div 
                   onClick={() => {
                     setActiveTab("enquiries");
@@ -430,7 +415,7 @@ export default function PortalHeader({ activeTab, setActiveTab }: PortalHeaderPr
             (item.id === "dashboard" && activeTab === "dashboard") || 
             (item.id === "products" && (activeTab === "products" || activeTab === "product-detail" || activeTab === "shortlist")) || 
             (item.id === "recommendations" && (activeTab === "recommendations" || activeTab === "concept-detail" || activeTab === "mymenu")) ||
-            (item.id === "insights" && (activeTab === "insights" || activeTab === "orders" || activeTab === "enquiries"));
+            (item.id === "insights" && (activeTab === "insights" || activeTab === "enquiries"));
 
           return (
             <button

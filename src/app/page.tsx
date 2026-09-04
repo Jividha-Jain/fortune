@@ -12,7 +12,6 @@ import ScreenConceptDetail from "@/components/ScreenConceptDetail";
 import ScreenShortlist from "@/components/ScreenShortlist";
 import ScreenWatchlist from "@/components/ScreenWatchlist";
 import ScreenEnquiries from "@/components/ScreenEnquiries";
-import ScreenOrders from "@/components/ScreenOrders";
 import ScreenInsights from "@/components/ScreenInsights";
 import ScreenProfile from "@/components/ScreenProfile";
 import ScreenRegister from "@/components/ScreenRegister";
@@ -34,7 +33,6 @@ export default function Home() {
     | "shortlist"
     | "watchlist"
     | "enquiries"
-    | "orders"
     | "insights"
     | "profile"
     | "onboarding"
@@ -118,12 +116,6 @@ export default function Home() {
           <ScreenEnquiries
             onBack={() => setActiveTab("shortlist")}
             onSuccessSubmit={() => setActiveTab("dashboard")}
-          />
-        )}
-
-        {activeTab === "orders" && (
-          <ScreenOrders
-            onNavigateTab={(tab) => setActiveTab(tab as any)}
           />
         )}
 
