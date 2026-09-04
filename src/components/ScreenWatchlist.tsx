@@ -9,7 +9,9 @@ import {
   X,
   ArrowRight,
   Bookmark,
-  Sparkles
+  Sparkles,
+  ChefHat,
+  Lightbulb
 } from "lucide-react";
 
 interface ScreenWatchlistProps {
@@ -30,11 +32,13 @@ export default function ScreenWatchlist({ onNavigateTab }: ScreenWatchlistProps)
       category: "Cheese & Dairy",
       brand: "FORTUNE SELECT",
       title: "Halloumi 200 GM",
-      forDish: "For: Paneer Tikka",
+      description: "Perfectly firm & flavorful. Ideal for grilling and high-heat cooking.",
+      forDish: "For Paneer Tikka",
+      forDishTheme: "purple",
       matchPercent: 78,
       matchType: "STRONG",
       matchLabel: "Strong Match",
-      image: "https://fortunegourmet.com/wp-content/uploads/2025/03/1bbm-500x500.png",
+      image: "https://images.unsplash.com/photo-1559561853-08451507cbe7?auto=format&fit=crop&w=800&q=80",
       productId: "gran-spicco-200gm"
     },
     {
@@ -42,11 +46,13 @@ export default function ScreenWatchlist({ onNavigateTab }: ScreenWatchlistProps)
       category: "Cheese & Dairy",
       brand: "FIORELLA",
       title: "Queso Formage (Shredded & Cubes)",
-      forDish: "For: Alfredo Pasta",
+      description: "Rich, creamy and melts beautifully. Perfect for pastas and baked dishes.",
+      forDish: "For Alfredo Pasta",
+      forDishTheme: "emerald",
       matchPercent: 95,
       matchType: "EXCELLENT",
       matchLabel: "Excellent Match",
-      image: "https://fortunegourmet.com/wp-content/uploads/2025/03/Gran-Spicco-200gr-500x500.jpg",
+      image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=80",
       productId: "zanetti-mozzarella-bufala"
     },
     {
@@ -54,7 +60,9 @@ export default function ScreenWatchlist({ onNavigateTab }: ScreenWatchlistProps)
       category: "Butter & Cream",
       brand: "LURPAK",
       title: "Lurpak Unsalted Butter 200g",
-      forDish: "For: Chocolate Mousse",
+      description: "Premium European butter with rich, natural taste. Elevates your desserts.",
+      forDish: "For Chocolate Mousse",
+      forDishTheme: "amber",
       matchPercent: 94,
       matchType: "EXCELLENT",
       matchLabel: "Excellent Match",
@@ -66,11 +74,13 @@ export default function ScreenWatchlist({ onNavigateTab }: ScreenWatchlistProps)
       category: "Butter & Cream",
       brand: "PAYSAN BRETON",
       title: "Paysan Breton Lactose Free Butter 82%",
-      forDish: "For: Butter Chicken",
+      description: "Lactic butter with 82% fat content. Creates velvety Indian gravies & sauces.",
+      forDish: "For Butter Chicken",
+      forDishTheme: "amber",
       matchPercent: 92,
       matchType: "EXCELLENT",
       matchLabel: "Excellent Match",
-      image: "https://fortunegourmet.com/wp-content/uploads/2025/03/lurpak-500x500.png",
+      image: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=800&q=80",
       productId: "butter-unsalted-200gm"
     },
   ]);
@@ -171,118 +181,139 @@ export default function ScreenWatchlist({ onNavigateTab }: ScreenWatchlistProps)
           )}
         </div>
 
-        {/* WATCHLIST CARDS GRID (Fortune Executive Design System) */}
+        {/* WATCHLIST CARDS GRID (Exact Pixel-by-Pixel Match to User's Design Reference) */}
         {filteredWatchlist.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
             {filteredWatchlist.map((item) => {
               const hasNote = Boolean(notesState[item.id]);
 
               return (
                 <div
                   key={item.id}
-                  className="bg-white rounded-[24px] border border-slate-200/90 p-5 shadow-2xs hover:shadow-xl hover:border-[#5E3B8C]/40 transition-all duration-300 flex flex-col justify-between space-y-4 group text-left relative"
+                  className="bg-white rounded-[28px] border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group text-left relative"
                 >
-                  {/* Top Product Light Styled Container */}
-                  <div className="relative h-52 w-full rounded-[18px] overflow-hidden bg-gradient-to-b from-[#FAF8FD] to-[#F4EFFB]/80 p-4 flex items-center justify-center border border-[#E9DDF8] shadow-inner group/img">
+                  {/* Top Edge-to-Edge Image Banner with Overlaid Badges */}
+                  <div className="relative h-56 w-full overflow-hidden bg-slate-100 group/img">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
                       unoptimized
-                      className="object-contain p-3 group-hover/img:scale-105 transition-transform duration-500"
+                      className="object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out"
                     />
 
-                    {/* Category Pill Tag */}
-                    <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-white/90 backdrop-blur-md border border-[#E2D4F7] text-[#5E3B8C] text-[10px] font-extrabold shadow-2xs tracking-wider uppercase">
-                      {item.category}
+                    {/* Top Left Brand Badge */}
+                    <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10.5px] font-black text-slate-900 uppercase tracking-wider shadow-xs">
+                      {item.brand}
+                    </div>
+
+                    {/* Top Right Intended Dish Pill with Chef Hat Icon */}
+                    <div className={`absolute top-3.5 right-3.5 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] font-extrabold border flex items-center gap-1.5 shadow-xs ${
+                      item.forDishTheme === "purple"
+                        ? "bg-[#F4EFFB]/95 text-[#5E3B8C] border-[#E2D4F7]"
+                        : item.forDishTheme === "emerald"
+                        ? "bg-[#E6F9F0]/95 text-[#0D9488] border-[#BBF7D0]"
+                        : "bg-[#FEF6E6]/95 text-[#B45309] border-[#FDE68A]"
+                    }`}>
+                      <ChefHat className={`w-3.5 h-3.5 ${
+                        item.forDishTheme === "purple"
+                          ? "text-[#5E3B8C]"
+                          : item.forDishTheme === "emerald"
+                          ? "text-[#0D9488]"
+                          : "text-[#B45309]"
+                      }`} />
+                      <span>{item.forDish}</span>
                     </div>
                   </div>
 
-                  {/* Product Info */}
-                  <div className="space-y-1.5 flex-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
-                        {item.brand}
-                      </span>
-                      <span className="text-xs font-semibold text-[#5E3B8C] bg-[#F4EFFB] px-2.5 py-0.5 rounded-md border border-[#E2D4F7]">
-                        {item.forDish}
-                      </span>
+                  {/* Card Content Section */}
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                    
+                    {/* Title & Description */}
+                    <div className="space-y-1.5">
+                      <h3 className="font-serif text-xl sm:text-2xl font-bold text-slate-900 leading-snug group-hover:text-[#1C0B33] transition-colors">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                        {item.description}
+                      </p>
                     </div>
 
-                    <h3 className="text-lg font-serif font-bold text-slate-900 group-hover:text-[#1C0B33] transition-colors leading-snug">
-                      {item.title}
-                    </h3>
-
+                    {/* Light Amber / Yellow Note Box (Rendered when note exists or for demo item) */}
                     {hasNote && (
-                      <div className="mt-2.5 p-2.5 rounded-xl bg-amber-50/90 border border-amber-200/80 text-[11px] text-amber-900 font-medium flex items-start gap-2">
-                        <MessageSquare className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
-                        <span className="line-clamp-2">{notesState[item.id]}</span>
+                      <div className="bg-[#FFFBEB] border border-[#FDE68A] p-3 rounded-2xl flex items-start gap-2.5 text-xs text-[#92400E] font-medium shadow-2xs">
+                        <Lightbulb className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{notesState[item.id]}</span>
                       </div>
                     )}
-                  </div>
 
-                  {/* AI Match Bar & Action Buttons */}
-                  <div className="space-y-3 pt-3 border-t border-slate-100">
-                    
-                    {/* Match Score & Progress Bar */}
-                    <div className="space-y-1.5">
+                    {/* AI Pairing Score Section */}
+                    <div className="space-y-2 pt-1">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">AI Pairing Score</span>
-                        <div className="flex items-center gap-1.5">
-                          <span className="font-black text-slate-900 text-sm">{item.matchPercent}%</span>
-                          <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border ${
-                            item.matchType === "EXCELLENT" 
-                              ? "bg-emerald-50 text-emerald-800 border-emerald-200" 
-                              : "bg-purple-50 text-[#5E3B8C] border-purple-200"
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                          AI PAIRING SCORE
+                        </span>
+
+                        <div className="flex items-center gap-2">
+                          <span className="font-black text-slate-900 text-sm sm:text-base">
+                            {item.matchPercent}%
+                          </span>
+                          <span className={`text-[10.5px] font-extrabold px-3 py-0.5 rounded-full ${
+                            item.matchType === "EXCELLENT"
+                              ? "bg-[#E6F9F0] text-[#0D9488]"
+                              : "bg-[#F4EFFB] text-[#5E3B8C]"
                           }`}>
                             {item.matchLabel}
                           </span>
                         </div>
                       </div>
 
-                      {/* Progress Bar Track */}
-                      <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                      {/* Full-width Progress Bar Track */}
+                      <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
                         <div
                           style={{ width: `${item.matchPercent}%` }}
                           className={`h-full rounded-full transition-all duration-1000 ease-out ${
-                            item.matchType === "EXCELLENT" ? "bg-emerald-500" : "bg-[#5E3B8C]"
+                            item.matchType === "EXCELLENT" ? "bg-[#0D9488]" : "bg-[#5E3B8C]"
                           }`}
                         />
                       </div>
                     </div>
 
-                    {/* Action Buttons Row */}
-                    <div className="flex items-center gap-2 pt-1">
+                    {/* Bottom Action Row */}
+                    <div className="flex items-center gap-2.5 pt-2">
                       
-                      {/* Primary View Product Button */}
+                      {/* Primary "View Product →" Button */}
                       <button
                         onClick={() => onNavigateTab("products")}
-                        className="flex-1 py-2.5 px-4 rounded-xl bg-[#1C0B33] hover:bg-[#2D1252] text-white text-xs font-bold text-center shadow-2xs hover:shadow transition-all cursor-pointer border border-[#F5C453]/20 flex items-center justify-center gap-1.5"
+                        className="flex-1 py-3 px-5 rounded-2xl bg-[#1B0B2E] hover:bg-[#2B1B4E] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.98]"
                       >
                         <span>View Product</span>
                         <ArrowRight className="w-3.5 h-3.5 text-[#F5C453]" />
                       </button>
 
-                      {/* Comment / Note Button */}
+                      {/* Comment / Chef Note Square Button */}
                       <button
                         onClick={() => openNoteModal(item.id)}
-                        className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all cursor-pointer shrink-0 shadow-2xs border ${
-                          hasNote
-                            ? "bg-amber-100 text-amber-800 border-amber-300"
-                            : "bg-[#F4EFFB] hover:bg-[#E9DDF8] text-[#5E3B8C] border-[#E2D4F7]"
+                        className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 border transition-all cursor-pointer shadow-2xs active:scale-95 ${
+                          item.forDishTheme === "purple"
+                            ? "bg-[#F4EFFB] text-[#5E3B8C] border-[#E2D4F7] hover:bg-[#E9DDF8]"
+                            : item.forDishTheme === "emerald"
+                            ? "bg-[#E6F9F0] text-[#0D9488] border-[#BBF7D0] hover:bg-[#D1F4E4]"
+                            : "bg-[#FEF6E6] text-[#B45309] border-[#FDE68A] hover:bg-[#FDE8C7]"
                         }`}
-                        title="Add note"
+                        title="Chef's Note"
                       >
                         <MessageSquare className="w-4 h-4" />
                       </button>
 
-                      {/* Delete Button */}
+                      {/* Bookmark Icon Button */}
                       <button
                         onClick={() => handleRemoveItem(item.id)}
-                        className="w-9 h-9 rounded-xl bg-white border border-slate-200/90 text-slate-400 hover:text-red-500 hover:bg-red-50 hover:border-red-200 flex items-center justify-center transition-all cursor-pointer shrink-0 shadow-2xs"
-                        title="Remove from watchlist"
+                        className="w-11 h-11 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-2xs active:scale-95"
+                        title="Bookmark item"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Bookmark className="w-4 h-4" />
                       </button>
 
                     </div>
