@@ -3,55 +3,44 @@
 import React from "react";
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
-import { ALL_PRODUCTS } from "@/data/productsData";
 
 interface AIPairingSuggestionsSectionProps {
   onNavigateTab: (tab: "products" | "product-detail" | "recommendations" | "mymenu") => void;
 }
 
 export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairingSuggestionsSectionProps) {
-  // Find official Fortune Gourmet products from catalog
-  const mozzarellaProduct = ALL_PRODUCTS.find((p) => p.id === "zanetti-mozzarella-bufala");
-  const parmesanProduct = ALL_PRODUCTS.find((p) => p.id === "gran-spicco-200gm");
-  const salmonProduct = ALL_PRODUCTS.find((p) => p.id === "fortune-atlantic-salmon-trim-d");
-  const butterProduct = ALL_PRODUCTS.find((p) => p.id === "butter-unsalted-200gm");
-
   const cards = [
     {
       id: "card-1",
       bgColor: "bg-[#FAF5EE]", // Warm cream/peach pastel
       dishTitle: "Margherita Pizza",
-      productSubtitle: "with Zanetti Mozzarella di Bufala",
-      productId: mozzarellaProduct?.id || "zanetti-mozzarella-bufala",
+      productSubtitle: "with Black Truffle Oil",
       dishImage: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80",
-      productImage: mozzarellaProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/1bbm-500x500.png",
+      productImage: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=300&q=80",
     },
     {
       id: "card-2",
       bgColor: "bg-[#F3EEFA]", // Soft purple/lavender pastel
       dishTitle: "Mushroom Pasta",
       productSubtitle: "with Gran Spicco Parmesan",
-      productId: parmesanProduct?.id || "gran-spicco-200gm",
       dishImage: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80",
-      productImage: parmesanProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/Gran-Spicco-200gr-500x500.jpg",
+      productImage: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=300&q=80",
     },
     {
       id: "card-3",
       bgColor: "bg-[#FAF6EF]", // Light warm almond pastel
       dishTitle: "Grilled Salmon",
       productSubtitle: "with Atlantic Salmon Fillet",
-      productId: salmonProduct?.id || "fortune-atlantic-salmon-trim-d",
       dishImage: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80",
-      productImage: salmonProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/Tomex-Salmon-fish-fillet-500x500.jpg",
+      productImage: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=300&q=80",
     },
     {
       id: "card-4",
       bgColor: "bg-[#FCF4FA]", // Soft pink/rose pastel
       dishTitle: "Chocolate Cake",
       productSubtitle: "with Lurpak Unsalted Butter",
-      productId: butterProduct?.id || "butter-unsalted-200gm",
       dishImage: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80",
-      productImage: butterProduct?.image || "https://fortunegourmet.com/wp-content/uploads/2025/03/lurpak-500x500.png",
+      productImage: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=300&q=80",
     },
   ];
 
@@ -115,14 +104,14 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
           <div
             key={card.id}
             onClick={() => onNavigateTab("recommendations")}
-            className={`${card.bgColor} rounded-[28px] p-5 sm:p-6 border border-slate-200/50 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group min-h-[290px] text-left cursor-pointer`}
+            className={`${card.bgColor} rounded-[28px] p-5 sm:p-6 border border-slate-200/40 shadow-xs hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group min-h-[290px] text-left cursor-pointer`}
           >
             <div>
               {/* Card Top Composition: Dish Circle + Plus Badge + Product Item */}
               <div className="relative flex items-center justify-between gap-1 py-3 px-1 h-36">
                 
                 {/* Dish Plate Circle */}
-                <div className="relative w-26 h-26 sm:w-28 sm:h-28 rounded-full overflow-hidden shadow-md ring-4 ring-white shrink-0 group-hover:scale-105 transition-transform duration-300 bg-white">
+                <div className="relative w-26 h-26 sm:w-28 sm:h-28 rounded-full overflow-hidden shadow-md border-2 border-white shrink-0 group-hover:scale-105 transition-transform duration-300 bg-white">
                   <Image
                     src={card.dishImage}
                     alt={card.dishTitle}
@@ -133,18 +122,18 @@ export default function AIPairingSuggestionsSection({ onNavigateTab }: AIPairing
                 </div>
 
                 {/* Plus Circle Badge */}
-                <div className="w-7 h-7 rounded-full bg-white text-[#2B145E] font-extrabold text-xs flex items-center justify-center shrink-0 shadow-md ring-2 ring-purple-100/90 z-10 -mx-3">
+                <div className="w-7 h-7 rounded-full bg-white text-[#2B145E] font-bold text-xs flex items-center justify-center shrink-0 shadow-md border border-purple-100/90 z-10 -mx-3">
                   +
                 </div>
 
-                {/* Product Image with mix-blend-screen for seamless black background removal */}
-                <div className="relative w-20 h-24 sm:w-22 sm:h-26 rounded-2xl overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-300 flex items-center justify-center bg-black/5 p-1">
+                {/* Product Image (Standard clean photo rendering without blend tricks) */}
+                <div className="relative w-20 h-24 sm:w-22 sm:h-26 rounded-2xl overflow-hidden shadow-md border-2 border-white shrink-0 group-hover:scale-105 transition-transform duration-300 bg-white">
                   <Image
                     src={card.productImage}
                     alt={card.productSubtitle}
                     fill
                     unoptimized
-                    className="object-contain mix-blend-screen filter drop-shadow-sm p-1"
+                    className="object-cover"
                   />
                 </div>
 
